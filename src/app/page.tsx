@@ -1,69 +1,168 @@
 import Image from "next/image";
+import Link from "next/link";
+import { site } from "@/config/site";
+import { getDictionary } from "@/content";
+import { PageShell } from "@/components/PageShell";
+import { ProductBand } from "@/components/ProductBand";
+import { LoopVideo } from "@/components/LoopVideo";
+import { Parallax } from "@/components/Parallax";
+import { Starfield } from "@/components/home/Starfield";
+import { LogoOrbit } from "@/components/home/LogoOrbit";
+import { BinaryRain } from "@/components/orison/BinaryRain";
+import { PixelEye } from "@/components/orison/PixelEye";
+import { OsWindow } from "@/components/orison/OsWindow";
 
-export default function Home() {
+export default function HomePage() {
+  const t = getDictionary();
+  const h = t.home;
+  const trailerHref = site.orison.youtubeTrailerUrl ?? site.orison.steamUrl;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <PageShell theme="studio">
+      {/* ── Hero: the logo, its galaxy ring, and what the studio makes riding on it ── */}
+      <Parallax className="relative isolate flex min-h-[88svh] items-center justify-center overflow-hidden pt-14">
+        <div data-parallax="0.3" className="absolute -inset-y-[10%] inset-x-0 -z-10">
+          <Starfield />
+        </div>
+        <h1 className="sr-only">{t.meta.siteName}</h1>
+        <div data-parallax="0.12" className="w-[125%] max-w-3xl shrink-0 px-2 md:w-full">
+          <LogoOrbit words={h.hero.orbit} alt={h.hero.logoAlt} />
+        </div>
+      </Parallax>
+
+      {/* ── Statement ───────────────────────────────────────────────── */}
+      <section className="mx-auto max-w-6xl px-5 pb-24 md:px-8 md:pb-36">
+        <p
+          aria-label={h.statement.lines.join(" ")}
+          className="text-[clamp(2.75rem,13vw,9rem)] font-semibold uppercase leading-[0.92] tracking-[-0.03em]"
+        >
+          {h.statement.lines.map((line, i) => (
+            <span
+              key={line}
+              aria-hidden="true"
+              className={`block ${i === h.statement.lines.length - 1 ? "text-accent" : ""} ${
+                i % 2 ? "md:pl-[12%]" : ""
+              }`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              {line}
+            </span>
+          ))}
+        </p>
+        <div className="mt-12 grid gap-6 md:mt-20 md:grid-cols-12">
+          <p className="max-w-prose text-lg leading-relaxed text-fg/85 md:col-span-6 md:col-start-7">
+            {h.statement.intro}{" "}
+            <Link href="/about" className="link whitespace-nowrap text-fg">
+              {h.statement.aboutLink}
+            </Link>
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      </section>
+
+      {/* ── Products: each band switches to its product's own world ── */}
+      <section id="products" aria-label={h.products.title}>
+        <ProductBand
+          theme="orison"
+          backdrop={
+            <>
+              <div className="absolute inset-0 bg-bg" />
+              {/* Rain and eyes only at the edges, the middle stays black (deltarune-style framing) */}
+              <BinaryRain className="[mask-image:linear-gradient(90deg,#000_0,transparent_22%,transparent_78%,#000_100%)]" />
+              <PixelEye className="absolute left-[3%] top-[8%] opacity-80" size={44} />
+              <PixelEye className="absolute bottom-[6%] right-[4%] opacity-70" size={56} />
+              <div className="scanlines absolute inset-0" />
+            </>
+          }
+          name={
             <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+              src="/media/orison/wordmark.png"
+              alt={h.products.orison.name}
+              width={900}
+              height={190}
+              className="h-auto w-full max-w-sm [image-rendering:pixelated]"
             />
-            Deploy Now
+          }
+          kind={h.products.orison.kind}
+          status={h.products.orison.status}
+          description={h.products.orison.description}
+          media={
+            <a
+              href={trailerHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={h.products.orison.mediaLabel}
+              className="group block"
+            >
+              <OsWindow title="TRAILER.WEBM">
+                <div className="relative aspect-video">
+                  <LoopVideo src="/media/orison/clip" poster="/media/orison/clip-poster.webp" />
+                  <span className="btn absolute bottom-3 left-3 !min-h-0 !px-3 !py-1.5 group-hover:!bg-[#7ef4ff]">
+                    ▶ {t.buttons.watchTrailer}
+                  </span>
+                </div>
+              </OsWindow>
+            </a>
+          }
+          moreHref="/orison"
+          moreLabel={t.buttons.more}
+          storeHref={site.orison.steamUrl}
+          storeLabel={t.buttons.steam}
+        />
+
+        <ProductBand
+          theme="silentium"
+          reverse
+          backdrop={
+            <>
+              <div className="absolute inset-0 bg-gradient-to-b from-[var(--brick-deep)] via-bg to-bg" />
+              <div className="grain absolute inset-0" />
+            </>
+          }
+          name={
+            <span className="block text-[clamp(2rem,9vw,3.5rem)] font-normal uppercase leading-none tracking-[0.2em]">
+              {h.products.silentium.name}
+            </span>
+          }
+          kind={h.products.silentium.kind}
+          status={h.products.silentium.status}
+          description={h.products.silentium.description}
+          media={
+            <figure className="relative aspect-[4/3] overflow-hidden md:aspect-video">
+              <Image
+                src="/media/silentium/hand.webp"
+                alt={h.products.silentium.mediaAlt}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover"
+              />
+              <div className="grain absolute inset-0" />
+            </figure>
+          }
+          moreHref="/silentium"
+          moreLabel={t.buttons.more}
+          storeHref={site.silentium.spotifyUrl}
+          storeLabel={t.buttons.spotify}
+        />
+      </section>
+
+      {/* ── Contact ──────────────────────────────────────────────────── */}
+      <section id="contact" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24 md:px-8 md:py-36">
+        <h2 className="text-[clamp(2.25rem,9vw,6rem)] font-semibold uppercase leading-[0.95] tracking-[-0.03em]">
+          {h.contact.title}
+        </h2>
+        <p className="mt-8 max-w-prose text-fg/80">{h.contact.text}</p>
+        <a
+          href={`mailto:${site.contactEmail}`}
+          className="link mt-10 inline-block text-[clamp(1.05rem,5.2vw,2.25rem)] text-accent"
+        >
+          {site.contactEmail}
+        </a>
+        <p className="mt-6 text-sm text-muted">
+          {h.contact.pressLabel}{" "}
+          <a href={`mailto:${site.pressEmail}`} className="link text-fg">
+            {site.pressEmail}
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </p>
+      </section>
+    </PageShell>
   );
 }

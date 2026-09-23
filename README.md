@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Arcane Canvas — website v1
 
-## Getting Started
+Showcase site for Arcane Canvas, ORISON and SILENTIUM. Next.js (App Router) + Tailwind CSS v4, with plain CSS in `src/app/globals.css` where Tailwind isn't a good fit (CRT frame, glitch, binary rain).
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+npm install
+npm run dev        # http://localhost:3000
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route        | Content |
+|--------------|---------|
+| `/`          | Hero/About, product bands (ORISON, SILENTIUM), contact |
+| `/about`     | Studio statement, principles, team, timeline, press |
+| `/orison`    | CRT-framed page: parallax hero with the tracking eye, clips, screenshots, terminal, easter eggs |
+| `/silentium` | Format, episode list with Spotify Embed player |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Design
 
-## Learn More
+Each area speaks its own visual language; the rules are in the header comment of `src/app/globals.css`.
 
-To learn more about Next.js, take a look at the following resources:
+- **Studio (Home, About)**: built from the logo. The crystal "A" and its galaxy ring are the Home hero, with the studio's work orbiting on the ring; big monospace statements (after aggrocrab.com).
+- **ORISON**: the game's own 90s OS and the client's print mockups: README windows, HELP output, bevelled system buttons, VT323. Black around the eye, decoration only at the edges (after deltarune.com). The whole page sits inside a CRT monitor.
+- **SILENTIUM**: the poster's black, brick and flesh; photographic, film grain, format facts set like closing credits.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Avoid template tropes: uppercase letter-spaced labels over headings, gradient text, glows, numbered cards. Buttons use `.btn` / `.btn-quiet`, which restyle per theme.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Where things live
 
-## Deploy on Vercel
+- **Copy**: `src/content/en.ts` — every user-facing string. Add a locale by copying it and registering it in `src/content/index.ts`.
+- **Links / IDs / email**: `src/config/site.ts` (items marked TBD are open points).
+- **Easter eggs**: `src/content/easter-eggs.ts` — codes are stored as SHA-256 hashes; the file header lists where each code is hidden.
+- **SILENTIUM episodes**: fetched from the Spotify Web API when `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` are set (see `.env.example`), otherwise `src/data/silentium-episodes.ts`.
+- **Media**: `public/media`, generated from the client's raw assets with `npm run assets -- "<path to ArcaneCanvas folder>"` (needs ffmpeg).
+- **Fonts**: self-hosted WOFF2 in `src/app/fonts` (IBM Plex Mono preloaded, VT323 and Caveat on demand). No requests to Google.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Placeholders to replace
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `public/media/orison/clip.*` is a montage of screenshots: replace with the Steam trailer clips, re-encoded (WebM + MP4).
+- YouTube trailer URL (the ORISON product band links to Steam until it exists).
+- ORISON press kit link (`site.orison.pressKitUrl`): Dropbox folder from Marco. Until then the Press kit buttons open an email to press@.
+- Team profiles, About/Home lorem ipsum.
+- Glitch panel and terminal unlock content (TBD with Marco).
