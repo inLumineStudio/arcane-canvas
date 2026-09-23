@@ -5,9 +5,14 @@ import { NavLinks } from "./NavLinks";
 // A plain solid bar (deltarune.com keeps its nav this simple). The logo is the way home.
 export function SiteHeader() {
   const t = getDictionary();
+  const projects = {
+    label: t.nav.projects,
+    items: [
+      { href: "/orison", label: t.nav.orison, note: t.home.products.orison.kind },
+      { href: "/silentium", label: t.nav.silentium, note: t.home.products.silentium.kind },
+    ],
+  };
   const links = [
-    { href: "/orison", label: t.nav.orison },
-    { href: "/silentium", label: t.nav.silentium },
     { href: "/about", label: t.nav.about },
     { href: "/#contact", label: t.nav.contact },
   ];
@@ -26,7 +31,7 @@ export function SiteHeader() {
           <img src="/media/brand/logo.svg" alt="" width={32} height={25} className="h-6 w-auto" />
           <span className="text-sm font-medium">{t.meta.siteName}</span>
         </Link>
-        <NavLinks links={links} menuLabel={t.nav.menu} closeLabel={t.nav.close} />
+        <NavLinks projects={projects} links={links} menuLabel={t.nav.menu} closeLabel={t.nav.close} />
       </div>
     </header>
   );

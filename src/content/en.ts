@@ -24,6 +24,7 @@ export const en = {
 
   nav: {
     home: "Home",
+    projects: "Projects",
     about: "About",
     orison: "ORISON",
     silentium: "SILENTIUM",
