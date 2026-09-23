@@ -111,7 +111,7 @@ export const en = {
       items: [
         { year: "2026", title: "ORISON", kind: "Narrative game for PC", status: "Free demo in December", href: "/orison" },
         { year: "2025", title: "SILENTIUM", kind: "Horror fiction podcast", status: "A new case every month", href: "/silentium" },
-        { year: "2026", title: "ORISON mini CD", kind: "Print & NFC promo object", status: "Handed out at events", href: null },
+        { year: "2026", title: "ORISON mini CD", kind: "Print & NFC promo object", status: "", href: null },
       ],
     },
     press: {

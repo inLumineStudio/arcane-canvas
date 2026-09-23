@@ -418,18 +418,6 @@ html.is-glitching body::after {
   .crt-brand { font-size: 0.6rem; }
 }
 
-/* Mobile first: the sticky store bar covers the bottom of the page, so the footer
-   makes room for it; from 768px up the CTA is a small corner box and needs no room. */
-[data-theme]:has(.sticky-cta) footer {
-  padding-bottom: 4.5rem;
-}
-
-@media (min-width: 768px) {
-  [data-theme]:has(.sticky-cta) footer {
-    padding-bottom: 0;
-  }
-}
-
 /* Fixed UI must stay inside the screen */
 .site-header {
   top: var(--crt-top, 0px);

@@ -182,8 +182,8 @@ export default function OrisonPage() {
         <Terminal t={t.terminal} />
       </Section>
 
-      {/* ── Final CTA ────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden">
+      {/* ── Final CTA (the sticky one steps aside while this is on screen) ── */}
+      <section data-hide-sticky-cta className="relative isolate overflow-hidden">
         <BinaryRain columns={20} seed={11} className="-z-10 [mask-image:linear-gradient(90deg,#000_0,transparent_30%,transparent_70%,#000_100%)]" />
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-5 py-28 text-center">
           <PixelEye size={96} />

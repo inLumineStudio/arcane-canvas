@@ -79,7 +79,7 @@ export default function AboutPage() {
                   </span>
                   <span className="text-sm text-muted">{w.kind}</span>
                 </span>
-                <span className="hidden text-sm text-muted md:inline">{w.status}</span>
+                {w.status && <span className="hidden text-sm text-muted md:inline">{w.status}</span>}
                 {w.href && (
                   <span aria-hidden="true" className="text-accent transition-transform group-hover:translate-x-1">
                     →

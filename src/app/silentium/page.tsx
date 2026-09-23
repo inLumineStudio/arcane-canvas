@@ -101,8 +101,8 @@ export default async function SilentiumPage() {
         <EpisodePlayer episodes={episodes} showId={site.silentium.spotifyShowId} t={s.episodes} />
       </Section>
 
-      {/* ── Final CTA ────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden">
+      {/* ── Final CTA (the sticky one steps aside while this is on screen) ── */}
+      <section data-hide-sticky-cta className="relative isolate overflow-hidden">
         <Image
           src="/media/silentium/band-hands.webp"
           alt=""
