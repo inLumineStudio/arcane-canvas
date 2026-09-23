@@ -23,12 +23,17 @@
   --accent-fg: #0b0f15;
 }
 
+/* Colours sampled from the game: the page is the navy of the CURIO browser, raised
+   surfaces are #181233, the indigo of the game's own OS windows (NOTEPAD, title bars),
+   framed in the light grey of its window chrome and taskbar. */
 [data-theme="orison"] {
   --bg: #040817;
-  --bg-raised: #0a1633;
+  --bg-raised: #181233;
   --fg: #d6f3ff;
-  --muted: #6f93ad;
-  --line: #16305a;
+  --muted: #7f8fb8;
+  --line: #2a2356;
+  --os-chrome: #c9c8d0;
+  --os-chrome-dark: #88878d;
   --accent: #35d0ff;
   --accent-fg: #02060f;
 }
@@ -189,7 +194,7 @@ body {
 }
 
 [data-theme="orison"] .btn-quiet:hover {
-  background: #102451;
+  background: #231a4a;
   color: var(--fg);
 }
 
@@ -473,13 +478,14 @@ html.is-glitching body::after {
 }
 
 /* ── ORISON OS window ────────────────────────────────────────────────────── */
+/* Like the game's windows: light grey bevelled chrome, #181233 title bar and body. */
 
 .os-window {
-  background: #07102a;
+  background: var(--os-chrome);
   padding: 3px;
   box-shadow:
-    inset -2px -2px 0 #000,
-    inset 2px 2px 0 rgb(214 243 255 / 0.35),
+    inset -2px -2px 0 var(--os-chrome-dark),
+    inset 2px 2px 0 #fff,
     0 0 0 1px #000;
 }
 
@@ -489,8 +495,8 @@ html.is-glitching body::after {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.15rem 0.2rem 0.15rem 0.5rem;
-  background: linear-gradient(90deg, #0d2a5c, #14487a);
-  color: #d6f3ff;
+  background: #181233;
+  color: #f2f0fa;
   font-family: var(--font-vt323), monospace;
   font-size: 1.15rem;
   line-height: 1.4;
@@ -508,8 +514,8 @@ html.is-glitching body::after {
   height: 1rem;
   font-size: 0.9rem;
   line-height: 1;
-  color: #02060f;
-  background: #9fb6c9;
+  color: #181233;
+  background: var(--os-chrome);
   box-shadow:
     inset -1px -1px 0 #000,
     inset 1px 1px 0 #fff;
@@ -517,8 +523,8 @@ html.is-glitching body::after {
 
 .os-body {
   margin-top: 3px;
-  background: #02060f;
+  background: #181233;
   box-shadow:
-    inset 1px 1px 0 #000,
-    inset -1px -1px 0 rgb(214 243 255 / 0.2);
+    inset 1px 1px 0 var(--os-chrome-dark),
+    inset -1px -1px 0 #fff;
 }
