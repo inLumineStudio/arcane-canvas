@@ -13,6 +13,7 @@ import { EyeCanvas } from "@/components/orison/EyeCanvas";
 import { PixelEye } from "@/components/orison/PixelEye";
 import { BinaryRain } from "@/components/orison/BinaryRain";
 import { OsWindow } from "@/components/orison/OsWindow";
+import { ScreenshotGallery } from "@/components/orison/ScreenshotGallery";
 import { Terminal } from "@/components/orison/Terminal";
 import { GlitchTrigger } from "@/components/orison/Glitch";
 import { SourceComment } from "@/components/orison/SourceComment";
@@ -106,25 +107,6 @@ export default function OrisonPage() {
         </p>
       </Section>
 
-      {/* ── What you do in there, as the game's own HELP output ──────── */}
-      <Section className="max-w-3xl pt-0 md:pt-0">
-        <OsWindow title={o.features.window}>
-          <div className="p-5 font-pixel text-xl leading-snug md:p-8 md:text-2xl">
-            <p className="text-muted">C:\ORISON&gt;{o.features.command}</p>
-            <dl className="mt-4 grid grid-cols-[6.5rem_1fr] gap-x-4 gap-y-2 md:grid-cols-[8rem_1fr]">
-              {o.features.items.map((f) => (
-                <div key={f.cmd} className="contents">
-                  <dt className="text-accent">{f.cmd}</dt>
-                  <dd>{f.text}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-4 text-muted">{o.features.footer}</p>
-            <p className="caret mt-4 text-muted">C:\ORISON&gt;</p>
-          </div>
-        </OsWindow>
-      </Section>
-
       {/* ── Clips from the trailer ───────────────────────────────────── */}
       <Section className="pt-0 md:pt-0">
         <OsWindow title={o.clips.file}>
@@ -145,36 +127,7 @@ export default function OrisonPage() {
           </p>
         </div>
 
-        {/* Mobile first: a swipeable row of windows */}
-        <ul className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:hidden">
-          {shots.map((s) => (
-            <li key={s.src} className="w-[85%] shrink-0 snap-center">
-              <OsWindow title={s.file}>
-                <Image src={s.src} alt={s.alt} width={1280} height={720} sizes="85vw" className="h-auto w-full" />
-              </OsWindow>
-            </li>
-          ))}
-        </ul>
-
-        {/* From 768px: windows scattered across the desktop, each column on its own parallax layer */}
-        <Parallax className="mx-auto mt-10 hidden max-w-6xl grid-cols-3 gap-8 px-8 md:grid">
-          {[0, 1, 2].map((col) => (
-            <div
-              key={col}
-              data-parallax={[0.06, -0.08, 0.12][col]}
-              data-parallax-desktop
-              className={`flex flex-col gap-10 ${col === 1 ? "mt-24" : ""} ${col === 2 ? "mt-10" : ""}`}
-            >
-              {shots
-                .filter((_, i) => i % 3 === col)
-                .map((s, j) => (
-                  <OsWindow key={s.src} title={s.file} className={j % 2 ? "-rotate-1" : "rotate-1"}>
-                    <Image src={s.src} alt={s.alt} width={1280} height={720} sizes="33vw" className="h-auto w-full" />
-                  </OsWindow>
-                ))}
-            </div>
-          ))}
-        </Parallax>
+        <ScreenshotGallery shots={shots} labels={o.gallery.viewer} />
       </section>
 
       {/* ── Terminal (easter egg codes) ──────────────────────────────── */}

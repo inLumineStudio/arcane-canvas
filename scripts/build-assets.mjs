@@ -34,7 +34,8 @@ webp(join(SRC, 'Mockups.jpeg'), join(OUT, 'orison/minicd-disc.webp'), 'crop=176:
 const shots = readdirSync(join(O, 'Screenshots')).filter((f) => f.endsWith('.png')).sort();
 shots.forEach((f, i) => {
   const input = join(O, 'Screenshots', f);
-  webp(input, join(OUT, `orison/shot-${i + 1}.webp`), 'scale=1280:-1');
+  // Full 1920px: next/image serves smaller widths for thumbnails, the lightbox gets the full size.
+  webp(input, join(OUT, `orison/shot-${i + 1}.webp`), null, 82);
 });
 
 // Placeholder "clip": slow pan over the screenshots until the real Steam trailers are delivered.

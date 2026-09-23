@@ -131,34 +131,37 @@ body {
   text-decoration-color: currentColor;
 }
 
-/* Base button (studio): a plain silver slab, sentence case */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 1.1rem;
-  font-weight: 500;
-  background: var(--fg);
-  color: var(--bg);
-  transition: background-color 0.15s, color 0.15s;
-}
+/* Base button (studio): a plain silver slab, sentence case.
+   In the components layer so Tailwind utilities (hidden, md:inline-flex…) can override it. */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.1rem;
+    font-weight: 500;
+    background: var(--fg);
+    color: var(--bg);
+    transition: background-color 0.15s, color 0.15s;
+  }
 
-.btn:hover {
-  background: var(--accent);
-}
+  .btn:hover {
+    background: var(--accent);
+  }
 
-.btn-quiet {
-  background: transparent;
-  color: var(--fg);
-  box-shadow: inset 0 0 0 1px var(--line);
-}
+  .btn-quiet {
+    background: transparent;
+    color: var(--fg);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
 
-.btn-quiet:hover {
-  background: transparent;
-  color: var(--accent);
-  box-shadow: inset 0 0 0 1px currentColor;
+  .btn-quiet:hover {
+    background: transparent;
+    color: var(--accent);
+    box-shadow: inset 0 0 0 1px currentColor;
+  }
 }
 
 /* ORISON: bevelled system buttons, like the game's own OS */
@@ -526,5 +529,48 @@ html.is-glitching body::after {
   background: #181233;
   box-shadow:
     inset 1px 1px 0 var(--os-chrome-dark),
+    inset -1px -1px 0 #fff;
+}
+
+/* ── ORISON screenshot viewer ────────────────────────────────────────────── */
+
+.lightbox[open] .os-window {
+  animation: lightbox-in 0.25s ease-out both;
+}
+
+.lightbox[open]::backdrop {
+  animation: lightbox-fade 0.25s ease-out both;
+}
+
+.lightbox-image {
+  animation: lightbox-fade 0.2s ease-out both;
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; scale: 0.96; }
+}
+
+@keyframes lightbox-fade {
+  from { opacity: 0; }
+}
+
+/* The window's own close button, drawn like the title bar controls, but big enough to tap */
+.lightbox-close {
+  display: grid;
+  place-items: center;
+  min-width: 2.25rem;
+  min-height: 1.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #181233;
+  background: var(--os-chrome);
+  box-shadow:
+    inset -1px -1px 0 #000,
+    inset 1px 1px 0 #fff;
+}
+
+.lightbox-close:active {
+  box-shadow:
+    inset 1px 1px 0 #000,
     inset -1px -1px 0 #fff;
 }

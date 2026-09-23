@@ -135,18 +135,6 @@ export const en = {
       text:
         "The last [[u]]nwatched place on the i[[n]]ternet ran on a well hidden machine. People sent it [[w]]hat they couldn't say [[a]]nywhere else, and i[[t]] kept everything safe while governments tore the network apart looking for it. You found the ma[[c]]hine. Now it wants to talk. **T[[h]]ere are no right answ[[e]]rs to pick in there**, only what you [[d]]o.",
     },
-    // Rendered as the game's own HELP output
-    features: {
-      window: "COMMAND PROMPT",
-      command: "HELP",
-      items: [
-        { cmd: "READ", text: "letters, diaries, recordings, photographs, last words" },
-        { cmd: "RUN", text: "commands: dates, passwords and hidden entries" },
-        { cmd: "DEFEND", text: "the machine when the deletion programs arrive" },
-        { cmd: "WATCH", text: "ORISON. It is watching you too" },
-      ],
-      footer: "Some commands may exist.",
-    },
     clips: {
       file: "TRAILER.WEBM",
       caption: "Clips from the Steam trailer. Muted, looping.",
@@ -155,6 +143,7 @@ export const en = {
     gallery: {
       folder: "C:\\ORISON\\SCREENS",
       count: "6 file(s)",
+      viewer: { open: "Open full screen", close: "Close", prev: "Previous screenshot", next: "Next screenshot" },
       alts: [
         "The ORISON desktop: a vast eye made of dots stares out from a black screen.",
         "A folder of submissions open on the ORISON desktop.",
