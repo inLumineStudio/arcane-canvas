@@ -141,6 +141,9 @@ export const en = {
     owner: "Marco D'Antino / Arcane Canvas",
     rights: "All rights reserved.",
     privacy: "Privacy",
+    // Labels of the two social groups
+    orison: "ORISON",
+    studio: "Studio",
     note: "All writing, art and audio are human-made.",
     follow: "Follow",
     press: "Press",
@@ -207,7 +210,7 @@ export const en = {
       items: [
         { year: "2026", title: "ORISON", kind: "Narrative game for PC", status: "Free demo in December", href: "/orison" },
         { year: "2025", title: "SILENTIUM", kind: "Horror fiction podcast", status: "A new case every month", href: "/silentium" },
-        { year: "2026", title: "ORISON mini CD", kind: "Print & NFC promo object", status: "", href: null },
+        { year: "2026", title: "ORISON mini CD", kind: "Print & NFC promo object", status: "Handed out in person, at events", href: null },
       ],
     },
     press: {
@@ -222,13 +225,17 @@ export const en = {
     hero: {
       tagline: "Humanity awaits.",
       status: "Free demo · December 2026",
+      languages: "Available in English and Italian",
       wordmarkAlt: "ORISON",
     },
     intro: {
       file: "README.TXT",
-      // Cipher letters spell a terminal code (see src/content/easter-eggs.ts).
+      // The same text as the Home band (home.products.orison.description, the client's
+      // spoiler-free version) plus the closing line. Keep the two in sync.
+      // Cipher letters spell a terminal code, UNWATCHED (see src/content/easter-eggs.ts): if
+      // the text changes, keep those nine letters in it, in order.
       text:
-        "The last [[u]]nwatched place on the i[[n]]ternet ran on a well hidden machine. People sent it [[w]]hat they couldn't say [[a]]nywhere else, and i[[t]] kept everything safe while governments tore the network apart looking for it. You found the ma[[c]]hine. Now it wants to talk. **T[[h]]ere are no right answ[[e]]rs to pick in there**, only what you [[d]]o.",
+        "The last [[u]]nwatched place on the i[[n]]ternet ran on a [[w]]ell hidden machine. The website promised th[[a]]t nothing you sent could be [[t]]raced back to you, and it kept that promise while governments tore the network apart looking for it. You found the ma[[c]]hine. Now it wants to talk. **T[[h]]ere are no right answ[[e]]rs in there.** Only what you [[d]]o.",
     },
     clips: {
       file: "TRAILER.WEBM",
@@ -313,6 +320,10 @@ export const en = {
     episodes: {
       title: "Case files",
       intro: "Pick an episode to play it here. No account needed.",
+      // Other ways to listen, next to Spotify
+      alsoOn: "Also on",
+      applePodcasts: "Apple Podcasts",
+      rss: "RSS feed",
       nowPlaying: "Now playing",
       selected: "Selected episode",
       // Shown before the Spotify player is loaded (it is only loaded on request)
@@ -343,7 +354,9 @@ export const en = {
     },
     cta: {
       title: "Follow the show.",
-      text: "New case files every month on Spotify.",
+      text: "New case files every month, wherever you listen to podcasts.",
+      apple: "Listen on Apple Podcasts",
+      rss: "RSS feed for podcast apps",
     },
   },
 } as const;

@@ -13,7 +13,7 @@ npm run build
 | Route        | Content |
 |--------------|---------|
 | `/`          | Hero/About, product bands (ORISON, SILENTIUM), contact |
-| `/about`     | Studio statement, principles, team, timeline, press |
+| `/about`     | A letter from the developer (Arcane Canvas is one person), list of works, press |
 | `/orison`    | CRT-framed page: parallax hero with the tracking eye, YouTube trailer, screenshots, terminal, easter eggs |
 | `/silentium` | Format, episode list with Spotify Embed player, transcript list |
 | `/privacy`   | Privacy notice (copy in `en.ts` → `privacy`), linked from the footer |
@@ -49,5 +49,5 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
 ## Placeholders to replace
 
 - ORISON press kit link (`site.orison.pressKitUrl`): Dropbox folder from Marco. Until then the Press kit buttons open an email to press@.
-- Team profiles, About/Home lorem ipsum.
+- About/Home lorem ipsum (final texts promised by the client).
 - Glitch panel and terminal unlock content (TBD with Marco).

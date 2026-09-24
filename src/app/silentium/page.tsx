@@ -103,7 +103,18 @@ export default async function SilentiumPage() {
 
       {/* ── Episodes ─────────────────────────────────────────────────── */}
       <Section id="episodes" title={s.episodes.title}>
-        <p className="-mt-6 mb-10 text-muted md:-mt-8">{s.episodes.intro}</p>
+        <p className="-mt-6 text-muted md:-mt-8">{s.episodes.intro}</p>
+        {/* The embed is Spotify's, but the show is everywhere: the other ways in, right here */}
+        <p className="mb-10 mt-1 text-sm text-muted">
+          {s.episodes.alsoOn}{" "}
+          <a href={site.silentium.appleUrl} target="_blank" rel="noopener noreferrer" className="link inline-flex min-h-11 items-center text-fg md:min-h-0">
+            {s.episodes.applePodcasts}
+          </a>
+          {" · "}
+          <a href={site.silentium.rssUrl} target="_blank" rel="noopener noreferrer" className="link inline-flex min-h-11 items-center text-fg md:min-h-0">
+            {s.episodes.rss}
+          </a>
+        </p>
         <EpisodePlayer episodes={episodes} showId={site.silentium.spotifyShowId} t={s.episodes} />
       </Section>
 
@@ -177,9 +188,18 @@ export default async function SilentiumPage() {
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-5 py-28 text-center">
           <h2 className="text-4xl font-medium md:text-5xl">{s.cta.title}</h2>
           <p className="text-fg/80">{s.cta.text}</p>
-          <Button href={site.silentium.spotifyUrl} external>
-            {t.buttons.listen}
-          </Button>
+          {/* Spotify first (the main platform), then the other podcast apps */}
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button href={site.silentium.spotifyUrl} external>
+              {t.buttons.listen}
+            </Button>
+            <Button href={site.silentium.appleUrl} external variant="quiet">
+              {s.cta.apple}
+            </Button>
+          </div>
+          <a href={site.silentium.rssUrl} target="_blank" rel="noopener noreferrer" className="link inline-flex min-h-11 items-center text-sm text-muted">
+            {s.cta.rss}
+          </a>
         </div>
       </section>
 

@@ -85,7 +85,10 @@ export default function OrisonPage() {
             {o.hero.tagline.slice(0, -1)}
             <GlitchTrigger t={t.glitch}>{o.hero.tagline.slice(-1)}</GlitchTrigger>
           </div>
-          <p className="font-pixel text-xl text-muted">{o.hero.status}</p>
+          <p className="font-pixel text-xl leading-tight text-muted">
+            {o.hero.status}
+            <span className="block">{o.hero.languages}</span>
+          </p>
           <GyroPrompt label={o.gyroPrompt} />
         </div>
 

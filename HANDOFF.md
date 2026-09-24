@@ -9,7 +9,7 @@ Website v1 is built and on `main` (`inLumineStudio/arcane-canvas`). All four rou
 | Route        | Status |
 |--------------|--------|
 | `/`          | Done. Logo + orbit hero, statement, ORISON / SILENTIUM product bands, contact. |
-| `/about`     | Done in layout; team profiles and part of the copy are lorem ipsum. |
+| `/about`     | Done in layout; part of the copy is lorem ipsum (final texts coming from the client). |
 | `/orison`    | Done. CRT frame, parallax hero with tracking eye (gyroscope on mobile), YouTube trailer, screenshot gallery with zoom + full-screen viewer, terminal, glitch panel, easter eggs. Unlock content is placeholder. |
 | `/silentium` | Done. Format facts, episode list, Spotify embed player, transcripts. Episodes come from the Spotify API when env vars are set, otherwise the static list. Transcripts come live from the client's archive repo. |
 
@@ -40,6 +40,8 @@ Client TODO list (second round, 2026-09-24):
 - **Projects section on Home.** A studio "Projects" heading (h2), studio-black gaps between the bands and band backdrops that fade in/out at top and bottom (`.band-fade`), so the two worlds no longer butt into each other.
 - **New ORISON eye** from the client's second `eye.html`: the teal halo is now a "dissolve" field of 1px dots that turns with the rings; offscreen buffers capped for 4K; phones run 24fps with rings/halo rebuilt every 5th frame.
 - **YouTube trailer plays in place** (`site.orison.youtubeTrailerId`, `TrailerPlayer`): the trailer windows on Home and /orison show the muted loop until play is pressed, then swap in the youtube-nocookie player, already playing. Nothing loads from YouTube before that press.
+- **Client's P1 list:** one ORISON text everywhere (the Home version, plus "There are no right answers in there. Only what you do." on /orison; the UNWATCHED cipher letters are re-hidden in it). "Available in English and Italian" under the /orison hero status. SILENTIUM: Apple Podcasts and RSS next to Spotify (episodes intro and final CTA). Footer socials split into "ORISON: Instagram · TikTok · YouTube" and "Studio: Bluesky" (YouTube: @ArcaneCanvasYT). The mini CD stays in About's list of works as "Handed out in person, at events". No team section: it was never built, only mentioned in the docs.
+- **Email deliverability:** SPF is set (Aruba), DMARC exists but only in `p=none`, DKIM was not found. DKIM has to be switched on from the Aruba mail panel (client or agency with access); then DMARC can move to `p=quarantine`.
 - **Privacy / Garante (client's P0 list):** the SILENTIUM Spotify player now loads only on request (placeholder of the same size, note on Spotify's cookies, link to /privacy, plain "open on Spotify" link), like the YouTube trailer. Nothing third-party loads on its own, so no cookie banner is needed. New `/privacy` page, linked in the footer: hosting logs (Vercel), no analytics or cookies (the terminal's localStorage is mentioned), YouTube and Spotify on request, email (Aruba), rights and the Garante. **It is a draft: have it reviewed**, and update it if analytics, forms or new embeds are ever added. Footer © is now "Marco D'Antino / Arcane Canvas".
 - **ORISON monitor (Marco's request):** the CRT frame is now a 90s beige monitor like the reference (putty plastic, recessed lip around the glass, glare, chin with round buttons, power button and LED). The chin brand is **Audeo**, the in-game maker of the PC (`orison.monitorLabel`). On opening, the monitor powers on: line, picture opening from the centre, static and a rolling band, ~1.3s, CSS only, skipped under reduced motion.
 - **Developer name confirmed: Marco D'Antino.** Used for the About signature, the SILENTIUM "Voice" fact and the transcript credit.
@@ -51,7 +53,7 @@ Client TODO list (second round, 2026-09-24):
 |------|---------------|
 | ORISON press kit Dropbox URL | `site.orison.pressKitUrl` in `src/config/site.ts` (until then, Press kit buttons open an email to press@) |
 | Glitch panel and terminal unlock content | `src/content/en.ts` (ORISON section) and `src/content/easter-eggs.ts` |
-| Team profiles, portrait photo | `src/content/en.ts` (About) |
+| Portrait photo | `src/content/en.ts` (About) |
 | Final EN copy (Home / About lorem ipsum) | `src/content/en.ts` |
 
 ## Suggested next steps

@@ -20,6 +20,8 @@ export const site = {
       return `https://open.spotify.com/show/${this.spotifyShowId}`;
     },
     episodeUrl: (id: string) => `https://open.spotify.com/episode/${id}`,
+    appleUrl: "https://podcasts.apple.com/us/podcast/silentium/id1855797896",
+    rssUrl: "https://anchor.fm/s/10c0ad324/podcast/rss",
     // The client's transcript archive (a static GitHub Pages site). The transcript pages
     // read its HTML straight from the repo, so a push there shows up here on the next
     // revalidation, with no copy to keep in sync.
@@ -43,11 +45,16 @@ export const site = {
   // Footer credit for the agency that built the site
   builtBy: { label: "inLumine", href: "https://www.inlumine.it/" },
 
-  socials: [
-    { label: "Instagram", href: "https://www.instagram.com/orison.sys/" },
-    { label: "TikTok", href: "https://www.tiktok.com/@orison.sys" },
-    { label: "Bluesky", href: "https://bsky.app/profile/arcanecanvas.bsky.social" },
-  ],
+  // Split by owner, so the ORISON accounts (@orison.sys) don't read as the studio's.
+  // YouTube is listed under ORISON as the client asked (the channel hosts the trailer).
+  socials: {
+    orison: [
+      { label: "Instagram", href: "https://www.instagram.com/orison.sys/" },
+      { label: "TikTok", href: "https://www.tiktok.com/@orison.sys" },
+      { label: "YouTube", href: "https://www.youtube.com/@ArcaneCanvasYT" },
+    ],
+    studio: [{ label: "Bluesky", href: "https://bsky.app/profile/arcanecanvas.bsky.social" }],
+  },
 } as const;
 
 /** Dropbox press kit once Marco shares it; an email to the press address until then. */
