@@ -38,9 +38,7 @@ export default function HomePage() {
             <span
               key={line}
               aria-hidden="true"
-              className={`block ${i === h.statement.lines.length - 1 ? "text-accent" : ""} ${
-                i % 2 ? "md:pl-[0.9em]" : ""
-              }`}
+              className={`block ${i === h.statement.lines.length - 1 ? "text-accent" : ""}`}
             >
               {line}
             </span>

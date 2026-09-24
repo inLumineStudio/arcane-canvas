@@ -255,8 +255,11 @@ body {
 .home-hero {
   --statement: min(10.6vw, 6.15svh, 7.4rem);
 }
+/* Stacked under the logo (phones, portrait tablets) the statement is centred on the logo's
+   axis; side by side (below) it is flush left, with every other line stepped in. */
 .home-hero-statement {
   font-size: var(--statement);
+  text-align: center;
 }
 .home-hero-logo {
   width: max(12rem, min(125%, 48rem, (100svh - 3.5rem - 4.6 * var(--statement) - 4.5rem) * 1.95));
@@ -285,6 +288,10 @@ body {
     width: auto;
     white-space: nowrap;
     padding-inline: 0;
+    text-align: left;
+  }
+  .home-hero-statement > :nth-child(even) {
+    padding-left: 0.9em;
   }
   .home-hero-logo {
     width: min(var(--row) * 0.56, 48rem, (100svh - 7.5rem) * 1.95);
