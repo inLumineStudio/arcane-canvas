@@ -787,6 +787,39 @@ html.is-glitching body::after {
   right: var(--crt-side, 0px);
 }
 
+/* ── ORISON scattered eyes (EyeField) ────────────────────────────────────── */
+.eye-spot {
+  position: absolute;
+  line-height: 0;
+}
+/* Peeking: 60% hidden, so even the largest eye stays inside the 20px phone gutter */
+.eye-spot[data-side="left"] {
+  left: 0;
+  translate: -60% 0;
+}
+.eye-spot[data-side="right"] {
+  right: 0;
+  translate: 60% 0;
+}
+/* Gutter mode (sections 72rem wide): once the empty sides are wider than an eye (1360px up),
+   the field spans the screen (minus the bezel, and minus a little more than a scrollbar,
+   since 100vw counts it) and each eye sits whole in the middle of its gutter. */
+@media (min-width: 1360px) {
+  .eye-field[data-gutter] {
+    left: 50%;
+    right: auto;
+    width: calc(100vw - 2 * var(--crt-side, 0px) - 20px);
+    translate: -50% 0;
+  }
+  .eye-field[data-gutter] .eye-spot[data-side="left"] {
+    left: calc((100% - 72rem) / 4);
+    translate: -50% 0;
+  }
+  .eye-field[data-gutter] .eye-spot[data-side="right"] {
+    right: calc((100% - 72rem) / 4);
+    translate: 50% 0;
+  }
+}
 /* ── ORISON binary rain ──────────────────────────────────────────────────── */
 
 .binary-rain span {

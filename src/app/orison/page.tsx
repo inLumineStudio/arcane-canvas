@@ -11,6 +11,7 @@ import { RichText } from "@/components/RichText";
 import { StickyCta } from "@/components/StickyCta";
 import { EyeCanvas } from "@/components/orison/EyeCanvas";
 import { PixelEye } from "@/components/orison/PixelEye";
+import { EyeField } from "@/components/orison/EyeField";
 import { BinaryRain } from "@/components/orison/BinaryRain";
 import { OsWindow } from "@/components/orison/OsWindow";
 import { TrailerPlayer } from "@/components/orison/TrailerPlayer";
@@ -89,6 +90,13 @@ export default function OrisonPage() {
 
       {/* ── README: the short description, straight from the print mockups ── */}
       <Section className="max-w-3xl">
+        <EyeField
+          gutter
+          spots={[
+            { top: "14%", side: "left", size: 40 },
+            { top: "68%", side: "right", size: 30, opacity: 0.7 },
+          ]}
+        />
         <OsWindow title={o.intro.file}>
           <p className="p-5 leading-relaxed md:p-8 md:text-lg">
             <RichText text={o.intro.text} />
@@ -110,6 +118,7 @@ export default function OrisonPage() {
 
       {/* ── Trailer: the muted loop until play is pressed, then the real trailer ── */}
       <Section className="pt-0 md:pt-0">
+        <EyeField gutter spots={[{ top: "30%", side: "right", size: 44, opacity: 0.8 }]} />
         <OsWindow title={o.clips.file}>
           {site.orison.youtubeTrailerId ? (
             <TrailerPlayer
@@ -131,7 +140,13 @@ export default function OrisonPage() {
       </Section>
 
       {/* ── Screenshots: a folder of windows ─────────────────────────── */}
-      <section className="py-12 md:py-20">
+      <section className="relative py-12 md:py-20">
+        <EyeField
+          spots={[
+            { top: "8%", side: "left", size: 36, opacity: 0.75 },
+            { top: "82%", side: "right", size: 28, opacity: 0.6 },
+          ]}
+        />
         <div className="mx-auto max-w-6xl px-5 font-pixel text-xl text-muted md:px-8">
           <p>
             {o.gallery.folder}&gt;DIR <span className="ml-4">{o.gallery.count}</span>
@@ -143,6 +158,7 @@ export default function OrisonPage() {
 
       {/* ── Terminal (easter egg codes) ──────────────────────────────── */}
       <Section id="terminal" className="max-w-3xl">
+        <EyeField gutter spots={[{ top: "40%", side: "left", size: 44, opacity: 0.85 }]} />
         <Terminal t={t.terminal} />
       </Section>
 
