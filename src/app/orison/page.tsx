@@ -68,14 +68,16 @@ export default function OrisonPage() {
         </div>
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 px-5 pb-28 text-center md:pb-16">
-          <h1 className="w-full max-w-xl" data-parallax="-0.1">
+          {/* 32rem: the vector logo is taller than the old PNG; this keeps it at the same height */}
+          <h1 className="w-full max-w-[32rem]" data-parallax="-0.1">
             <Image
-              src="/media/orison/wordmark.png"
+              src="/media/orison/wordmark.svg"
               alt={o.hero.wordmarkAlt}
-              width={900}
-              height={190}
+              width={1170}
+              height={280}
               priority
-              className="mx-auto h-auto w-full [image-rendering:pixelated]"
+              unoptimized
+              className="mx-auto h-auto w-full"
             />
           </h1>
           {/* The full stop is the hidden glitch trigger. */}

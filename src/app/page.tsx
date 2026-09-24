@@ -92,11 +92,12 @@ export default function HomePage() {
               }
               name={
                 <Image
-                  src="/media/orison/wordmark.png"
+                  src="/media/orison/wordmark.svg"
                   alt={h.products.orison.name}
-                  width={900}
-                  height={190}
-                  className="h-auto w-full max-w-sm [image-rendering:pixelated]"
+                  width={1170}
+                  height={280}
+                  unoptimized
+                  className="h-auto w-full max-w-sm"
                 />
               }
               kind={h.products.orison.kind}

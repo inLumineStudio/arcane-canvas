@@ -24,9 +24,8 @@ webp(join(O, 'Library Hero.png'), join(OUT, 'orison/hero.webp'), 'scale=2400:-1'
 webp(join(O, 'Main Capsule.png'), join(OUT, 'orison/capsule.webp'));
 webp(join(O, 'Library Header v2.png'), join(OUT, 'orison/header.webp'));
 webp(join(O, 'Vertical Capsule.png'), join(OUT, 'orison/vertical.webp'));
-// Keep only the white pixel lettering so it sits on any background.
-ff('-i', join(O, 'Main Capsule.png'), '-vf',
-  "crop=iw*0.46:ih*0.19:iw*0.27:ih*0.685,scale=900:-1:flags=neighbor,format=rgba,geq=r='255':g='255':b='255':a='if(gt(r(X,Y)+g(X,Y)+b(X,Y),600),255,0)'", join(OUT, 'orison/wordmark.png'));
+// The ORISON wordmark is not generated here: orison/wordmark.svg is the client's vector logo
+// (ORISON_logo_white.svg), copied as is. It replaced a PNG cut out of the Main Capsule.
 
 // Mini CD disc, cropped from the print mockups sheet.
 webp(join(SRC, 'Mockups.jpeg'), join(OUT, 'orison/minicd-disc.webp'), 'crop=176:176:578:614', 85);
