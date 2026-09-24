@@ -30,6 +30,79 @@ export const en = {
     },
   },
 
+  // /privacy. Describes what the site really does (keep it in sync if analytics, forms or
+  // new embeds are ever added). {email} becomes a link to the contact address.
+  // Draft by the agency: to be reviewed by whoever handles the client's legal side.
+  privacy: {
+    metaTitle: "Privacy - Arcane Canvas",
+    metaDescription: "What this site does with your data: hosting logs, no analytics, YouTube and Spotify only on request, email.",
+    title: "Privacy",
+    intro:
+      "This site is a showcase. It has no accounts, no forms and no newsletter, and it sets no cookies of its own. This is everything it does with data, in plain words.",
+    updated: "Last updated: 24 September 2026",
+    sections: [
+      {
+        title: "Who is responsible",
+        paragraphs: [
+          "The data controller is Marco D'Antino. Arcane Canvas is the name of his work, not a company. For anything about your data, write to {email}.",
+        ],
+        links: [],
+      },
+      {
+        title: "Hosting and server logs",
+        paragraphs: [
+          "The site is hosted by Vercel Inc. (USA). Like any web server, it receives some technical data with each request: your IP address, browser and device type, the page requested and the time. This is needed to deliver the pages and keep them secure (legitimate interest, art. 6(1)(f) GDPR).",
+          "These logs are kept only for the short period set by Vercel and are not used to identify or profile visitors. Transfers to the USA rely on the EU-U.S. Data Privacy Framework and on Vercel's standard contractual clauses.",
+        ],
+        links: [{ label: "Vercel privacy policy", key: "vercel" }],
+      },
+      {
+        title: "Analytics and cookies",
+        paragraphs: [
+          "The site uses no analytics, no advertising and no tracking of any kind, and it sets no cookies of its own. Fonts and images are served from this site, not from third parties.",
+          "On the ORISON page, the terminal remembers the codes you unlock in your browser's local storage. That stays on your device, is never sent anywhere, and goes away when you clear your browser data.",
+        ],
+        links: [],
+      },
+      {
+        title: "YouTube (ORISON trailer)",
+        paragraphs: [
+          "The trailer is played by YouTube (Google Ireland Ltd.). Nothing is loaded from YouTube until you press play: before that you only see a picture stored on this site. When you press play, the video loads from youtube-nocookie.com, and from then on Google may process your IP address and set cookies under its own policy.",
+        ],
+        links: [{ label: "Google privacy policy", key: "google" }],
+      },
+      {
+        title: "Spotify (SILENTIUM player)",
+        paragraphs: [
+          "The episode player on the SILENTIUM page comes from Spotify AB (Sweden). It is loaded only when you press “Load the Spotify player”; from then on Spotify may process your data and set cookies under its own policy. You can always open the episodes on Spotify instead.",
+          "The episode list and the transcripts are fetched by this site's server from Spotify and GitHub. No data about you is part of those requests.",
+        ],
+        links: [{ label: "Spotify privacy policy", key: "spotify" }],
+      },
+      {
+        title: "Email",
+        paragraphs: [
+          "If you write to hello@ or press@thearcanecanvas.com, your address and your message are used only to reply to you, and kept for as long as the conversation needs. The mailboxes are hosted by Aruba S.p.A. (Italy).",
+        ],
+        links: [{ label: "Aruba privacy policy", key: "aruba" }],
+      },
+      {
+        title: "Other sites",
+        paragraphs: [
+          "Links to Steam, Instagram, TikTok, Bluesky, YouTube, Spotify and other services take you to their sites, which have their own privacy policies.",
+        ],
+        links: [],
+      },
+      {
+        title: "Your rights",
+        paragraphs: [
+          "You can ask to access, correct or delete your data, to limit its use or to object to it, by writing to {email}. You can also lodge a complaint with the Italian data protection authority, the Garante per la protezione dei dati personali.",
+        ],
+        links: [{ label: "Garante per la protezione dei dati personali", key: "garante" }],
+      },
+    ],
+  },
+
   // The 404 page: a wall of eyes that follow the visitor
   notFound: {
     code: "404",
@@ -62,7 +135,10 @@ export const en = {
   },
 
   footer: {
+    // Arcane Canvas is not a legal entity yet, so the copyright holder is the person
+    owner: "Marco D'Antino / Arcane Canvas",
     rights: "All rights reserved.",
+    privacy: "Privacy",
     note: "All writing, art and audio are human-made.",
     follow: "Follow",
     press: "Press",
@@ -236,6 +312,12 @@ export const en = {
       title: "Case files",
       intro: "Pick an episode to play it here. No account needed.",
       nowPlaying: "Now playing",
+      selected: "Selected episode",
+      // Shown before the Spotify player is loaded (it is only loaded on request)
+      loadPlayer: "Load the Spotify player",
+      consentNote: "The player comes from Spotify, which may set its own cookies.",
+      privacyLink: "Privacy",
+      openOnSpotify: "Open it on Spotify instead",
       play: "Play",
       minutes: "min",
       playerTitle: "Spotify player",

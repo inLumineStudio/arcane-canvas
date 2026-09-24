@@ -1,11 +1,21 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
+import { site } from "@/config/site";
 import type { Episode } from "@/data/silentium-episodes";
 import type { Dictionary } from "@/content";
 
 // Episode list + a single Spotify Embed (brief §5, §7). Picking an episode swaps the iframe,
 // so only one player is ever loaded. Logged-out visitors can still listen.
+//
+// Click to load: the Spotify iframe can set third-party cookies, so nothing is requested
+// from Spotify until the visitor asks for the player (Italian Garante guidelines: no
+// non-essential third-party cookies before consent). Until then a local placeholder of the
+// same size shows the chosen episode, says what loading the player implies (with the link
+// to /privacy) and offers the episode on Spotify as a plain link instead.
+// Picking episodes before that only updates the placeholder.
 
 type Props = {
   episodes: Episode[];
@@ -23,6 +33,7 @@ const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short
 
 export function EpisodePlayer({ episodes, showId, t }: Props) {
   const [current, setCurrent] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   const player = useRef<HTMLDivElement>(null);
   const ep = episodes[current];
   const src = ep?.id
@@ -40,18 +51,53 @@ export function EpisodePlayer({ episodes, showId, t }: Props) {
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-14">
       <div ref={player} className="scroll-mt-20 lg:sticky lg:top-24 lg:order-2 lg:self-start">
-        <p className="text-sm text-muted">{t.nowPlaying}</p>
+        <p className="text-sm text-muted">{loaded ? t.nowPlaying : t.selected}</p>
         <p className="mb-4 mt-1 text-lg font-medium">{ep ? splitTitle(ep.title).name : ""}</p>
-        <iframe
-          key={src}
-          title={`${t.playerTitle}: ${ep?.title ?? ""}`}
-          src={src}
-          width="100%"
-          height="232"
-          loading="lazy"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          className="block rounded-xl border-0"
-        />
+        {loaded ? (
+          <iframe
+            key={src}
+            title={`${t.playerTitle}: ${ep?.title ?? ""}`}
+            src={src}
+            width="100%"
+            height="232"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            className="block rounded-xl border-0"
+          />
+        ) : (
+          // Same height as the Spotify embed (232px), so nothing jumps when it loads
+          <div className="flex h-[232px] flex-col justify-between gap-3 rounded-xl border border-line bg-bg-raised p-4">
+            <div className="flex items-start gap-4">
+              <Image
+                src="/media/silentium/cover.webp"
+                alt=""
+                width={96}
+                height={128}
+                className="h-24 w-[4.5rem] shrink-0 object-cover"
+              />
+              <div className="min-w-0">
+                <p className="text-sm text-muted">{ep ? splitTitle(ep.title).label : ""}</p>
+                <button type="button" onClick={() => setLoaded(true)} className="btn mt-2 text-left">
+                  ▶ {t.loadPlayer}
+                </button>
+              </div>
+            </div>
+            <p className="text-xs leading-relaxed text-muted">
+              {t.consentNote}{" "}
+              <Link href="/privacy" className="link text-fg">
+                {t.privacyLink}
+              </Link>
+              {" · "}
+              <a
+                href={ep?.id ? site.silentium.episodeUrl(ep.id) : site.silentium.spotifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link text-fg"
+              >
+                {t.openOnSpotify}
+              </a>
+            </p>
+          </div>
+        )}
         {!ep?.id && <p className="mt-3 text-xs text-muted">{t.showFallback}</p>}
       </div>
 

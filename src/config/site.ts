@@ -19,6 +19,7 @@ export const site = {
     get spotifyUrl() {
       return `https://open.spotify.com/show/${this.spotifyShowId}`;
     },
+    episodeUrl: (id: string) => `https://open.spotify.com/episode/${id}`,
     // The client's transcript archive (a static GitHub Pages site). The transcript pages
     // read its HTML straight from the repo, so a push there shows up here on the next
     // revalidation, with no copy to keep in sync.
@@ -28,6 +29,15 @@ export const site = {
       ref: "HEAD",
       siteUrl: "https://arcane-canvas.github.io/silentiumpodcast/",
     },
+  },
+
+  // Privacy policies of the services the /privacy page names, and the Italian authority
+  legal: {
+    vercel: "https://vercel.com/legal/privacy-policy",
+    google: "https://policies.google.com/privacy",
+    spotify: "https://www.spotify.com/legal/privacy-policy/",
+    aruba: "https://www.aruba.it/informativa-privacy.aspx",
+    garante: "https://www.garanteprivacy.it/",
   },
 
   // Footer credit for the agency that built the site

@@ -16,6 +16,7 @@ npm run build
 | `/about`     | Studio statement, principles, team, timeline, press |
 | `/orison`    | CRT-framed page: parallax hero with the tracking eye, YouTube trailer, screenshots, terminal, easter eggs |
 | `/silentium` | Format, episode list with Spotify Embed player, transcript list |
+| `/privacy`   | Privacy notice (copy in `en.ts` → `privacy`), linked from the footer |
 | `/silentium/transcripts/[slug]` | One episode transcript (or `lexicon`), read from the client's archive repo |
 
 ## Design
