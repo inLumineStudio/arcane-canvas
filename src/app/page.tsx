@@ -103,8 +103,7 @@ export default function HomePage() {
                   {site.orison.youtubeTrailerId ? (
                     <TrailerPlayer
                       videoId={site.orison.youtubeTrailerId}
-                      loopSrc="/media/orison/clip"
-                      poster="/media/orison/clip-poster.webp"
+                      poster="/media/orison/trailer-poster.webp"
                       playLabel={t.buttons.watchTrailer}
                       title={h.products.orison.mediaLabel}
                     />

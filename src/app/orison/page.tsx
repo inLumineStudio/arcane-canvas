@@ -116,15 +116,14 @@ export default function OrisonPage() {
         </p>
       </Section>
 
-      {/* ── Trailer: the muted loop until play is pressed, then the real trailer ── */}
+      {/* ── Trailer: its YouTube cover until play is pressed, then the trailer itself ── */}
       <Section className="pt-0 md:pt-0">
         <EyeField gutter spots={[{ top: "30%", side: "right", size: 44, opacity: 0.8 }]} />
         <OsWindow title={o.clips.file}>
           {site.orison.youtubeTrailerId ? (
             <TrailerPlayer
               videoId={site.orison.youtubeTrailerId}
-              loopSrc="/media/orison/clip"
-              poster="/media/orison/clip-poster.webp"
+              poster="/media/orison/trailer-poster.webp"
               playLabel={t.buttons.watchTrailer}
               title={t.home.products.orison.mediaLabel}
             />
@@ -135,8 +134,6 @@ export default function OrisonPage() {
           )}
         </OsWindow>
         <p className="mt-3 font-pixel text-lg text-muted">{o.clips.caption}</p>
-        {/* TODO: remove once the real Steam trailer clips are in public/media/orison */}
-        <p className="text-xs text-muted/60">{o.clips.placeholderNote}</p>
       </Section>
 
       {/* ── Screenshots: a folder of windows ─────────────────────────── */}

@@ -10,7 +10,7 @@ Website v1 is built and on `main` (`inLumineStudio/arcane-canvas`). All four rou
 |--------------|--------|
 | `/`          | Done. Logo + orbit hero, statement, ORISON / SILENTIUM product bands, contact. |
 | `/about`     | Done in layout; team profiles and part of the copy are lorem ipsum. |
-| `/orison`    | Done. CRT frame, parallax hero with tracking eye (gyroscope on mobile), clips, screenshot gallery with zoom + full-screen viewer, terminal, glitch panel, easter eggs. Unlock content is placeholder. |
+| `/orison`    | Done. CRT frame, parallax hero with tracking eye (gyroscope on mobile), YouTube trailer, screenshot gallery with zoom + full-screen viewer, terminal, glitch panel, easter eggs. Unlock content is placeholder. |
 | `/silentium` | Done. Format facts, episode list, Spotify embed player, transcripts. Episodes come from the Spotify API when env vars are set, otherwise the static list. Transcripts come live from the client's archive repo. |
 
 ## Recent changes
@@ -49,7 +49,6 @@ Client TODO list (second round, 2026-09-24):
 | Item | Where it goes |
 |------|---------------|
 | ORISON press kit Dropbox URL | `site.orison.pressKitUrl` in `src/config/site.ts` (until then, Press kit buttons open an email to press@) |
-| Real Steam trailer clips | Replace `public/media/orison/clip.*` (WebM + MP4), then remove the TODO in `src/app/orison/page.tsx` |
 | Glitch panel and terminal unlock content | `src/content/en.ts` (ORISON section) and `src/content/easter-eggs.ts` |
 | Team profiles, portrait photo | `src/content/en.ts` (About) |
 | Final EN copy (Home / About lorem ipsum) | `src/content/en.ts` |
@@ -59,7 +58,7 @@ Client TODO list (second round, 2026-09-24):
 1. Review the 2026-09-24 changes on a real phone and tablet.
 2. Deploy (Vercel is the natural fit; none is set up yet). Set `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` there for live episodes.
 3. Swap in the client's material as it arrives (table above), then clear the matching `TBD`s and README placeholders.
-4. Before launch: Lighthouse on mobile (the hero video and ORISON clips are the heaviest assets), OG images / metadata per route, favicon check, real-device test on iOS Safari (gyroscope permission prompt, `svh` behaviour with the toolbar).
+4. Before launch: Lighthouse on mobile (the ORISON eye canvas and screenshots are the heaviest assets), OG images / metadata per route, favicon check, real-device test on iOS Safari (gyroscope permission prompt, `svh` behaviour with the toolbar).
 5. Optional: a second locale (copy `src/content/en.ts`, register it in `src/content/index.ts`).
 
 ## Gotchas

@@ -140,8 +140,7 @@ export const en = {
     },
     clips: {
       file: "TRAILER.WEBM",
-      caption: "Clips from the trailer. Press play to watch it in full, with sound.",
-      placeholderNote: "Placeholder montage from screenshots: swap with the re-encoded Steam trailer clips.",
+      caption: "The official trailer. Press play to watch it here, with sound.",
     },
     gallery: {
       folder: "C:\\ORISON\\SCREENS",
