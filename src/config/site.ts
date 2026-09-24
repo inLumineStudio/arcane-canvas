@@ -30,7 +30,7 @@ export const site = {
   },
 
   // Footer credit for the agency that built the site
-  builtBy: { label: "InLumine", href: "https://www.inlumine.it/" },
+  builtBy: { label: "inLumine", href: "https://www.inlumine.it/" },
 
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/orison.sys/" },

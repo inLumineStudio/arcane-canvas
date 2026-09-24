@@ -27,7 +27,7 @@ Session of 2026-09-24:
   - Phones and portrait tablets: stacked, logo above. Landscape screens from 768px (landscape tablet, desktop, landscape phone): side by side, statement left, logo right.
   - The intro paragraph under the hero is a block of max 60ch, text centred from 768px (flush left on phones), with the "About the studio" link on its own line.
 - **Contact section** ("Say hello.") centred from 768px too, for consistency with the intro; flush left on phones.
-- **Footer credit** "Built by InLumine" → https://www.inlumine.it/ under the socials, right-aligned on desktop (`site.builtBy` in `src/config/site.ts`, label in `en.ts`).
+- **Footer credit** "Built by inLumine" → https://www.inlumine.it/ under the socials, right-aligned on desktop (`site.builtBy` in `src/config/site.ts`, label in `en.ts`).
   - The statement is sized by width and height, the logo gets the space left. All sizing lives in `globals.css` (`.home-hero*`), with the maths explained there.
   - The orbit SVG's viewBox is cropped to the band actually drawn (`0 96 640 328`), and the SVG fills whatever box its parent gives it.
   - Checked at 375×667, 390×844, 768×1024, 844×390, 1024×768, 1280×800, 1366×657, 1600×751, 1920×960 and 2560×1300: 5 statement lines, no horizontal scroll, everything above the fold.
