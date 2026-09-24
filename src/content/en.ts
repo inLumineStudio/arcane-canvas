@@ -106,7 +106,7 @@ export const en = {
         "No generative AI, anywhere. Every word, drawing and note is made by a person, and that person is usually me, very late at night.",
       ],
       signoff: "Please, remember you are not alone in this world.",
-      signature: "Name Surname", // TBD: the developer's name, or a pen name
+      signature: "Marco D'Antino",
       portraitAlt: "Photo placeholder: the developer's desk",
       portraitCaption: "where ORISON happened (photo TBD)",
     },
@@ -212,7 +212,7 @@ export const en = {
         "Each episode documents a new case. Father Tommaso Lanza, a Vatican linguist working for the Custodia Ultimae Vocis, investigates deaths where an impossible language appears at the very last moment. Religious horror, psychological thriller, dark fantasy.",
       facts: [
         { label: "Theme", value: "Cosmic and religious horror" },
-        { label: "Voice", value: "Solo narrator. Lorem ipsum (host name TBD)" },
+        { label: "Voice", value: "Solo narrator, Marco D'Antino" },
         { label: "Cadence", value: "One episode a month" },
         { label: "Length", value: "15 to 35 minutes" },
       ],
@@ -240,7 +240,7 @@ export const en = {
       back: "All transcripts",
       prev: "Previous case",
       next: "Next case",
-      credit: "SILENTIUM is a work of fiction. All characters and events are fictitious.",
+      credit: "Written, performed and transcribed by Marco D'Antino. All characters and events are fictitious.",
       metaTitle: "SILENTIUM transcripts - Arcane Canvas",
     },
     cta: {

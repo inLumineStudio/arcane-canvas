@@ -40,6 +40,7 @@ Client TODO list (second round, 2026-09-24):
 - **Projects section on Home.** A studio "Projects" heading (h2), a "Project 01 / 02" line above each product name in that product's typeface (VT323 for ORISON, Caveat for SILENTIUM), studio-black gaps between the bands and band backdrops that fade in/out at top and bottom (`.band-fade`), so the two worlds no longer butt into each other.
 - **New ORISON eye** from the client's second `eye.html`: the teal halo is now a "dissolve" field of 1px dots that turns with the rings; offscreen buffers capped for 4K; phones run 24fps with rings/halo rebuilt every 5th frame.
 - **YouTube trailer** set (`site.orison.youtubeTrailerUrl`): the Home trailer card now opens it.
+- **Developer name confirmed: Marco D'Antino.** Used for the About signature, the SILENTIUM "Voice" fact and the transcript credit.
 - **SILENTIUM transcripts** (client option 2, "read from GitHub"): list on `/silentium#transcripts`, one page per case at `/silentium/transcripts/<slug>` plus the Lexicon, prev/next case, sticky Spotify CTA. No admin page needed: the client keeps publishing to the archive repo as today. Option 3 (link to the archive) is kept as the fallback if GitHub is down.
 
 ## Waiting on the client (Marco)
@@ -49,8 +50,7 @@ Client TODO list (second round, 2026-09-24):
 | ORISON press kit Dropbox URL | `site.orison.pressKitUrl` in `src/config/site.ts` (until then, Press kit buttons open an email to press@) |
 | Real Steam trailer clips | Replace `public/media/orison/clip.*` (WebM + MP4), then remove the TODO in `src/app/orison/page.tsx` |
 | Glitch panel and terminal unlock content | `src/content/en.ts` (ORISON section) and `src/content/easter-eggs.ts` |
-| Team profiles, developer name / pen name, portrait photo | `src/content/en.ts` (About) |
-| SILENTIUM host name | `src/content/en.ts` (SILENTIUM format facts). The transcript archive credits "Marco D'Antino": confirm whether the site should use that name |
+| Team profiles, portrait photo | `src/content/en.ts` (About) |
 | Final EN copy (Home / About lorem ipsum) | `src/content/en.ts` |
 
 ## Suggested next steps
