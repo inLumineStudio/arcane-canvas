@@ -19,43 +19,41 @@ export default function HomePage() {
 
   return (
     <PageShell theme="studio">
-      {/* ── Hero: the logo, its galaxy ring, and what the studio makes riding on it ── */}
-      <Parallax className="relative isolate flex min-h-[88svh] items-center justify-center overflow-hidden pt-14">
+      {/* ── Hero: the logo with its galaxy ring and the statement, together in one screen.
+          Stacked on phones and portrait tablets, side by side on landscape screens from 768px.
+          Sizes live in globals.css (.home-hero). ── */}
+      <Parallax className="home-hero relative isolate flex min-h-svh flex-col items-center justify-center gap-4 overflow-hidden pb-6 pt-14 md:gap-6 md:pb-10">
         <div data-parallax="0.3" className="absolute -inset-y-[10%] inset-x-0 -z-10">
           <Starfield />
         </div>
         <h1 className="sr-only">{t.meta.siteName}</h1>
-        <div data-parallax="0.12" className="w-[125%] max-w-3xl shrink-0 px-2 md:w-full">
+        <div data-parallax="0.12" className="home-hero-logo aspect-[640/328] shrink-0">
           <LogoOrbit words={h.hero.orbit} alt={h.hero.logoAlt} />
         </div>
-      </Parallax>
-
-      {/* ── Statement ───────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-6xl px-5 pb-24 md:px-8 md:pb-36">
         <p
           aria-label={h.statement.lines.join(" ")}
-          className="text-[clamp(2.75rem,13vw,9rem)] font-semibold uppercase leading-[0.92] tracking-[-0.03em]"
+          className="home-hero-statement w-full max-w-6xl px-5 font-semibold uppercase leading-[0.92] tracking-[-0.03em] md:px-8"
         >
           {h.statement.lines.map((line, i) => (
             <span
               key={line}
               aria-hidden="true"
               className={`block ${i === h.statement.lines.length - 1 ? "text-accent" : ""} ${
-                i % 2 ? "md:pl-[12%]" : ""
+                i % 2 ? "md:pl-[0.9em]" : ""
               }`}
             >
               {line}
             </span>
           ))}
         </p>
-        <div className="mt-12 grid gap-6 md:mt-20 md:grid-cols-12">
-          <p className="max-w-prose text-lg leading-relaxed text-fg/85 md:col-span-6 md:col-start-7">
-            {h.statement.intro}{" "}
-            <Link href="/about" className="link whitespace-nowrap text-fg">
-              {h.statement.aboutLink}
-            </Link>
-          </p>
-        </div>
+      </Parallax>
+
+      {/* ── Intro: short enough (4 lines) to centre under the hero on tablet and desktop ── */}
+      <section className="mx-auto max-w-[60ch] px-5 pb-24 pt-12 text-lg md:px-0 md:pb-36 md:pt-20 md:text-center">
+        <p className="leading-relaxed text-fg/85">{h.statement.intro}</p>
+        <Link href="/about" className="link mt-4 inline-block text-fg">
+          {h.statement.aboutLink}
+        </Link>
       </section>
 
       {/* ── Products: each band switches to its product's own world ── */}
@@ -145,11 +143,12 @@ export default function HomePage() {
       </section>
 
       {/* ── Contact ──────────────────────────────────────────────────── */}
-      <section id="contact" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24 md:px-8 md:py-36">
+      {/* Centred from 768px like the intro above; flush left on phones */}
+      <section id="contact" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24 md:px-8 md:py-36 md:text-center">
         <h2 className="text-[clamp(2.25rem,9vw,6rem)] font-semibold uppercase leading-[0.95] tracking-[-0.03em]">
           {h.contact.title}
         </h2>
-        <p className="mt-8 max-w-prose text-fg/80">{h.contact.text}</p>
+        <p className="mt-8 max-w-prose text-fg/80 md:mx-auto">{h.contact.text}</p>
         <a
           href={`mailto:${site.contactEmail}`}
           className="link mt-10 inline-block text-[clamp(1.05rem,5.2vw,2.25rem)] text-accent"

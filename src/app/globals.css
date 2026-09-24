@@ -245,6 +245,50 @@ body {
   50% { opacity: 0.1; }
 }
 
+/* Home hero: logo + statement always share one screen.
+   The statement (5 lines at line-height 0.92) scales with width and with height, so it never
+   takes more than ~35% of the screen. The logo gets the height the header (3.5rem), the
+   statement and the gaps leave, turned into a width through the orbit's aspect (640 / 328).
+   Phones: up to 125% wide so the ring runs off the edges. */
+.home-hero {
+  --statement: min(13vw, 7.5svh, 9rem);
+}
+.home-hero-statement {
+  font-size: var(--statement);
+}
+.home-hero-logo {
+  width: max(12rem, min(125%, 48rem, (100svh - 3.5rem - 4.6 * var(--statement) - 4.5rem) * 1.95));
+}
+@media (min-width: 768px) {
+  .home-hero-logo {
+    width: max(16rem, min(100% - 4rem, 48rem, (100svh - 3.5rem - 4.6 * var(--statement) - 6.5rem) * 1.95));
+  }
+}
+/* Landscape screens from 768px (tablet landscape, desktop, and the wide landscape phones):
+   side by side, statement on the left, logo on the right. Stacking there would squeeze both
+   into the short height. The statement's longest line is ~6.9em wide, so 0.062 × the usable
+   width gives it ~43% of the row (100vw counts the scrollbar, hence the margin); the logo
+   takes ~50%, the rest is the gap. Lines never wrap. */
+@media (min-width: 768px) and (orientation: landscape) {
+  .home-hero {
+    --row: calc(100vw - 6rem);
+    --statement: min((100svh - 7.5rem) / 4.6, var(--row) * 0.062, 8rem);
+    flex-direction: row;
+    column-gap: calc(var(--row) * 0.04);
+    padding-inline: 3rem;
+  }
+  .home-hero-statement {
+    order: -1;
+    flex-shrink: 0;
+    width: auto;
+    white-space: nowrap;
+    padding-inline: 0;
+  }
+  .home-hero-logo {
+    width: min(var(--row) * 0.5, 48rem, (100svh - 7.5rem) * 1.95);
+  }
+}
+
 .logo-float {
   animation: logo-float 7s ease-in-out infinite;
 }

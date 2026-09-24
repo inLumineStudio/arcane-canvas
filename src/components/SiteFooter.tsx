@@ -20,15 +20,28 @@ export function SiteFooter() {
             </a>
           </p>
         </div>
-        <ul className="flex gap-6" aria-label={t.footer.follow}>
-          {site.socials.map((s) => (
-            <li key={s.href}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="space-y-3 md:text-right">
+          <ul className="flex gap-6 md:justify-end" aria-label={t.footer.follow}>
+            {site.socials.map((s) => (
+              <li key={s.href}>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p>
+            {t.footer.builtBy}{" "}
+            <a
+              href={site.builtBy.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-4 hover:text-accent hover:underline"
+            >
+              {site.builtBy.label}
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );

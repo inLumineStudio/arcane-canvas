@@ -1,4 +1,4 @@
-# Arcane Canvas — website v1
+# Arcane Canvas - website v1
 
 Showcase site for Arcane Canvas, ORISON and SILENTIUM. Next.js (App Router) + Tailwind CSS v4, with plain CSS in `src/app/globals.css` where Tailwind isn't a good fit (CRT frame, glitch, binary rain).
 
@@ -29,9 +29,9 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
 
 ## Where things live
 
-- **Copy**: `src/content/en.ts` — every user-facing string. Add a locale by copying it and registering it in `src/content/index.ts`.
+- **Copy**: `src/content/en.ts` - every user-facing string. Add a locale by copying it and registering it in `src/content/index.ts`.
 - **Links / IDs / email**: `src/config/site.ts` (items marked TBD are open points).
-- **Easter eggs**: `src/content/easter-eggs.ts` — codes are stored as SHA-256 hashes; the file header lists where each code is hidden.
+- **Easter eggs**: `src/content/easter-eggs.ts` - codes are stored as SHA-256 hashes; the file header lists where each code is hidden.
 - **SILENTIUM episodes**: fetched from the Spotify Web API when `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` are set (see `.env.example`), otherwise `src/data/silentium-episodes.ts`.
 - **Media**: `public/media`, generated from the client's raw assets with `npm run assets -- "<path to ArcaneCanvas folder>"` (needs ffmpeg).
 - **Fonts**: self-hosted WOFF2 in `src/app/fonts` (IBM Plex Mono preloaded, VT323 and Caveat on demand). No requests to Google.

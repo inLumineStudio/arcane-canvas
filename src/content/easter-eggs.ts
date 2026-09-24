@@ -3,10 +3,10 @@
 // has to stay truly secret, move validation to a server endpoint (brief §7).
 //
 // Where each code is hidden:
-//   1. text     — cipher letters in the ORISON intro paragraph (content/en.ts, orison.intro)
-//   2. source   — an HTML comment in the page markup (components/orison/SourceComment.tsx)
-//   3. console  — a message printed in the browser console (components/orison/ConsoleWhisper.tsx)
-//   4. asset    — the alt text of screenshot #4 (content/en.ts, orison.gallery.alts)
+//   1. text     - cipher letters in the ORISON intro paragraph (content/en.ts, orison.intro)
+//   2. source   - an HTML comment in the page markup (components/orison/SourceComment.tsx)
+//   3. console  - a message printed in the browser console (components/orison/ConsoleWhisper.tsx)
+//   4. asset    - the alt text of screenshot #4 (content/en.ts, orison.gallery.alts)
 //
 // Unlock payloads are placeholders: what each code reveals is TBD with Marco (brief §8.1).
 

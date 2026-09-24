@@ -16,6 +16,13 @@ const CY = H / 2;
 const RX = 300;
 const RY = 78;
 const TILT = -16;
+// The drawing only uses the middle band of the canvas: the tilted ring spans about CY ± 112
+// (plus its text) and the logo, floating, reaches up to y ≈ 102. Cropping the viewBox to
+// that band keeps the look and scale identical but drops the dead space above and below,
+// so the logo can share one screen with the statement. The SVG fills its box and fits the
+// drawing inside it (default preserveAspectRatio "meet"), so the parent decides the size.
+const CROP_Y = 96;
+const CROP_H = 328;
 
 // Ellipse as a path, starting at the far right, going over the top (back half, upside down
 // and dimmed, like the far side of an orbit) then under the logo left to right, so the
@@ -84,7 +91,7 @@ export function LogoOrbit({ words, alt }: { words: readonly string[]; alt: strin
   );
 
   return (
-    <svg ref={root} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={alt} className="h-auto w-full overflow-visible">
+    <svg ref={root} viewBox={`0 ${CROP_Y} ${W} ${CROP_H}`} role="img" aria-label={alt} className="h-full w-full overflow-visible">
       <defs>
         <path id="orbit-ring" d={RING} />
         {/* Halves of the ring in its own (untilted) space: above the centre line is "behind" */}

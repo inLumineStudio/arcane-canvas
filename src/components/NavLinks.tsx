@@ -95,7 +95,12 @@ export function NavLinks({ projects, links, menuLabel, closeLabel }: Props) {
             bottom: "var(--crt-bottom, 0px)",
           }}
         >
-          <p className="text-sm text-muted">{projects.label}</p>
+          <ul>
+            {links.map((l) => (
+              <li key={l.href}>{sheetLink(l, "text-2xl")}</li>
+            ))}
+          </ul>
+          <p className="mt-6 border-t border-line pt-6 text-sm text-muted">{projects.label}</p>
           <ul className="mt-2">
             {projects.items.map((p) => (
               <li key={p.href}>
@@ -104,16 +109,25 @@ export function NavLinks({ projects, links, menuLabel, closeLabel }: Props) {
               </li>
             ))}
           </ul>
-          <ul className="mt-6 border-t border-line pt-6">
-            {links.map((l) => (
-              <li key={l.href}>{sheetLink(l, "text-2xl")}</li>
-            ))}
-          </ul>
         </div>
       )}
 
       {/* ── Desktop ────────────────────────────────────────────────── */}
       <ul className="hidden items-center gap-7 md:flex">
+        {links.map((l) => (
+          <li key={l.href}>
+            <Link
+              href={l.href}
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className={`nav-link text-sm transition-colors hover:text-accent ${
+                isActive(l.href) ? "text-accent" : "text-fg/75"
+              }`}
+            >
+              {l.label}
+            </Link>
+          </li>
+        ))}
+
         <li ref={dropdown} className="relative">
           <button
             ref={dropButton}
@@ -138,7 +152,7 @@ export function NavLinks({ projects, links, menuLabel, closeLabel }: Props) {
           {dropOpen && (
             <ul
               id="projects-menu"
-              className="absolute left-1/2 top-full mt-4 w-72 -translate-x-1/2 border border-line bg-bg-raised p-1.5 shadow-[0_16px_40px_rgb(0_0_0/0.5)]"
+              className="absolute right-0 top-full mt-4 w-72 border border-line bg-bg-raised p-1.5 shadow-[0_16px_40px_rgb(0_0_0/0.5)]"
             >
               {projects.items.map((p) => (
                 <li key={p.href}>
@@ -162,20 +176,6 @@ export function NavLinks({ projects, links, menuLabel, closeLabel }: Props) {
             </ul>
           )}
         </li>
-
-        {links.map((l) => (
-          <li key={l.href}>
-            <Link
-              href={l.href}
-              aria-current={isActive(l.href) ? "page" : undefined}
-              className={`nav-link text-sm transition-colors hover:text-accent ${
-                isActive(l.href) ? "text-accent" : "text-fg/75"
-              }`}
-            >
-              {l.label}
-            </Link>
-          </li>
-        ))}
       </ul>
     </nav>
   );

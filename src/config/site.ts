@@ -20,6 +20,9 @@ export const site = {
     },
   },
 
+  // Footer credit for the agency that built the site
+  builtBy: { label: "InLumine", href: "https://www.inlumine.it/" },
+
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/orison.sys/" },
     { label: "TikTok", href: "https://www.tiktok.com/@orison.sys" },

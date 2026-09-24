@@ -8,16 +8,16 @@
 export const en = {
   meta: {
     siteName: "Arcane Canvas",
-    homeTitle: "Arcane Canvas — Games, stories and sound from the dark",
+    homeTitle: "Arcane Canvas - Games, stories and sound from the dark",
     homeDescription:
       "Arcane Canvas is an independent creative studio. We make ORISON, a narrative game, and SILENTIUM, a horror fiction podcast.",
-    aboutTitle: "About — Arcane Canvas",
+    aboutTitle: "About - Arcane Canvas",
     aboutDescription:
       "Arcane Canvas is one person making narrative games, audio fiction and printed things. All human-made.",
-    orisonTitle: "ORISON — Arcane Canvas",
+    orisonTitle: "ORISON - Arcane Canvas",
     orisonDescription:
       "The last unwatched place on the internet ran on a well hidden machine. You found the machine. Now it wants to talk.",
-    silentiumTitle: "SILENTIUM — Arcane Canvas",
+    silentiumTitle: "SILENTIUM - Arcane Canvas",
     silentiumDescription:
       "A solo-narrator horror fiction podcast. A Vatican linguist translates an impossible language that appears only at the moment of death.",
   },
@@ -50,6 +50,7 @@ export const en = {
     note: "All writing, art and audio are human-made.",
     follow: "Follow",
     press: "Press",
+    builtBy: "Built by",
   },
 
   home: {
