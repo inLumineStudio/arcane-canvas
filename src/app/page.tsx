@@ -9,9 +9,16 @@ import { Parallax } from "@/components/Parallax";
 import { StarBackdrop, Starfield } from "@/components/home/Starfield";
 import { LogoOrbit } from "@/components/home/LogoOrbit";
 import { BinaryRain } from "@/components/orison/BinaryRain";
+import { pageMetadata } from "@/lib/metadata";
 import { PixelEye } from "@/components/orison/PixelEye";
 import { OsWindow } from "@/components/orison/OsWindow";
 import { TrailerPlayer } from "@/components/orison/TrailerPlayer";
+
+export const metadata = pageMetadata({
+  title: getDictionary().meta.homeTitle,
+  description: getDictionary().meta.homeDescription,
+  path: "/",
+});
 
 export default function HomePage() {
   const t = getDictionary();

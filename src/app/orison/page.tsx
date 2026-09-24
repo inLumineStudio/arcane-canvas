@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { orisonPressKitHref, site } from "@/config/site";
 import { getDictionary } from "@/content";
+import { OG, pageMetadata } from "@/lib/metadata";
 import { PageShell } from "@/components/PageShell";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
@@ -24,11 +25,12 @@ import { GyroPrompt } from "@/components/orison/GyroPrompt";
 
 const t = getDictionary();
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: t.meta.orisonTitle,
   description: t.meta.orisonDescription,
-  openGraph: { images: ["/media/orison/capsule.webp"] },
-};
+  path: "/orison",
+  image: OG.orison,
+});
 
 // Visual language: the game's own 90s OS and the client's print mockups (README.TXT,
 // DOS listings, bevelled buttons), with lots of black around the eye (after deltarune.com).

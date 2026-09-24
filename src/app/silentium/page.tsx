@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { site } from "@/config/site";
 import { getDictionary } from "@/content";
+import { OG, pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { getSilentiumEpisodes } from "@/lib/spotify";
 import { getTranscriptSeasons, LEXICON } from "@/lib/transcripts";
@@ -14,11 +15,12 @@ import { EpisodePlayer } from "@/components/silentium/EpisodePlayer";
 
 const t = getDictionary();
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: t.meta.silentiumTitle,
   description: t.meta.silentiumDescription,
-  openGraph: { images: ["/media/silentium/cover.webp"] },
-};
+  path: "/silentium",
+  image: OG.silentium,
+});
 
 // Refresh the episode list from Spotify once a day; the transcript list (from the client's
 // archive repo) asks for an hourly refresh, and the page follows the shorter of the two.

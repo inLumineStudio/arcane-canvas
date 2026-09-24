@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { getTranscript, getTranscriptSeasons, LEXICON } from "@/lib/transcripts";
+import { OG, pageMetadata } from "@/lib/metadata";
 import { PageShell } from "@/components/PageShell";
 import { StickyCta } from "@/components/StickyCta";
 
@@ -26,11 +27,13 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const transcript = await getTranscript((await params).slug);
-  if (!transcript) return {};
-  return {
+  if (!transcript) return { title: t.meta.notFoundTitle };
+  return pageMetadata({
     title: `${transcript.title} - ${t.silentium.transcripts.metaTitle}`,
-    openGraph: { images: ["/media/silentium/cover.webp"] },
-  };
+    description: transcript.summary || t.silentium.transcripts.lexiconNote,
+    path: `/silentium/transcripts/${transcript.slug}`,
+    image: OG.silentium,
+  });
 }
 
 export default async function TranscriptPage({ params }: Props) {

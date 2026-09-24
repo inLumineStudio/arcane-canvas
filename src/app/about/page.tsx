@@ -3,16 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { orisonPressKitHref, site } from "@/config/site";
 import { getDictionary } from "@/content";
+import { pageMetadata } from "@/lib/metadata";
 import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/Button";
 import { Starfield } from "@/components/home/Starfield";
 
 const t = getDictionary();
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: t.meta.aboutTitle,
   description: t.meta.aboutDescription,
-};
+  path: "/about",
+});
 
 // Arcane Canvas is a solo developer, so this page is a letter rather than a corporate
 // "about us": first person, like the developer notes of Toby Fox or Lucas Pope, followed by

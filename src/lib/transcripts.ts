@@ -34,6 +34,8 @@ export type TranscriptSeason = { title: string; entries: TranscriptEntry[] };
 export type Transcript = {
   slug: string;
   title: string;
+  /** The case summary from the archive's index ("" for the Lexicon), for link previews */
+  summary: string;
   /** Sanitised HTML of the transcript body */
   html: string;
   prev: TranscriptEntry | null;
@@ -186,6 +188,7 @@ export async function getTranscript(slug: string): Promise<Transcript | null> {
   return {
     slug,
     title,
+    summary: i >= 0 ? entries[i].summary : "",
     html: sanitize(body),
     prev: i > 0 ? entries[i - 1] : null,
     next: i >= 0 && i < entries.length - 1 ? entries[i + 1] : null,

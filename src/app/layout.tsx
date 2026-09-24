@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { site } from "@/config/site";
 import { getDictionary } from "@/content";
+import { pageMetadata } from "@/lib/metadata";
 import "./globals.css";
 
 // Self-hosted WOFF2 (no requests to Google, brief §6). Only the body font is preloaded.
@@ -33,12 +34,14 @@ const caveat = localFont({
 
 const t = getDictionary();
 
+// Defaults for any page that sets nothing itself. Every route sets its own through
+// pageMetadata() (lib/metadata.ts), which also adds the canonical URL; that is left out
+// here so a page without one never claims to be the home page.
 export const metadata: Metadata = {
+  ...pageMetadata({ title: t.meta.homeTitle, description: t.meta.homeDescription, path: "/" }),
+  alternates: undefined,
   metadataBase: new URL(site.url),
-  title: t.meta.homeTitle,
-  description: t.meta.homeDescription,
   icons: { icon: "/media/brand/logo.svg" },
-  openGraph: { siteName: t.meta.siteName, type: "website" },
 };
 
 export const viewport: Viewport = {

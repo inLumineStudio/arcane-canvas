@@ -810,6 +810,20 @@ html.is-glitching body::after {
     translate: 50% 0;
   }
 }
+/* ── 404 eye wall ───────────────────────────────────────────────────────── */
+/* The middle of the wall is cleared for the message: a wide, short hole on phones (the text
+   spans the width), a rounder one from tablet up. */
+.eye-wall {
+  -webkit-mask-image: radial-gradient(ellipse 62% 30% at 50% 50%, transparent 55%, #000 100%);
+  mask-image: radial-gradient(ellipse 62% 30% at 50% 50%, transparent 55%, #000 100%);
+}
+@media (min-width: 768px) {
+  .eye-wall {
+    -webkit-mask-image: radial-gradient(ellipse 34% 34% at 50% 50%, transparent 60%, #000 100%);
+    mask-image: radial-gradient(ellipse 34% 34% at 50% 50%, transparent 60%, #000 100%);
+  }
+}
+
 /* ── ORISON binary rain ──────────────────────────────────────────────────── */
 
 .binary-rain span {

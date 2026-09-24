@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  Link-preview images (public/og/home.jpg and silentium.jpg, 1200×630), drawn with the site's
+  own fonts and assets. ?v=home or ?v=silentium picks the card. public/og/orison.jpg is just
+  the Steam capsule cropped. How to regenerate them: README, "Link previews".
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: Plex; font-weight: 400; src: url("../../src/app/fonts/ibm-plex-mono-latin-400-normal.woff2"); }
+  @font-face { font-family: Plex; font-weight: 600; src: url("../../src/app/fonts/ibm-plex-mono-latin-600-normal.woff2"); }
+  @font-face { font-family: Caveat; src: url("../../src/app/fonts/caveat-latin-500-normal.woff2"); }
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { font-family: Plex, monospace; -webkit-font-smoothing: antialiased; }
+  .card { position: relative; width: 1200px; height: 630px; overflow: hidden; }
+
+  /* Studio (Home) */
+  .home { background: radial-gradient(ellipse 70% 80% at 72% 45%, #121a26, #0b0f15 70%); color: #e4eef9; }
+  .home svg.stars { position: absolute; inset: 0; }
+  .home .statement { position: absolute; left: 72px; top: 118px; font-size: 64px; font-weight: 600; line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase; }
+  .home .statement span { display: block; }
+  .home .statement span:nth-child(even) { padding-left: 0.9em; }
+  .home .statement span:last-child { color: #8ebfe7; }
+  .home .logo { position: absolute; right: 70px; top: 120px; width: 470px; }
+  .home .ring { position: absolute; right: 20px; top: 150px; width: 560px; height: 320px; }
+  .home .url { position: absolute; left: 72px; bottom: 60px; font-size: 22px; color: #8a94a8; }
+  .home .brand { position: absolute; right: 72px; bottom: 60px; font-size: 22px; color: #8a94a8; }
+
+  /* SILENTIUM */
+  .silentium { background: #0a0605 url("../../public/media/silentium/band-hands.webp") 62% center / cover; color: #efdcd3; }
+  .silentium::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(10 6 5 / 0.96) 0%, rgb(10 6 5 / 0.82) 38%, rgb(10 6 5 / 0.15) 72%, rgb(10 6 5 / 0.35) 100%), linear-gradient(0deg, rgb(10 6 5 / 0.6), transparent 40%); }
+  .silentium .grain { position: absolute; inset: 0; opacity: 0.1; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .silentium .text { position: absolute; left: 72px; bottom: 96px; }
+  .silentium h1 { font-weight: 400; font-size: 92px; letter-spacing: 0.2em; line-height: 1; }
+  .silentium .tag { margin-top: 22px; font-family: Caveat, cursive; font-size: 52px; color: #d08a74; }
+  .silentium .sub { margin-top: 26px; font-size: 22px; color: #a8847a; }
+  .silentium .sub b { font-weight: 400; color: #efdcd3; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  const v = new URLSearchParams(location.search).get("v");
+  const root = document.getElementById("root");
+  if (v === "home") {
+    // Same seeded sky as the site's Starfield
+    let seed = 21; const rand = () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;
+    let stars = "";
+    for (let i = 0; i < 110; i++) { const x = rand() * 1200, y = rand() * 630, r = rand() < 0.9 ? 0.8 + rand() * 0.8 : 2, o = 0.25 + rand() * 0.6; stars += `<circle cx="${x}" cy="${y}" r="${r}" fill="#e4eef9" opacity="${o}"/>`; }
+    root.innerHTML = `
+      <div class="card home">
+        <svg class="stars" width="1200" height="630">${stars}</svg>
+        <svg class="ring" viewBox="0 0 560 320"><ellipse cx="280" cy="160" rx="270" ry="72" transform="rotate(-16 280 160)" fill="none" stroke="#8ebfe7" stroke-opacity="0.3"/></svg>
+        <img class="logo" src="../../public/media/brand/logo.svg">
+        <p class="statement"><span>One person.</span><span>Games,</span><span>podcasts</span><span>&amp; other</span><span>dark things.</span></p>
+        <p class="url">thearcanecanvas.com</p>
+        <p class="brand">Arcane Canvas</p>
+      </div>`;
+  } else {
+    root.innerHTML = `
+      <div class="card silentium">
+        <div class="grain"></div>
+        <div class="text">
+          <h1>SILENTIUM</h1>
+          <p class="tag">Some words are only spoken once.</p>
+          <p class="sub">A horror fiction podcast <b>·</b> New case every month</p>
+        </div>
+      </div>`;
+  }
+</script>
+</body>
+</html>

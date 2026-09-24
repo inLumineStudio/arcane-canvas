@@ -9,17 +9,33 @@ export const en = {
   meta: {
     siteName: "Arcane Canvas",
     homeTitle: "Arcane Canvas - Games, stories and sound from the dark",
+    // Descriptions stay under ~160 characters: longer ones get cut in search results and previews
     homeDescription:
-      "Arcane Canvas is an independent creative studio. We make ORISON, a narrative game, and SILENTIUM, a horror fiction podcast.",
+      "Arcane Canvas is a one-person studio making dark things by hand: ORISON, a narrative game for PC, and SILENTIUM, a horror fiction podcast.",
     aboutTitle: "About - Arcane Canvas",
     aboutDescription:
       "Arcane Canvas is one person making narrative games, audio fiction and printed things. All human-made.",
     orisonTitle: "ORISON - Arcane Canvas",
     orisonDescription:
-      "The last unwatched place on the internet ran on a well hidden machine. You found the machine. Now it wants to talk.",
+      "A narrative game for PC. The last unwatched place on the internet ran on a well hidden machine. You found it. Now it wants to talk. Free demo, December 2026.",
     silentiumTitle: "SILENTIUM - Arcane Canvas",
     silentiumDescription:
-      "A solo-narrator horror fiction podcast. A Vatican linguist translates an impossible language that appears only at the moment of death.",
+      "A horror fiction podcast. Vatican linguist Father Tommaso Lanza translates an impossible language spoken only at the moment of death. New case every month.",
+    notFoundTitle: "Page not found - Arcane Canvas",
+    // Alt text of the link-preview images in public/og
+    ogAlt: {
+      home: "Arcane Canvas: the crystal A with its galaxy ring, next to the words One person. Games, podcasts & other dark things.",
+      orison: "ORISON: a pixel-art eye above the game's wordmark.",
+      silentium: "SILENTIUM: a pale hand reaching out in red light. Some words are only spoken once.",
+    },
+  },
+
+  // The 404 page: a wall of eyes that follow the visitor
+  notFound: {
+    code: "404",
+    title: "This page isn't here.",
+    text: "But you are. And they've noticed.",
+    home: "Back to the home page",
   },
 
   nav: {

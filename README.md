@@ -35,6 +35,12 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
 - **Easter eggs**: `src/content/easter-eggs.ts` - codes are stored as SHA-256 hashes; the file header lists where each code is hidden.
 - **SILENTIUM episodes**: fetched from the Spotify Web API when `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` are set (see `.env.example`), otherwise `src/data/silentium-episodes.ts`.
 - **SILENTIUM transcripts**: not stored here. `src/lib/transcripts.ts` reads the HTML of the client's archive repo (`site.silentium.transcripts`, `arcane-canvas/silentiumpodcast`) from GitHub and regenerates at most once an hour, so a new `episodeN.html` listed in its `index.html` appears on the site with no deploy. The markup is cut to an allowlist and restyled by `.transcript` in `globals.css`. If GitHub is unreachable, the SILENTIUM page links to the archive site instead.
+- **Link previews** (title, description, image for WhatsApp, social, search): every page goes through `pageMetadata()` in `src/lib/metadata.ts`; the texts are `meta.*` in `en.ts` (descriptions under ~160 characters). Images are 1200×630 JPGs in `public/og`: `orison.jpg` is the Steam capsule cropped (`ffmpeg -i public/media/orison/capsule.webp -vf "scale=1200:-1,crop=1200:630" -q:v 3 public/og/orison.jpg`); `home.jpg` and `silentium.jpg` are drawn from `scripts/og/og.html` with headless Chrome, then converted with `ffmpeg -i x.png -q:v 3 public/og/x.jpg`:
+  ```
+  chrome --headless=new --hide-scrollbars --allow-file-access-from-files --window-size=1200,630 --virtual-time-budget=4000 --screenshot=home.png "file:///<repo>/scripts/og/og.html?v=home"
+  ```
+  After a change, check the preview with a debugger such as the Facebook Sharing Debugger (it also refreshes the cache).
+- **404**: `src/app/not-found.tsx`, a wall of pixel eyes following the visitor (`EyeWall`).
 - **Trailer cover**: `public/media/orison/trailer-poster.webp` is a local copy of the YouTube thumbnail (`i.ytimg.com/vi/<id>/maxresdefault.jpg`, converted to WebP), so nothing is requested from YouTube before play. Replace it if the trailer changes. `clip.*` (a screenshot montage) is only shown if `site.orison.youtubeTrailerId` is set back to null.
 - **Media**: `public/media`, generated from the client's raw assets with `npm run assets -- "<path to ArcaneCanvas folder>"` (needs ffmpeg).
 - **Fonts**: self-hosted WOFF2 in `src/app/fonts` (IBM Plex Mono preloaded, VT323 and Caveat on demand). No requests to Google.
