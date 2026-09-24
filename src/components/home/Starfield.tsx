@@ -41,3 +41,32 @@ export function Starfield({ count = 90, seed = 21, className = "" }) {
     </svg>
   );
 }
+
+// The same sky for the rest of the Home page, behind the intro, the gaps between the product
+// bands and the contact section. A 0–100 viewBox stretched over a tall page would scale the
+// stars with the section (huge on a 5000px column, cropped away on a phone), so here the
+// stars are sized in pixels, in tiles repeated as a CSS background: same size and density on
+// every screen, drawn once by the browser, no JS. Two tiles of coprime-ish sizes overlap so
+// the repeat does not read as a grid; a third, sparse one breathes slowly (the "twinkle").
+
+function tile(size: number, count: number, seed: number) {
+  const rand = seeded(seed);
+  const dots = Array.from({ length: count }, () => {
+    const r = rand() < 0.9 ? 0.7 + rand() * 0.7 : 1.8;
+    return `<circle cx="${(rand() * size).toFixed(1)}" cy="${(rand() * size).toFixed(1)}" r="${r.toFixed(2)}" fill-opacity="${(0.25 + rand() * 0.6).toFixed(2)}"/>`;
+  }).join("");
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><g fill="#e4eef9">${dots}</g></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+const STATIC_SKY = [tile(420, 13, 7), tile(610, 17, 13)].join(", ");
+const TWINKLE_SKY = tile(530, 6, 29);
+
+export function StarBackdrop() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+      <div className="absolute inset-0" style={{ backgroundImage: STATIC_SKY }} />
+      <div className="twinkle absolute inset-0" style={{ backgroundImage: TWINKLE_SKY, animationDuration: "7s" }} />
+    </div>
+  );
+}
