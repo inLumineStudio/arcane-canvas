@@ -69,7 +69,6 @@ export const en = {
     products: {
       title: "Projects",
       orison: {
-        label: "Project 01",
         kind: "A narrative game for PC",
         name: "ORISON",
         status: "Free demo, December 2026",
@@ -78,7 +77,6 @@ export const en = {
         mediaLabel: "Play the ORISON trailer",
       },
       silentium: {
-        label: "Project 02",
         kind: "A horror fiction podcast",
         name: "SILENTIUM",
         status: "New case every month",

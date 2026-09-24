@@ -11,8 +11,6 @@ import { Button } from "./Button";
 
 type Props = {
   theme: "orison" | "silentium";
-  /** Small line above the name ("Project 01"), set in the product's typeface (.band-label) */
-  label: string;
   backdrop: ReactNode;
   media: ReactNode;
   /** The product name, as text or as a logo/wordmark element */
@@ -33,7 +31,6 @@ export function ProductBand(p: Props) {
       <div className="band-fade absolute inset-0 -z-10">{p.backdrop}</div>
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-12">
         <header className={`lg:col-span-5 lg:row-start-1 lg:self-end ${p.reverse ? "lg:col-start-8" : "lg:col-start-1"}`}>
-          <p className="band-label mb-3">{p.label}</p>
           <h3>{p.name}</h3>
           <p className="mt-4 text-sm text-muted">
             {p.kind} <span className="text-fg">· {p.status}</span>

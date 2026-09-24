@@ -75,7 +75,6 @@ export default function HomePage() {
           <div className="mt-4 flex flex-col gap-12 md:mt-8 md:gap-20">
             <ProductBand
               theme="orison"
-              label={h.products.orison.label}
               backdrop={
                 <>
                   <div className="absolute inset-0 bg-bg" />
@@ -122,7 +121,6 @@ export default function HomePage() {
 
             <ProductBand
               theme="silentium"
-              label={h.products.silentium.label}
               reverse
               backdrop={
                 <>

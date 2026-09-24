@@ -326,23 +326,6 @@ body {
   .band-fade { --fade: 6rem; }
 }
 
-/* "Project 01" above each product name, in the product's own hand: plain sentence case,
-   no letter-spacing (not an eyebrow label). */
-.band-label {
-  color: var(--accent);
-  font-size: 0.9375rem;
-}
-[data-theme="orison"] .band-label {
-  font-family: var(--font-vt323), monospace;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-[data-theme="silentium"] .band-label {
-  font-family: var(--font-caveat), cursive;
-  font-size: 1.75rem;
-  line-height: 1;
-}
-
 /* ORISON: the site navigation speaks the game's pixel font */
 [data-theme="orison"] .nav-link {
   font-family: var(--font-vt323), monospace;
