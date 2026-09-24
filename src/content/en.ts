@@ -164,7 +164,8 @@ export const en = {
       title: "The machine is waiting.",
       text: "Wishlist ORISON on Steam to get notified when the free demo opens.",
     },
-    monitorLabel: "ARCANE CANVAS · ORISON-17",
+    // The monitor's brand: Audeo built the machine in the game
+    monitorLabel: "Audeo",
     gyroPrompt: "Tap to let it see you",
   },
 
