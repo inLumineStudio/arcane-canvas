@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { site } from "@/config/site";
 import { getDictionary } from "@/content";
+import Link from "next/link";
 import { getSilentiumEpisodes } from "@/lib/spotify";
+import { getTranscriptSeasons, LEXICON } from "@/lib/transcripts";
 import { PageShell } from "@/components/PageShell";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
@@ -18,12 +20,14 @@ export const metadata: Metadata = {
   openGraph: { images: ["/media/silentium/cover.webp"] },
 };
 
-// Refresh the episode list from Spotify once a day.
+// Refresh the episode list from Spotify once a day; the transcript list (from the client's
+// archive repo) asks for an hourly refresh, and the page follows the shorter of the two.
 export const revalidate = 86400;
 
 export default async function SilentiumPage() {
   const s = t.silentium;
-  const episodes = await getSilentiumEpisodes();
+  const [episodes, seasons] = await Promise.all([getSilentiumEpisodes(), getTranscriptSeasons()]);
+  const tr = s.transcripts;
 
   return (
     <PageShell theme="silentium">
@@ -99,6 +103,64 @@ export default async function SilentiumPage() {
       <Section id="episodes" title={s.episodes.title}>
         <p className="-mt-6 mb-10 text-muted md:-mt-8">{s.episodes.intro}</p>
         <EpisodePlayer episodes={episodes} showId={site.silentium.spotifyShowId} t={s.episodes} />
+      </Section>
+
+      {/* ── Transcripts: every case as a whole-row link (big tap target on phones), read on
+          its own page. If the archive can't be reached, a link to it instead. ── */}
+      <Section id="transcripts" title={tr.title}>
+        <div className="-mt-6 mb-10 max-w-prose md:-mt-8">
+          <p className="text-muted">{tr.intro}</p>
+          <p className="mt-3 text-sm text-accent">{tr.warning}</p>
+        </div>
+
+        {seasons.length ? (
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-8">
+              {seasons.map((season) => (
+                <section key={season.title} aria-label={season.title || tr.title} className="mb-10 last:mb-0">
+                  {season.title && <h3 className="mb-2 font-hand text-3xl text-accent">{season.title}</h3>}
+                  <ul className="border-t border-line">
+                    {season.entries.map((e) => (
+                      <li key={e.slug} className="border-b border-line">
+                        <Link href={`/silentium/transcripts/${e.slug}`} className="group block py-5 md:py-6">
+                          <span className="block text-lg font-medium transition-colors group-hover:text-accent md:text-xl">
+                            {e.title}
+                          </span>
+                          {/* Case, date, status: each wraps as a whole, never mid-item */}
+                          {e.meta.length > 0 && (
+                            <span className="mt-1 flex flex-wrap gap-x-4 text-sm text-muted">
+                              {e.meta.map((m) => (
+                                <span key={m}>{m}</span>
+                              ))}
+                            </span>
+                          )}
+                          {e.summary && <span className="mt-3 block max-w-prose leading-relaxed text-fg/80">{e.summary}</span>}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+            {/* The Lexicon: under the list on phones, alongside it from 1024px */}
+            <aside className="lg:col-span-4">
+              <Link
+                href={`/silentium/transcripts/${LEXICON}`}
+                className="group block border border-line bg-bg-raised p-6 transition-colors hover:border-accent lg:sticky lg:top-24"
+              >
+                <span className="block text-xl font-medium group-hover:text-accent">{tr.lexicon} →</span>
+                <span className="mt-2 block text-sm leading-relaxed text-muted">{tr.lexiconNote}</span>
+              </Link>
+            </aside>
+          </div>
+        ) : (
+          <div>
+            <p className="mb-6 max-w-prose text-fg/80">{tr.unavailable}</p>
+            <Button href={site.silentium.transcripts.siteUrl} external>
+              {tr.archive}
+            </Button>
+          </div>
+        )}
       </Section>
 
       {/* ── Final CTA (the sticky one steps aside while this is on screen) ── */}

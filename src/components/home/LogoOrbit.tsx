@@ -24,30 +24,70 @@ const TILT = -16;
 const CROP_Y = 96;
 const CROP_H = 328;
 
-// Ellipse as a path, starting at the far right, going over the top (back half, upside down
-// and dimmed, like the far side of an orbit) then under the logo left to right, so the
-// front half reads upright.
-const RING = `M ${CX + RX} ${CY} A ${RX} ${RY} 0 1 0 ${CX - RX} ${CY} A ${RX} ${RY} 0 1 0 ${CX + RX} ${CY}`;
+// Ellipse as a path, in four quarters: from the top (behind the logo) to the left, under the
+// logo left to right (front half, upright), up the right side and back over the top (back
+// half, upside down and dimmed, like the far side of an orbit).
+// The path starts and ends at the top on purpose: that is where glyphs are born and die as
+// the text scrolls, and there they are hidden by the "A" and faded out by SEAM_FADE, so the
+// loop has no visible cut. At the far right, the old start, glyphs popped in and out.
+const Q = `${RX} ${RY} 0 0 0`;
+const RING = `M ${CX} ${CY - RY} A ${Q} ${CX - RX} ${CY} A ${Q} ${CX} ${CY + RY} A ${Q} ${CX + RX} ${CY} A ${Q} ${CX} ${CY - RY}`;
+const SEAM_FADE = 110; // half-width of the fade around the seam, in ring units
 const SPEED = 0.018; // px of path per ms
 
 export function LogoOrbit({ words, alt }: { words: readonly string[]; alt: string }) {
   const paths = useRef<SVGTextPathElement[]>([]);
+  const probe = useRef<SVGTextElement>(null);
   const root = useRef<SVGSVGElement>(null);
-  const text = Array(3).fill(words.join("  ✦  ")).join("  ✦  ") + "  ✦  ";
+  // One period of the loop. The text is this unit repeated, and the offset wraps at the
+  // unit's measured length (not the ring's), so the seamless loop has no jump and no gap.
+  const unit = words.join(" ✦ ") + " ✦ ";
+  const text = unit.repeat(4);
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
+    // The words fade in (see .orbit-words) once they are measured in their real font,
+    // instead of snapping in with the fallback font and reflowing.
+    const reveal = () => root.current?.setAttribute("data-ready", "");
+    if (prefersReducedMotion()) {
+      reveal();
+      return;
+    }
     let raf = 0;
     let last = 0;
     let offset = 0;
     let visible = false;
+    let period = 0;
     const length = (root.current!.querySelector("#orbit-ring") as SVGPathElement).getTotalLength();
+
+    // Measured on a hidden twin with the same font settings: two units minus one, so the
+    // trailing space SVG trims off the end cancels out. Redone once the webfont is in,
+    // since the fallback font has different advances. The text is then made long enough
+    // to cover the ring plus one period, so the tail never runs short while it scrolls.
+    const measure = () => {
+      const t = probe.current!;
+      t.textContent = unit;
+      const one = t.getComputedTextLength();
+      t.textContent = unit + unit;
+      period = t.getComputedTextLength() - one;
+      if (period <= 0) return;
+      const full = unit.repeat(Math.ceil(length / period) + 2);
+      for (const p of paths.current) p.textContent = full;
+      offset %= period;
+    };
+    measure();
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        measure();
+        reveal();
+      });
+    } else reveal();
 
     const frame = (ts: number) => {
       raf = requestAnimationFrame(frame);
       const dt = last ? Math.min(ts - last, 50) : 16;
       last = ts;
-      offset = (offset - SPEED * dt) % length;
+      if (period <= 0) return;
+      offset = (offset - SPEED * dt) % period;
       for (const p of paths.current) p.setAttribute("startOffset", String(offset));
     };
     const io = new IntersectionObserver(([e]) => {
@@ -65,7 +105,7 @@ export function LogoOrbit({ words, alt }: { words: readonly string[]; alt: strin
       cancelAnimationFrame(raf);
       io.disconnect();
     };
-  }, []);
+  }, [unit]);
 
   const ring = (half: "back" | "front", i: number) => (
     <g clipPath={`url(#orbit-${half})`} transform={`rotate(${TILT} ${CX} ${CY})`}>
@@ -76,7 +116,8 @@ export function LogoOrbit({ words, alt }: { words: readonly string[]; alt: strin
         fontSize="17"
         letterSpacing="1.5"
         dy="-7"
-        className="font-mono"
+        className="orbit-words font-mono"
+        mask={half === "back" ? "url(#orbit-seam)" : undefined}
       >
         <textPath
           ref={(el) => {
@@ -101,7 +142,18 @@ export function LogoOrbit({ words, alt }: { words: readonly string[]; alt: strin
         <clipPath id="orbit-front">
           <rect x="-50" y={CY} width={W + 100} height={H} />
         </clipPath>
+        {/* Fades the back words to nothing around the seam at the top, behind the "A" */}
+        <linearGradient id="orbit-seam-fade" gradientUnits="userSpaceOnUse" x1={CX - SEAM_FADE} x2={CX + SEAM_FADE} y1="0" y2="0">
+          <stop offset="0" stopColor="#fff" />
+          <stop offset="0.4" stopColor="#000" />
+          <stop offset="0.6" stopColor="#000" />
+          <stop offset="1" stopColor="#fff" />
+        </linearGradient>
+        <mask id="orbit-seam" maskUnits="userSpaceOnUse" x="-50" y="-200" width={W + 100} height={H + 400}>
+          <rect x="-50" y="-200" width={W + 100} height={H + 400} fill="url(#orbit-seam-fade)" />
+        </mask>
       </defs>
+      <text ref={probe} visibility="hidden" fontSize="17" letterSpacing="1.5" className="font-mono" aria-hidden />
       {ring("back", 0)}
       <image href="/media/brand/logo.svg" x={CX - 170} y={CY - 150} width="340" height="265" className="logo-float" />
       {ring("front", 1)}

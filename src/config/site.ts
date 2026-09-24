@@ -9,14 +9,23 @@ export const site = {
     // TBD: Dropbox folder from Marco (trailer, screenshots, cover…). While null, the
     // Press kit button opens an email to pressEmail instead.
     pressKitUrl: null as string | null,
-    // TBD: no YouTube channel yet. While null, the trailer card links to the Steam page instead.
-    youtubeTrailerUrl: null as string | null,
+    // The trailer card falls back to the Steam page if this is ever set back to null.
+    youtubeTrailerUrl: "https://www.youtube.com/watch?v=6veKf0zDn1g" as string | null,
   },
 
   silentium: {
     spotifyShowId: "5MFiBrUk5S3AkMjKoOPDKT",
     get spotifyUrl() {
       return `https://open.spotify.com/show/${this.spotifyShowId}`;
+    },
+    // The client's transcript archive (a static GitHub Pages site). The transcript pages
+    // read its HTML straight from the repo, so a push there shows up here on the next
+    // revalidation, with no copy to keep in sync.
+    transcripts: {
+      repo: "arcane-canvas/silentiumpodcast",
+      // HEAD follows whatever the repo's default branch is
+      ref: "HEAD",
+      siteUrl: "https://arcane-canvas.github.io/silentiumpodcast/",
     },
   },
 

@@ -249,9 +249,11 @@ body {
    The statement (5 lines at line-height 0.92) scales with width and with height, so it never
    takes more than ~35% of the screen. The logo gets the height the header (3.5rem), the
    statement and the gaps leave, turned into a width through the orbit's aspect (640 / 328).
-   Phones: up to 125% wide so the ring runs off the edges. */
+   Phones: up to 125% wide so the ring runs off the edges.
+   The statement was scaled down ~18% on the client's request (was min(13vw, 7.5svh, 9rem)
+   and 0.062 / 8rem in landscape); the logo takes the height it frees up. */
 .home-hero {
-  --statement: min(13vw, 7.5svh, 9rem);
+  --statement: min(10.6vw, 6.15svh, 7.4rem);
 }
 .home-hero-statement {
   font-size: var(--statement);
@@ -266,13 +268,13 @@ body {
 }
 /* Landscape screens from 768px (tablet landscape, desktop, and the wide landscape phones):
    side by side, statement on the left, logo on the right. Stacking there would squeeze both
-   into the short height. The statement's longest line is ~6.9em wide, so 0.062 × the usable
-   width gives it ~43% of the row (100vw counts the scrollbar, hence the margin); the logo
-   takes ~50%, the rest is the gap. Lines never wrap. */
+   into the short height. The statement's longest line is ~6.9em wide, so 0.051 × the usable
+   width gives it ~35% of the row (100vw counts the scrollbar, hence the margin); the logo
+   takes up to ~56%, the rest is the gap. Lines never wrap. */
 @media (min-width: 768px) and (orientation: landscape) {
   .home-hero {
     --row: calc(100vw - 6rem);
-    --statement: min((100svh - 7.5rem) / 4.6, var(--row) * 0.062, 8rem);
+    --statement: min((100svh - 7.5rem) / 4.6 * 0.82, var(--row) * 0.051, 6.5rem);
     flex-direction: row;
     column-gap: calc(var(--row) * 0.04);
     padding-inline: 3rem;
@@ -285,8 +287,17 @@ body {
     padding-inline: 0;
   }
   .home-hero-logo {
-    width: min(var(--row) * 0.5, 48rem, (100svh - 7.5rem) * 1.95);
+    width: min(var(--row) * 0.56, 48rem, (100svh - 7.5rem) * 1.95);
   }
+}
+
+/* The orbit words fade in once measured in the real font (LogoOrbit sets data-ready) */
+.orbit-words {
+  opacity: 0;
+  transition: opacity 1.6s ease-out;
+}
+[data-ready] .orbit-words {
+  opacity: 1;
 }
 
 .logo-float {
@@ -295,6 +306,41 @@ body {
 
 @keyframes logo-float {
   50% { transform: translateY(-8px); }
+}
+
+/* ── Home product bands ──────────────────────────────────────────────────── */
+
+/* Each band surfaces from the studio black and sinks back into it (shorter fade on phones,
+   where the band padding is smaller). */
+/* The band itself must not paint its theme background ([data-theme] does), or the fade
+   would show the band colour instead of the studio black behind it. */
+[data-theme].product-band {
+  background: transparent;
+}
+.band-fade {
+  --fade: 3.5rem;
+  -webkit-mask-image: linear-gradient(transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+  mask-image: linear-gradient(transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+}
+@media (min-width: 768px) {
+  .band-fade { --fade: 6rem; }
+}
+
+/* "Project 01" above each product name, in the product's own hand: plain sentence case,
+   no letter-spacing (not an eyebrow label). */
+.band-label {
+  color: var(--accent);
+  font-size: 0.9375rem;
+}
+[data-theme="orison"] .band-label {
+  font-family: var(--font-vt323), monospace;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+[data-theme="silentium"] .band-label {
+  font-family: var(--font-caveat), cursive;
+  font-size: 1.75rem;
+  line-height: 1;
 }
 
 /* ORISON: the site navigation speaks the game's pixel font */
@@ -316,6 +362,147 @@ body {
 /* Parallax layers are moved from JS; hint the compositor */
 [data-parallax] {
   will-change: transform;
+}
+
+/* ── SILENTIUM transcripts ────────────────────────────────────────────────── */
+/* The archive's own markup (see src/lib/transcripts.ts), restyled in the poster's language:
+   quiet body text, stage directions in muted italics, the Tongue in brick-flesh, the case
+   file set like closing credits. One ~65ch column at every size. */
+
+.transcript {
+  line-height: 1.85;
+  color: color-mix(in oklab, var(--fg) 88%, transparent);
+}
+.transcript p,
+.transcript ul,
+.transcript ol,
+.transcript blockquote {
+  margin-block: 0 1.1em;
+}
+.transcript h2 {
+  margin: 2.5em 0 1em;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--fg);
+}
+.transcript h3,
+.transcript h4 {
+  margin: 2em 0 0.75em;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--fg);
+}
+.transcript ul,
+.transcript ol {
+  padding-left: 1.25em;
+  list-style: disc;
+}
+.transcript li + li {
+  margin-top: 0.4em;
+}
+.transcript strong {
+  font-weight: 600;
+  color: var(--fg);
+}
+.transcript hr {
+  margin: 3em 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+.transcript a {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-color: color-mix(in oklab, currentColor 45%, transparent);
+}
+.transcript a:hover {
+  color: var(--accent);
+}
+.transcript .speaker {
+  font-weight: 600;
+  color: var(--fg);
+}
+.transcript .sound-effect,
+.transcript .note {
+  font-style: italic;
+  color: var(--muted);
+}
+.transcript .tongue {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--accent);
+}
+.transcript .redacted {
+  color: var(--accent);
+}
+.transcript .warning {
+  color: var(--accent);
+}
+/* Empty paragraphs were the archive's pauses between beats */
+.transcript .beat {
+  height: 0.75em;
+  margin: 0;
+}
+.transcript .transcript-header,
+.transcript .intro {
+  margin-bottom: 2.5em;
+}
+.transcript .case-info {
+  display: grid;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+}
+/* Label and value on one row, even on phones, so the case file stays short */
+.transcript .case-info > div {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.transcript .case-info strong {
+  font-weight: 400;
+  color: var(--muted);
+}
+.transcript .case-box,
+.transcript .lexicon-entry {
+  margin: 1.5em 0;
+  padding: 1.25rem;
+  background: var(--bg-raised);
+  border-left: 2px solid var(--brick);
+}
+.transcript .case-box > :last-child,
+.transcript .lexicon-entry > :last-child {
+  margin-bottom: 0;
+}
+.transcript .lexicon-word {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+.transcript .lexicon-pronunciation {
+  font-style: italic;
+  color: var(--muted);
+}
+.transcript .lexicon-tier {
+  margin-bottom: 0.75em;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+
+/* Previous / next case: whole-card tap targets */
+.transcript-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 2.75rem;
+  padding: 1rem 1.25rem;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: box-shadow 0.15s, color 0.15s;
+}
+.transcript-step:hover {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 /* ── ORISON glitch (easter egg) ──────────────────────────────────────────── */

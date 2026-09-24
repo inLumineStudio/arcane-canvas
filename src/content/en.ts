@@ -67,8 +67,9 @@ export const en = {
       aboutLink: "About the studio",
     },
     products: {
-      title: "Current work",
+      title: "Projects",
       orison: {
+        label: "Project 01",
         kind: "A narrative game for PC",
         name: "ORISON",
         status: "Free demo, December 2026",
@@ -77,6 +78,7 @@ export const en = {
         mediaLabel: "Play the ORISON trailer",
       },
       silentium: {
+        label: "Project 02",
         kind: "A horror fiction podcast",
         name: "SILENTIUM",
         status: "New case every month",
@@ -224,6 +226,22 @@ export const en = {
       minutes: "min",
       playerTitle: "Spotify player",
       showFallback: "Episode link pending: playing the full show instead.",
+    },
+    // The transcripts themselves come from the client's archive repo (src/lib/transcripts.ts)
+    transcripts: {
+      title: "Transcripts",
+      intro: "Father Tommaso Lanza's investigation logs for the Custodia Ultimae Vocis, transcribed in full.",
+      warning: "Contains descriptions of death, body horror, religious themes and existential dread.",
+      read: "Read the transcript",
+      lexicon: "The Lexicon",
+      lexiconNote: "Every documented word of the Tongue, by tier.",
+      unavailable: "The transcripts can't be loaded right now. They are always on the archive site.",
+      archive: "Open the transcript archive",
+      back: "All transcripts",
+      prev: "Previous case",
+      next: "Next case",
+      credit: "SILENTIUM is a work of fiction. All characters and events are fictitious.",
+      metaTitle: "SILENTIUM transcripts - Arcane Canvas",
     },
     cta: {
       title: "Follow the show.",

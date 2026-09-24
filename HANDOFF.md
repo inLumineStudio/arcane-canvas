@@ -11,7 +11,7 @@ Website v1 is built and on `main` (`inLumineStudio/arcane-canvas`). All four rou
 | `/`          | Done. Logo + orbit hero, statement, ORISON / SILENTIUM product bands, contact. |
 | `/about`     | Done in layout; team profiles and part of the copy are lorem ipsum. |
 | `/orison`    | Done. CRT frame, parallax hero with tracking eye (gyroscope on mobile), clips, screenshot gallery with zoom + full-screen viewer, terminal, glitch panel, easter eggs. Unlock content is placeholder. |
-| `/silentium` | Done. Format facts, episode list, Spotify embed player. Episodes come from the Spotify API when env vars are set, otherwise the static list. |
+| `/silentium` | Done. Format facts, episode list, Spotify embed player, transcripts. Episodes come from the Spotify API when env vars are set, otherwise the static list. Transcripts come live from the client's archive repo. |
 
 ## Recent changes
 
@@ -34,16 +34,23 @@ Session of 2026-09-24:
   - If the statement copy gets a longer line, or the ring or logo in `LogoOrbit.tsx` change, recheck the factors in `globals.css` (4.6 = 5 lines × 0.92, 0.062 ≈ the longest line of 12 characters, 1.95 = the orbit aspect).
 - `CLAUDE.md` (working rules) and this file.
 
+Client TODO list (second round, 2026-09-24):
+- **Orbit loop fixed.** The ring text was not periodic (3 copies of the words on a ring of a different length), so every lap it jumped and left a gap. Now the text is N copies of one unit and the offset wraps at the unit's measured length. The path also starts at the top, behind the "A", where the words fade out and back in (mask), so there is no visible seam; the words fade in on load once the webfont is measured.
+- **Hero statement ~18% smaller** (portrait `min(10.6vw, 6.15svh, 7.4rem)`, landscape factor 0.051 / 6.5rem); the logo takes the freed space (landscape: up to 56% of the row). Rechecked 375×667, 390×844, 844×390, 1366×657.
+- **Projects section on Home.** A studio "Projects" heading (h2), a "Project 01 / 02" line above each product name in that product's typeface (VT323 for ORISON, Caveat for SILENTIUM), studio-black gaps between the bands and band backdrops that fade in/out at top and bottom (`.band-fade`), so the two worlds no longer butt into each other.
+- **New ORISON eye** from the client's second `eye.html`: the teal halo is now a "dissolve" field of 1px dots that turns with the rings; offscreen buffers capped for 4K; phones run 24fps with rings/halo rebuilt every 5th frame.
+- **YouTube trailer** set (`site.orison.youtubeTrailerUrl`): the Home trailer card now opens it.
+- **SILENTIUM transcripts** (client option 2, "read from GitHub"): list on `/silentium#transcripts`, one page per case at `/silentium/transcripts/<slug>` plus the Lexicon, prev/next case, sticky Spotify CTA. No admin page needed: the client keeps publishing to the archive repo as today. Option 3 (link to the archive) is kept as the fallback if GitHub is down.
+
 ## Waiting on the client (Marco)
 
 | Item | Where it goes |
 |------|---------------|
 | ORISON press kit Dropbox URL | `site.orison.pressKitUrl` in `src/config/site.ts` (until then, Press kit buttons open an email to press@) |
-| YouTube trailer URL | `site.orison.youtubeTrailerUrl` (until then, the trailer card links to Steam) |
 | Real Steam trailer clips | Replace `public/media/orison/clip.*` (WebM + MP4), then remove the TODO in `src/app/orison/page.tsx` |
 | Glitch panel and terminal unlock content | `src/content/en.ts` (ORISON section) and `src/content/easter-eggs.ts` |
 | Team profiles, developer name / pen name, portrait photo | `src/content/en.ts` (About) |
-| SILENTIUM host name | `src/content/en.ts` (SILENTIUM format facts) |
+| SILENTIUM host name | `src/content/en.ts` (SILENTIUM format facts). The transcript archive credits "Marco D'Antino": confirm whether the site should use that name |
 | Final EN copy (Home / About lorem ipsum) | `src/content/en.ts` |
 
 ## Suggested next steps

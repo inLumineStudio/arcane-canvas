@@ -15,7 +15,8 @@ npm run build
 | `/`          | Hero/About, product bands (ORISON, SILENTIUM), contact |
 | `/about`     | Studio statement, principles, team, timeline, press |
 | `/orison`    | CRT-framed page: parallax hero with the tracking eye, clips, screenshots, terminal, easter eggs |
-| `/silentium` | Format, episode list with Spotify Embed player |
+| `/silentium` | Format, episode list with Spotify Embed player, transcript list |
+| `/silentium/transcripts/[slug]` | One episode transcript (or `lexicon`), read from the client's archive repo |
 
 ## Design
 
@@ -33,13 +34,13 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
 - **Links / IDs / email**: `src/config/site.ts` (items marked TBD are open points).
 - **Easter eggs**: `src/content/easter-eggs.ts` - codes are stored as SHA-256 hashes; the file header lists where each code is hidden.
 - **SILENTIUM episodes**: fetched from the Spotify Web API when `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` are set (see `.env.example`), otherwise `src/data/silentium-episodes.ts`.
+- **SILENTIUM transcripts**: not stored here. `src/lib/transcripts.ts` reads the HTML of the client's archive repo (`site.silentium.transcripts`, `arcane-canvas/silentiumpodcast`) from GitHub and regenerates at most once an hour, so a new `episodeN.html` listed in its `index.html` appears on the site with no deploy. The markup is cut to an allowlist and restyled by `.transcript` in `globals.css`. If GitHub is unreachable, the SILENTIUM page links to the archive site instead.
 - **Media**: `public/media`, generated from the client's raw assets with `npm run assets -- "<path to ArcaneCanvas folder>"` (needs ffmpeg).
 - **Fonts**: self-hosted WOFF2 in `src/app/fonts` (IBM Plex Mono preloaded, VT323 and Caveat on demand). No requests to Google.
 
 ## Placeholders to replace
 
 - `public/media/orison/clip.*` is a montage of screenshots: replace with the Steam trailer clips, re-encoded (WebM + MP4).
-- YouTube trailer URL (the ORISON product band links to Steam until it exists).
 - ORISON press kit link (`site.orison.pressKitUrl`): Dropbox folder from Marco. Until then the Press kit buttons open an email to press@.
 - Team profiles, About/Home lorem ipsum.
 - Glitch panel and terminal unlock content (TBD with Marco).
