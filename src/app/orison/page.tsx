@@ -13,6 +13,7 @@ import { EyeCanvas } from "@/components/orison/EyeCanvas";
 import { PixelEye } from "@/components/orison/PixelEye";
 import { BinaryRain } from "@/components/orison/BinaryRain";
 import { OsWindow } from "@/components/orison/OsWindow";
+import { TrailerPlayer } from "@/components/orison/TrailerPlayer";
 import { ScreenshotGallery } from "@/components/orison/ScreenshotGallery";
 import { Terminal } from "@/components/orison/Terminal";
 import { GlitchTrigger } from "@/components/orison/Glitch";
@@ -107,12 +108,22 @@ export default function OrisonPage() {
         </p>
       </Section>
 
-      {/* ── Clips from the trailer ───────────────────────────────────── */}
+      {/* ── Trailer: the muted loop until play is pressed, then the real trailer ── */}
       <Section className="pt-0 md:pt-0">
         <OsWindow title={o.clips.file}>
-          <div className="relative aspect-video">
-            <LoopVideo src="/media/orison/clip" poster="/media/orison/clip-poster.webp" />
-          </div>
+          {site.orison.youtubeTrailerId ? (
+            <TrailerPlayer
+              videoId={site.orison.youtubeTrailerId}
+              loopSrc="/media/orison/clip"
+              poster="/media/orison/clip-poster.webp"
+              playLabel={t.buttons.watchTrailer}
+              title={t.home.products.orison.mediaLabel}
+            />
+          ) : (
+            <div className="aspect-video">
+              <LoopVideo src="/media/orison/clip" poster="/media/orison/clip-poster.webp" />
+            </div>
+          )}
         </OsWindow>
         <p className="mt-3 font-pixel text-lg text-muted">{o.clips.caption}</p>
         {/* TODO: remove once the real Steam trailer clips are in public/media/orison */}

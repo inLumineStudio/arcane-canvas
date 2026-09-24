@@ -140,7 +140,7 @@ export const en = {
     },
     clips: {
       file: "TRAILER.WEBM",
-      caption: "Clips from the Steam trailer. Muted, looping.",
+      caption: "Clips from the trailer. Press play to watch it in full, with sound.",
       placeholderNote: "Placeholder montage from screenshots: swap with the re-encoded Steam trailer clips.",
     },
     gallery: {

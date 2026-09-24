@@ -9,8 +9,9 @@ export const site = {
     // TBD: Dropbox folder from Marco (trailer, screenshots, cover…). While null, the
     // Press kit button opens an email to pressEmail instead.
     pressKitUrl: null as string | null,
-    // The trailer card falls back to the Steam page if this is ever set back to null.
-    youtubeTrailerUrl: "https://www.youtube.com/watch?v=6veKf0zDn1g" as string | null,
+    // YouTube ID of the trailer (youtube.com/watch?v=<ID>), played inside the trailer windows
+    // on Home and /orison. If set back to null, those windows show only the muted loop.
+    youtubeTrailerId: "6veKf0zDn1g" as string | null,
   },
 
   silentium: {

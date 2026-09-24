@@ -11,11 +11,11 @@ import { LogoOrbit } from "@/components/home/LogoOrbit";
 import { BinaryRain } from "@/components/orison/BinaryRain";
 import { PixelEye } from "@/components/orison/PixelEye";
 import { OsWindow } from "@/components/orison/OsWindow";
+import { TrailerPlayer } from "@/components/orison/TrailerPlayer";
 
 export default function HomePage() {
   const t = getDictionary();
   const h = t.home;
-  const trailerHref = site.orison.youtubeTrailerUrl ?? site.orison.steamUrl;
 
   return (
     <PageShell theme="studio">
@@ -99,22 +99,21 @@ export default function HomePage() {
               status={h.products.orison.status}
               description={h.products.orison.description}
               media={
-                <a
-                  href={trailerHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={h.products.orison.mediaLabel}
-                  className="group block"
-                >
-                  <OsWindow title="TRAILER.WEBM">
-                    <div className="relative aspect-video">
+                <OsWindow title="TRAILER.WEBM">
+                  {site.orison.youtubeTrailerId ? (
+                    <TrailerPlayer
+                      videoId={site.orison.youtubeTrailerId}
+                      loopSrc="/media/orison/clip"
+                      poster="/media/orison/clip-poster.webp"
+                      playLabel={t.buttons.watchTrailer}
+                      title={h.products.orison.mediaLabel}
+                    />
+                  ) : (
+                    <div className="aspect-video">
                       <LoopVideo src="/media/orison/clip" poster="/media/orison/clip-poster.webp" />
-                      <span className="btn absolute bottom-3 left-3 !min-h-0 !px-3 !py-1.5 group-hover:!bg-[#7ef4ff]">
-                        ▶ {t.buttons.watchTrailer}
-                      </span>
                     </div>
-                  </OsWindow>
-                </a>
+                  )}
+                </OsWindow>
               }
               moreHref="/orison"
               moreLabel={t.buttons.more}

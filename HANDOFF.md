@@ -39,7 +39,7 @@ Client TODO list (second round, 2026-09-24):
 - **Hero statement ~18% smaller** (portrait `min(10.6vw, 6.15svh, 7.4rem)`, landscape factor 0.051 / 6.5rem); the logo takes the freed space (landscape: up to 56% of the row). Rechecked 375×667, 390×844, 844×390, 1366×657.
 - **Projects section on Home.** A studio "Projects" heading (h2), a "Project 01 / 02" line above each product name in that product's typeface (VT323 for ORISON, Caveat for SILENTIUM), studio-black gaps between the bands and band backdrops that fade in/out at top and bottom (`.band-fade`), so the two worlds no longer butt into each other.
 - **New ORISON eye** from the client's second `eye.html`: the teal halo is now a "dissolve" field of 1px dots that turns with the rings; offscreen buffers capped for 4K; phones run 24fps with rings/halo rebuilt every 5th frame.
-- **YouTube trailer** set (`site.orison.youtubeTrailerUrl`): the Home trailer card now opens it.
+- **YouTube trailer plays in place** (`site.orison.youtubeTrailerId`, `TrailerPlayer`): the trailer windows on Home and /orison show the muted loop until play is pressed, then swap in the youtube-nocookie player, already playing. Nothing loads from YouTube before that press.
 - **Developer name confirmed: Marco D'Antino.** Used for the About signature, the SILENTIUM "Voice" fact and the transcript credit.
 - **SILENTIUM transcripts** (client option 2, "read from GitHub"): list on `/silentium#transcripts`, one page per case at `/silentium/transcripts/<slug>` plus the Lexicon, prev/next case, sticky Spotify CTA. No admin page needed: the client keeps publishing to the archive repo as today. Option 3 (link to the archive) is kept as the fallback if GitHub is down.
 
