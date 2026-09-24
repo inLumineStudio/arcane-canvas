@@ -119,10 +119,10 @@ export default function HomePage() {
                   )}
                 </OsWindow>
               }
-              moreHref="/orison"
-              moreLabel={t.buttons.more}
               storeHref={site.orison.steamUrl}
-              storeLabel={t.buttons.steam}
+              storeLabel={t.buttons.wishlist}
+              exploreHref="/orison"
+              exploreLabel={t.buttons.exploreOrison}
             />
 
             <ProductBand
@@ -154,10 +154,10 @@ export default function HomePage() {
                   <div className="grain absolute inset-0" />
                 </figure>
               }
-              moreHref="/silentium"
-              moreLabel={t.buttons.more}
               storeHref={site.silentium.spotifyUrl}
-              storeLabel={t.buttons.spotify}
+              storeLabel={t.buttons.listenNow}
+              exploreHref="/silentium"
+              exploreLabel={t.buttons.exploreSilentium}
             />
           </div>
         </section>

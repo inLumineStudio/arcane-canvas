@@ -4,7 +4,10 @@ import { Button } from "./Button";
 // One full-bleed band per product on the Home page. Each band leaves the studio palette and
 // wears its product's colours and assets (`backdrop`, and a `media` element framed in the
 // product's own style), but every band has the same structure (brief §3):
-// name · kind/status · media · description · [More] [store]
+// name · kind/status · media · description · [store] [explore]
+// The store action (wishlist, listen) is the primary button; the product page is secondary.
+// Both labels name their destination ("Explore ORISON", not "More"): Lighthouse flags
+// generic link text, and so do screen reader users skimming a list of links.
 //
 // Mobile first: everything stacks in reading order. From 1024px the media takes seven
 // columns and the text five (mirrored with `reverse`).
@@ -18,10 +21,12 @@ type Props = {
   kind: string;
   status: string;
   description: string;
-  moreHref: string;
-  moreLabel: string;
+  /** Primary: the store (Steam wishlist, Spotify), opens in a new tab */
   storeHref: string;
   storeLabel: string;
+  /** Secondary: the product's own page */
+  exploreHref: string;
+  exploreLabel: string;
   reverse?: boolean;
 };
 
@@ -44,9 +49,11 @@ export function ProductBand(p: Props) {
         <div className={`lg:col-span-5 lg:row-start-2 lg:self-start ${p.reverse ? "lg:col-start-8" : "lg:col-start-1"}`}>
           <p className="max-w-prose leading-relaxed text-fg/85">{p.description}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href={p.moreHref}>{p.moreLabel}</Button>
-            <Button href={p.storeHref} external variant="quiet">
+            <Button href={p.storeHref} external>
               {p.storeLabel}
+            </Button>
+            <Button href={p.exploreHref} variant="quiet">
+              {p.exploreLabel}
             </Button>
           </div>
         </div>

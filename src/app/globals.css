@@ -201,15 +201,27 @@ body {
   color: var(--fg);
 }
 
-/* SILENTIUM: thin, quiet, fills with brick */
+/* SILENTIUM: the primary action is a brick slab with a flesh edge; the secondary stays a
+   thin, quiet outline that fills with brick on hover. */
 [data-theme="silentium"] .btn {
-  background: transparent;
+  background: var(--brick);
   color: var(--fg);
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 [data-theme="silentium"] .btn:hover {
+  background: color-mix(in oklab, var(--brick) 80%, var(--accent));
+}
+
+[data-theme="silentium"] .btn-quiet {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+[data-theme="silentium"] .btn-quiet:hover {
   background: var(--brick);
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 /* ── Decorative overlays ─────────────────────────────────────────────────── */

@@ -124,9 +124,11 @@ export const en = {
   },
 
   buttons: {
-    more: "More",
-    steam: "Steam",
-    spotify: "Spotify",
+    // Every label names where it leads: no bare "More", "Steam" or "Spotify" (Lighthouse
+    // flags generic link text)
+    exploreOrison: "Explore ORISON",
+    exploreSilentium: "Explore SILENTIUM",
+    listenNow: "Listen now",
     contact: "Contact",
     wishlist: "Wishlist on Steam",
     listen: "Listen on Spotify",
