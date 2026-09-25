@@ -4,6 +4,8 @@ import Link from "next/link";
 import { orisonPressKitHref, site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { pageMetadata } from "@/lib/metadata";
+import { aboutPage, breadcrumbs, graph, owner } from "@/lib/structured-data";
+import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/Button";
 import { Starfield } from "@/components/home/Starfield";
@@ -31,6 +33,7 @@ export default function AboutPage() {
 
   return (
     <PageShell theme="studio">
+      <JsonLd data={graph(aboutPage(), owner(), breadcrumbs([{ name: t.nav.about, path: "/about" }]))} />
       {/* ── The letter ───────────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden">
         <Starfield count={50} seed={5} className="-z-10 opacity-60" />

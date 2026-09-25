@@ -41,11 +41,17 @@ export const metadata: Metadata = {
   ...pageMetadata({ title: t.meta.homeTitle, description: t.meta.homeDescription, path: "/" }),
   alternates: undefined,
   metadataBase: new URL(site.url),
-  icons: { icon: "/media/brand/logo.svg" },
+  // Icons come from the file conventions (app/favicon.ico, icon.png, apple-icon.png)
+  applicationName: t.meta.siteName,
+  authors: [{ name: site.owner, url: `${site.url}/about` }],
+  creator: site.owner,
+  publisher: t.meta.siteName,
+  formatDetection: { telephone: false, email: false, address: false },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0b0d",
+  // The studio background, so the mobile browser bar blends with the header
+  themeColor: "#0b0f15",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -5,6 +5,8 @@ import { site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { getTranscript, getTranscriptSeasons, LEXICON } from "@/lib/transcripts";
 import { OG, pageMetadata } from "@/lib/metadata";
+import { breadcrumbs, graph, transcript as transcriptLd } from "@/lib/structured-data";
+import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { StickyCta } from "@/components/StickyCta";
 
@@ -44,6 +46,15 @@ export default async function TranscriptPage({ params }: Props) {
 
   return (
     <PageShell theme="silentium">
+      <JsonLd
+        data={graph(
+          transcriptLd(transcript),
+          breadcrumbs([
+            { name: "SILENTIUM", path: "/silentium" },
+            { name: transcript.title, path: `/silentium/transcripts/${transcript.slug}` },
+          ]),
+        )}
+      />
       <article className="relative isolate">
         <div className="absolute inset-x-0 top-0 -z-10 h-80 bg-gradient-to-b from-[var(--brick-deep)] to-transparent" />
         <div className="grain absolute inset-x-0 top-0 -z-10 h-80 [mask-image:linear-gradient(black,transparent)]" />

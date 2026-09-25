@@ -3,6 +3,8 @@ import Image from "next/image";
 import { site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { OG, pageMetadata } from "@/lib/metadata";
+import { breadcrumbs, graph, podcast } from "@/lib/structured-data";
+import { JsonLd } from "@/components/JsonLd";
 import Link from "next/link";
 import { getSilentiumEpisodes } from "@/lib/spotify";
 import { getTranscriptSeasons, LEXICON } from "@/lib/transcripts";
@@ -33,6 +35,7 @@ export default async function SilentiumPage() {
 
   return (
     <PageShell theme="silentium">
+      <JsonLd data={graph(podcast(episodes), breadcrumbs([{ name: "SILENTIUM", path: "/silentium" }]))} />
       {/* ── Hero: the vertical poster split into horizontal layers ───── */}
       <Parallax className="relative isolate flex min-h-dvh items-end overflow-hidden">
         <div className="absolute inset-0 -z-30 bg-gradient-to-b from-[var(--brick-deep)] to-bg" />

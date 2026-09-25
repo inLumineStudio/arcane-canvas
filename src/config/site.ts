@@ -1,6 +1,12 @@
 // External links and IDs. Values marked TBD are open points in the brief (§8).
 export const site = {
-  url: "https://thearcanecanvas.com",
+  // The primary address, as served by Vercel (the bare domain 308-redirects here). Canonical
+  // URLs, the sitemap, link previews and structured data all derive from it: it must match
+  // the domain set as primary on Vercel, or Google sees canonicals pointing at a redirect.
+  url: "https://www.thearcanecanvas.com",
+  // The person behind Arcane Canvas (not a legal entity yet): author and publisher in the
+  // structured data, copyright holder in the footer
+  owner: "Marco D'Antino",
   contactEmail: "hello@thearcanecanvas.com",
   pressEmail: "press@thearcanecanvas.com",
 
@@ -12,6 +18,9 @@ export const site = {
     // YouTube ID of the trailer (youtube.com/watch?v=<ID>), played inside the trailer windows
     // on Home and /orison. If set back to null, those windows show only the muted loop.
     youtubeTrailerId: "6veKf0zDn1g" as string | null,
+    // For the trailer's VideoObject (structured data): values read from its YouTube page
+    trailer: { uploadDate: "2026-09-24T03:24:43-07:00", duration: "PT1M21S" },
+    languages: ["en", "it"],
   },
 
   silentium: {

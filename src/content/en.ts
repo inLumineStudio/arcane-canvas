@@ -228,6 +228,8 @@ export const en = {
       languages: "Available in English and Italian",
       wordmarkAlt: "ORISON",
     },
+    // Name of the trailer video (its YouTube title), for structured data
+    trailerTitle: "ORISON - Official Narrative Trailer",
     intro: {
       file: "README.TXT",
       // The same text as the Home band (home.products.orison.description, the client's

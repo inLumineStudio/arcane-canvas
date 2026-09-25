@@ -41,6 +41,12 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
   chrome --headless=new --hide-scrollbars --allow-file-access-from-files --window-size=1200,630 --virtual-time-budget=4000 --screenshot=home.png "file:///<repo>/scripts/og/og.html?v=home"
   ```
   After a change, check the preview with a debugger such as the Facebook Sharing Debugger (it also refreshes the cache).
+- **SEO**:
+  - Primary address `https://www.thearcanecanvas.com` (`site.url`), the domain set as primary on Vercel; the bare domain and `arcane-canvas.vercel.app` 308-redirect to it (the latter in `next.config.ts`). Preview deployments send `X-Robots-Tag: noindex`.
+  - `src/app/robots.ts` → `/robots.txt`, `src/app/sitemap.ts` → `/sitemap.xml` (every page, the transcripts from the archive, image entries), `src/app/manifest.ts` → `/manifest.webmanifest`.
+  - Structured data (JSON-LD) in `src/lib/structured-data.ts`, rendered by `<JsonLd>`: Organization + Person + WebSite (Home), ProfilePage (About), VideoGame with its trailer (ORISON), PodcastSeries with every episode (SILENTIUM), Article (transcripts), breadcrumbs. Check with Google's Rich Results Test after changes.
+  - One H1 per page; on Home it is the visible statement, with the studio name for search engines and screen readers.
+- **Icons**: `src/app/favicon.ico` (16/32/48 PNGs in one ICO), `src/app/icon.png`, `src/app/apple-icon.png` and `public/icons/*` (manifest, incl. a maskable one) are rendered from `scripts/og/icon.html` with headless Chrome (`?s=<size>&r=<radius %>&p=<logo %>`, same command as the link previews, `--window-size=<size>,<size> --default-background-color=00000000`).
 - **404**: `src/app/not-found.tsx`, a wall of pixel eyes following the visitor (`EyeWall`).
 - **Trailer cover**: `public/media/orison/trailer-poster.webp` is a local copy of the YouTube thumbnail (`i.ytimg.com/vi/<id>/maxresdefault.jpg`, converted to WebP), so nothing is requested from YouTube before play. Replace it if the trailer changes. `clip.*` (a screenshot montage) is only shown if `site.orison.youtubeTrailerId` is set back to null.
 - **Media**: `public/media`, generated from the client's raw assets with `npm run assets -- "<path to ArcaneCanvas folder>"` (needs ffmpeg).

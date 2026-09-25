@@ -10,6 +10,8 @@ import { StarBackdrop, Starfield } from "@/components/home/Starfield";
 import { LogoOrbit } from "@/components/home/LogoOrbit";
 import { BinaryRain } from "@/components/orison/BinaryRain";
 import { pageMetadata } from "@/lib/metadata";
+import { graph, owner, studio, website } from "@/lib/structured-data";
+import { JsonLd } from "@/components/JsonLd";
 import { PixelEye } from "@/components/orison/PixelEye";
 import { OsWindow } from "@/components/orison/OsWindow";
 import { TrailerPlayer } from "@/components/orison/TrailerPlayer";
@@ -33,12 +35,15 @@ export default function HomePage() {
         <div data-parallax="0.3" className="absolute -inset-y-[10%] inset-x-0 -z-10">
           <Starfield />
         </div>
-        <h1 className="sr-only">{t.meta.siteName}</h1>
+        <JsonLd data={graph(studio(), owner(), website())} />
         <div data-parallax="0.12" className="home-hero-logo aspect-[640/328] shrink-0">
           <LogoOrbit words={h.hero.orbit} alt={h.hero.logoAlt} />
         </div>
-        <p
-          aria-label={h.statement.lines.join(" ")}
+        {/* The visible statement is the page's H1, with the studio name added for search
+            engines and screen readers (the name is the logo above). The hidden name comes
+            last so the line stepping in globals.css (:nth-child) is unchanged. */}
+        <h1
+          aria-label={`${t.meta.siteName}: ${h.statement.lines.join(" ")}`}
           className="home-hero-statement w-full max-w-6xl px-5 font-semibold uppercase leading-[0.92] tracking-[-0.03em] md:px-8"
         >
           {h.statement.lines.map((line, i) => (
@@ -50,7 +55,8 @@ export default function HomePage() {
               {line}
             </span>
           ))}
-        </p>
+          <span className="sr-only"> {t.meta.siteName}</span>
+        </h1>
       </Parallax>
 
       {/* Everything under the hero shares one starry sky (the product bands paint over it,

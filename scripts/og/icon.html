@@ -1,0 +1,24 @@
+<!doctype html>
+<!--
+  App icons, drawn from the logo on the studio's dark background (a silver logo on a
+  transparent icon would vanish on white tab bars and search results).
+  ?s=<size>&r=<corner radius %>&p=<logo width %>. How to regenerate: README, "Icons".
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; }
+  html, body { background: transparent; overflow: hidden; }
+  .tile { display: grid; place-items: center; background: radial-gradient(circle at 50% 40%, #16202e, #0b0f15 70%); }
+  img { display: block; height: auto; }
+</style>
+</head>
+<body>
+<script>
+  const q = new URLSearchParams(location.search);
+  const s = +q.get("s"), r = +(q.get("r") ?? 0), p = +(q.get("p") ?? 78);
+  document.body.innerHTML = `<div class="tile" style="width:${s}px;height:${s}px;border-radius:${r}%"><img src="../../public/media/brand/logo.svg" style="width:${p}%"></div>`;
+</script>
+</body>
+</html>

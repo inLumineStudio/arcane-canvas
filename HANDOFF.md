@@ -40,6 +40,7 @@ Client TODO list (second round, 2026-09-24):
 - **Projects section on Home.** A studio "Projects" heading (h2), studio-black gaps between the bands and band backdrops that fade in/out at top and bottom (`.band-fade`), so the two worlds no longer butt into each other.
 - **New ORISON eye** from the client's second `eye.html`: the teal halo is now a "dissolve" field of 1px dots that turns with the rings; offscreen buffers capped for 4K; phones run 24fps with rings/halo rebuilt every 5th frame.
 - **YouTube trailer plays in place** (`site.orison.youtubeTrailerId`, `TrailerPlayer`): the trailer windows on Home and /orison show the muted loop until play is pressed, then swap in the youtube-nocookie player, already playing. Nothing loads from YouTube before that press.
+- **SEO (2026-09-25):** primary address is now `https://www.thearcanecanvas.com` everywhere (canonicals, sitemap, previews), matching Vercel. robots.txt, sitemap.xml (with the transcripts and image entries), web manifest, full icon set (favicon.ico, icon, apple-icon, maskable), JSON-LD on every page (studio, owner, website, game + trailer, podcast + episodes, transcripts, breadcrumbs), Home H1 is the visible statement, `arcane-canvas.vercel.app` redirects to www, previews are noindex. **To do outside the code** (see "SEO: to do outside the code" below).
 - **Client's P1 list:** one ORISON text everywhere (the Home version, plus "There are no right answers in there. Only what you do." on /orison; the UNWATCHED cipher letters are re-hidden in it). "Available in English and Italian" under the /orison hero status. SILENTIUM: Apple Podcasts and RSS next to Spotify (episodes intro and final CTA). Footer socials split into "ORISON: Instagram · TikTok · YouTube" and "Studio: Bluesky" (YouTube: @ArcaneCanvasYT). The mini CD stays in About's list of works as "Handed out in person, at events". No team section: it was never built, only mentioned in the docs.
 - **Email deliverability:** SPF is set (Aruba), DMARC exists but only in `p=none`, DKIM was not found. DKIM has to be switched on from the Aruba mail panel (client or agency with access); then DMARC can move to `p=quarantine`.
 - **Privacy / Garante (client's P0 list):** the SILENTIUM Spotify player now loads only on request (placeholder of the same size, note on Spotify's cookies, link to /privacy, plain "open on Spotify" link), like the YouTube trailer. Nothing third-party loads on its own, so no cookie banner is needed. New `/privacy` page, linked in the footer: hosting logs (Vercel), no analytics or cookies (the terminal's localStorage is mentioned), YouTube and Spotify on request, email (Aruba), rights and the Garante. **It is a draft: have it reviewed**, and update it if analytics, forms or new embeds are ever added. Footer © is now "Marco D'Antino / Arcane Canvas".
@@ -55,6 +56,14 @@ Client TODO list (second round, 2026-09-24):
 | Glitch panel and terminal unlock content | `src/content/en.ts` (ORISON section) and `src/content/easter-eggs.ts` |
 | Portrait photo | `src/content/en.ts` (About) |
 | Final EN copy (Home / About lorem ipsum) | `src/content/en.ts` |
+
+## SEO: to do outside the code
+
+1. **Google Search Console**: add a *Domain* property for `thearcanecanvas.com`, verify it with the TXT record Google gives (Aruba → DNS management, new TXT on `@`; leave the SPF TXT alone), then submit `https://www.thearcanecanvas.com/sitemap.xml`. Do the same in Bing Webmaster Tools (it can import from Search Console).
+2. **Transcript archive (client's repo `arcane-canvas/silentiumpodcast`)**: the same transcripts are public on GitHub Pages, so Google sees duplicates and may pick the wrong one. In each `episodeN.html` and `lexicon.html`, inside `<head>`, add a canonical to the page on this site, e.g. for `episode1.html`:
+   `<link rel="canonical" href="https://www.thearcanecanvas.com/silentium/transcripts/episode1">`
+   and in `index.html` replace the existing canonical with `https://www.thearcanecanvas.com/silentium`. This site only reads `<main>` from those files, so the change does not affect it.
+3. After the next deploy, run the home, /orison and /silentium URLs through the Rich Results Test and the Facebook Sharing Debugger.
 
 ## Suggested next steps
 

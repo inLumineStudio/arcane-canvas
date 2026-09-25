@@ -3,6 +3,8 @@ import Image from "next/image";
 import { orisonPressKitHref, site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { OG, pageMetadata } from "@/lib/metadata";
+import { breadcrumbs, game, graph } from "@/lib/structured-data";
+import { JsonLd } from "@/components/JsonLd";
 import { PageShell } from "@/components/PageShell";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
@@ -41,6 +43,7 @@ export default function OrisonPage() {
 
   return (
     <PageShell theme="orison" crt={o.monitorLabel}>
+      <JsonLd data={graph(game(), breadcrumbs([{ name: "ORISON", path: "/orison" }]))} />
       <SourceComment />
       <ConsoleWhisper />
 
