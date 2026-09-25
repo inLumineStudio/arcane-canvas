@@ -27,8 +27,8 @@ export function SiteHeader() {
       </a>
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-5 md:px-8">
         <Link href="/" className="flex items-center gap-2.5" aria-label={`${t.meta.siteName}, ${t.nav.home}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- SVG logo, no optimisation needed */}
-          <img src="/media/brand/logo.svg" alt="" width={32} height={25} className="h-6 w-auto" />
+          {/* eslint-disable-next-line @next/next/no-img-element -- a 4 KB raster made for this size, nothing to optimise */}
+          <img src="/media/brand/logo-96.webp" alt="" width={32} height={25} className="h-6 w-auto" />
           <span className="text-sm font-medium">{t.meta.siteName}</span>
         </Link>
         <NavLinks projects={projects} links={links} menuLabel={t.nav.menu} closeLabel={t.nav.close} />

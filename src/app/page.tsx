@@ -4,7 +4,6 @@ import { site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { PageShell } from "@/components/PageShell";
 import { ProductBand } from "@/components/ProductBand";
-import { LoopVideo } from "@/components/LoopVideo";
 import { Parallax } from "@/components/Parallax";
 import { StarBackdrop, Starfield } from "@/components/home/Starfield";
 import { LogoOrbit } from "@/components/home/LogoOrbit";
@@ -111,18 +110,12 @@ export default function HomePage() {
               description={h.products.orison.description}
               media={
                 <OsWindow title="TRAILER.WEBM">
-                  {site.orison.youtubeTrailerId ? (
-                    <TrailerPlayer
-                      videoId={site.orison.youtubeTrailerId}
-                      poster="/media/orison/trailer-poster.webp"
-                      playLabel={t.buttons.watchTrailer}
-                      title={h.products.orison.mediaLabel}
-                    />
-                  ) : (
-                    <div className="aspect-video">
-                      <LoopVideo src="/media/orison/clip" poster="/media/orison/clip-poster.webp" />
-                    </div>
-                  )}
+                  <TrailerPlayer
+                    videoId={site.orison.youtubeTrailerId}
+                    poster="/media/orison/trailer-poster.webp"
+                    playLabel={t.buttons.watchTrailer}
+                    title={h.products.orison.mediaLabel}
+                  />
                 </OsWindow>
               }
               storeHref={site.orison.steamUrl}

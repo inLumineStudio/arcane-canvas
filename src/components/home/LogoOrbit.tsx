@@ -64,7 +64,9 @@ export function LogoOrbit({ words, alt }: { words: readonly string[]; alt: strin
     // since the fallback font has different advances. The text is then made long enough
     // to cover the ring plus one period, so the tail never runs short while it scrolls.
     const measure = () => {
-      const t = probe.current!;
+      const t = probe.current;
+      // fonts.ready can resolve after the visitor has left the page
+      if (!t) return;
       t.textContent = unit;
       const one = t.getComputedTextLength();
       t.textContent = unit + unit;
@@ -155,7 +157,9 @@ export function LogoOrbit({ words, alt }: { words: readonly string[]; alt: strin
       </defs>
       <text ref={probe} visibility="hidden" fontSize="17" letterSpacing="1.5" className="font-mono" aria-hidden />
       {ring("back", 0)}
-      <image href="/media/brand/logo.svg" x={CX - 170} y={CY - 150} width="340" height="265" className="logo-float" />
+      {/* A raster of the logo (brand/logo.svg holds ~900 gradients: heavy to download and to
+          redraw on every frame of the float) */}
+      <image href="/media/brand/logo-900.webp" x={CX - 170} y={CY - 150} width="340" height="265" className="logo-float" />
       {ring("front", 1)}
     </svg>
   );

@@ -36,7 +36,7 @@ export function CrtFrame({ label }: { label: string }) {
 
   // The glitch stays inside the glass: it shakes and scrambles the page (header, sections,
   // footer) and runs interference bars clipped to the screen, while the monitor itself
-  // stays still. Not the page-wide glitch (html.is-glitching), which moves the bezel too.
+  // stays still. The hero full stop (Glitch.tsx) uses the same effect.
   function power() {
     const shell = document.querySelector<HTMLElement>("[data-crt]");
     if (!shell || shell.hasAttribute("data-glitching")) return;

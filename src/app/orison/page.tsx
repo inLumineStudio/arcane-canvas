@@ -9,7 +9,6 @@ import { PageShell } from "@/components/PageShell";
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { Parallax } from "@/components/Parallax";
-import { LoopVideo } from "@/components/LoopVideo";
 import { RichText } from "@/components/RichText";
 import { StickyCta } from "@/components/StickyCta";
 import { EyeCanvas } from "@/components/orison/EyeCanvas";
@@ -130,18 +129,12 @@ export default function OrisonPage() {
       <Section className="pt-0 md:pt-0">
         <EyeField gutter spots={[{ top: "30%", side: "right", size: 44, opacity: 0.8 }]} />
         <OsWindow title={o.clips.file}>
-          {site.orison.youtubeTrailerId ? (
-            <TrailerPlayer
-              videoId={site.orison.youtubeTrailerId}
-              poster="/media/orison/trailer-poster.webp"
-              playLabel={t.buttons.watchTrailer}
-              title={t.home.products.orison.mediaLabel}
-            />
-          ) : (
-            <div className="aspect-video">
-              <LoopVideo src="/media/orison/clip" poster="/media/orison/clip-poster.webp" />
-            </div>
-          )}
+          <TrailerPlayer
+            videoId={site.orison.youtubeTrailerId}
+            poster="/media/orison/trailer-poster.webp"
+            playLabel={t.buttons.watchTrailer}
+            title={t.home.products.orison.mediaLabel}
+          />
         </OsWindow>
         <p className="mt-3 font-pixel text-lg text-muted">{o.clips.caption}</p>
       </Section>

@@ -14,14 +14,17 @@ Showcase site for the studio Arcane Canvas and its two products, ORISON (narrati
 ## Commands
 
 ```
-npm run dev      # http://localhost:3000 (the in-app preview uses .claude/launch.json → "next-dev")
+npm run dev      # http://localhost:3000 (in-app preview: .claude/launch.json → "next-dev")
 npm run build
+npm run start    # production server (in-app preview: "next-prod", port 3100) for performance checks
 npm run lint
 npx tsc --noEmit
 npm run assets -- "<path to ArcaneCanvas raw folder>"   # regenerate public/media, needs ffmpeg
 ```
 
-There are no tests. Before committing: `npx tsc --noEmit` and `npm run lint` must be clean, and UI changes must be checked in the browser.
+There are no tests. Before committing: `npx tsc --noEmit` and `npm run lint` must be clean, and UI changes must be checked in the browser. If the dev server keeps serving an old version of a file (it happens on this Windows machine), stop it, delete `.next` and restart.
+
+The site is live at https://www.thearcanecanvas.com (Vercel deploys `main` on every push). Canonical URLs, the sitemap and structured data derive from `site.url`: keep it equal to the primary domain on Vercel.
 
 ## Mobile first (non-negotiable)
 
@@ -44,6 +47,9 @@ There are no tests. Before committing: `npx tsc --noEmit` and `npm run lint` mus
 - All user-facing copy lives in `src/content/en.ts` (read via `getDictionary()`); links, IDs and emails in `src/config/site.ts`. Do not inline copy or URLs in components.
 - Open client decisions are marked `TBD` in code and listed in the README "Placeholders" section. Keep both in sync.
 - Easter egg codes are stored only as SHA-256 hashes (`src/content/easter-eggs.ts`); never commit a code in clear text.
+- No third-party request may happen before an explicit click (privacy, Garante guidelines): embeds (YouTube, Spotify) load from a local placeholder on request, and `/privacy` must be updated if that ever changes.
+- Every page sets its metadata through `pageMetadata()` (`src/lib/metadata.ts`); structured data lives in `src/lib/structured-data.ts`.
+- Heavy media stays out of the critical path: rasterise heavy SVGs, serve images through `next/image` with `sizes`, and keep animations on transform/opacity with a reduced-motion fallback.
 - Comments explain *why* (design intent, mobile alternative, browser quirk), in English, in the style of the existing file headers.
 
 ## Git

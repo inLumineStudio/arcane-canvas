@@ -16,8 +16,8 @@ export const site = {
     // Press kit button opens an email to pressEmail instead.
     pressKitUrl: null as string | null,
     // YouTube ID of the trailer (youtube.com/watch?v=<ID>), played inside the trailer windows
-    // on Home and /orison. If set back to null, those windows show only the muted loop.
-    youtubeTrailerId: "6veKf0zDn1g" as string | null,
+    // on Home and /orison. Its cover is a local copy: public/media/orison/trailer-poster.webp.
+    youtubeTrailerId: "6veKf0zDn1g",
     // For the trailer's VideoObject (structured data): values read from its YouTube page
     trailer: { uploadDate: "2026-09-24T03:24:43-07:00", duration: "PT1M21S" },
     languages: ["en", "it"],

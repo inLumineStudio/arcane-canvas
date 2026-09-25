@@ -19,7 +19,7 @@ const plex = localFont({
 });
 
 // ORISON's "on screen" font: W95FA, the font the game itself uses (a trial, requested by the
-// client; it replaced VT323). To go back, point src at ./fonts/vt323-latin-400-normal.woff2.
+// client; it replaced VT323, which can be restored from @fontsource/vt323 if the trial is dropped).
 const w95fa = localFont({
   src: "./fonts/w95fa-400-normal.woff2",
   variable: "--font-w95",

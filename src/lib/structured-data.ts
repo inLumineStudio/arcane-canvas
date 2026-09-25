@@ -106,19 +106,17 @@ export function game(): Node {
     author: { "@id": ID.owner },
     publisher: { "@id": ID.studio },
     sameAs: [o.steamUrl],
-    ...(o.youtubeTrailerId && {
-      trailer: {
-        "@type": "VideoObject",
-        name: t.orison.trailerTitle,
-        description: t.meta.orisonDescription,
-        thumbnailUrl: [abs("/media/orison/trailer-poster.webp"), abs("/og/orison.jpg")],
-        uploadDate: o.trailer.uploadDate,
-        duration: o.trailer.duration,
-        embedUrl: `https://www.youtube-nocookie.com/embed/${o.youtubeTrailerId}`,
-        url: `https://www.youtube.com/watch?v=${o.youtubeTrailerId}`,
-        publisher: { "@id": ID.studio },
-      },
-    }),
+    trailer: {
+      "@type": "VideoObject",
+      name: t.orison.trailerTitle,
+      description: t.meta.orisonDescription,
+      thumbnailUrl: [abs("/media/orison/trailer-poster.webp"), abs("/og/orison.jpg")],
+      uploadDate: o.trailer.uploadDate,
+      duration: o.trailer.duration,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${o.youtubeTrailerId}`,
+      url: `https://www.youtube.com/watch?v=${o.youtubeTrailerId}`,
+      publisher: { "@id": ID.studio },
+    },
   };
 }
 

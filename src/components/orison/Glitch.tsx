@@ -16,14 +16,16 @@ type Props = { t: Dictionary["glitch"]; children: ReactNode };
 export function GlitchTrigger({ t, children }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
 
+  // The glitch runs inside the monitor glass (data-glitching on the CRT page shell, the same
+  // effect as the monitor's power button, see CrtFrame): the bezel itself never moves.
   function trigger() {
-    const html = document.documentElement;
-    if (html.classList.contains("is-glitching")) return;
+    const shell = document.querySelector<HTMLElement>("[data-crt]");
+    if (!shell || shell.hasAttribute("data-glitching")) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return dialog.current?.showModal();
     navigator.vibrate?.([30, 40, 30, 40, 80]); // a short stutter on Android phones
-    html.classList.add("is-glitching");
+    shell.setAttribute("data-glitching", "");
     setTimeout(() => {
-      html.classList.remove("is-glitching");
+      shell.removeAttribute("data-glitching");
       dialog.current?.showModal();
     }, GLITCH_MS);
   }
