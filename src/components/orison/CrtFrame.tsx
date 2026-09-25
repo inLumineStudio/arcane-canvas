@@ -35,17 +35,22 @@ export function CrtFrame({ label }: { label: string }) {
     }
   }
 
+  // The glitch stays inside the glass: it shakes and scrambles the page (header, sections,
+  // footer) and runs interference bars clipped to the screen, while the monitor itself
+  // stays still. Not the page-wide glitch (html.is-glitching), which moves the bezel too.
   function power() {
-    const html = document.documentElement;
-    if (html.classList.contains("is-glitching")) return;
+    const shell = document.querySelector<HTMLElement>("[data-crt]");
+    if (!shell || shell.hasAttribute("data-glitching")) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     navigator.vibrate?.([20, 30, 20]);
-    html.classList.add("is-glitching");
-    setTimeout(() => html.classList.remove("is-glitching"), GLITCH_MS);
+    shell.setAttribute("data-glitching", "");
+    setTimeout(() => shell.removeAttribute("data-glitching"), GLITCH_MS);
   }
 
   return (
     <div className="crt-frame">
+      {/* Interference bars of the power-button glitch, clipped to the glass (under the bezel) */}
+      <div aria-hidden="true" className="crt-glitch" />
       <div aria-hidden="true" className="crt-screen" />
       <div aria-hidden="true" className="crt-boot">
         <div className="crt-boot-noise" />
