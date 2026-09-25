@@ -24,7 +24,7 @@ npm run build
 Each area speaks its own visual language; the rules are in the header comment of `src/app/globals.css`.
 
 - **Studio (Home, About)**: built from the logo. The crystal "A" and its galaxy ring are the Home hero, with the studio's work orbiting on the ring; big monospace statements (after aggrocrab.com).
-- **ORISON**: the game's own 90s OS and the client's print mockups: README windows, HELP output, bevelled system buttons, VT323. Black around the eye, decoration only at the edges (after deltarune.com). The whole page sits inside a CRT monitor.
+- **ORISON**: the game's own OS: flat windows with the in-game dithered title bar (`src/lib/dither.ts`), W95FA (the game's font), bevelled system buttons. Black around the eye, decoration only at the edges (after deltarune.com). The whole page sits inside a beige Audeo CRT monitor, whose chin buttons hide an easter egg (sequence 1 1 4 2 3 1 → the 404; the hint is the ASCII spelled by the binary rain; the power button glitches the screen).
 - **SILENTIUM**: the poster's black, brick and flesh; photographic, film grain, format facts set like closing credits.
 
 Avoid template tropes: uppercase letter-spaced labels over headings, gradient text, glows, numbered cards. Buttons use `.btn` / `.btn-quiet`, which restyle per theme.
@@ -50,7 +50,7 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
 - **404**: `src/app/not-found.tsx`, a wall of pixel eyes following the visitor (`EyeWall`).
 - **Trailer cover**: `public/media/orison/trailer-poster.webp` is a local copy of the YouTube thumbnail (`i.ytimg.com/vi/<id>/maxresdefault.jpg`, converted to WebP), so nothing is requested from YouTube before play. Replace it if the trailer changes. `clip.*` (a screenshot montage) is only shown if `site.orison.youtubeTrailerId` is set back to null.
 - **Media**: `public/media`, generated from the client's raw assets with `npm run assets -- "<path to ArcaneCanvas folder>"` (needs ffmpeg).
-- **Fonts**: self-hosted WOFF2 in `src/app/fonts` (IBM Plex Mono preloaded, VT323 and Caveat on demand). No requests to Google.
+- **Fonts**: self-hosted WOFF2 in `src/app/fonts` (IBM Plex Mono preloaded; on demand: W95FA for ORISON, Forum and Cormorant Garamond Italic for SILENTIUM, Caveat for About's handwriting). Licences (OFL) in `src/app/fonts/licenses`. No requests to Google. W95FA is a trial that replaced VT323: to go back, point the `w95fa` font in `layout.tsx` at `vt323-latin-400-normal.woff2`.
 
 ## Placeholders to replace
 

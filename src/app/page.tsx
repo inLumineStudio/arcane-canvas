@@ -141,7 +141,8 @@ export default function HomePage() {
                 </>
               }
               name={
-                <span className="block text-[clamp(2rem,9vw,3.5rem)] font-normal uppercase leading-none tracking-[0.2em]">
+                // Forum, the typeface of the podcast's cover art
+                <span className="block font-forum text-[clamp(2.5rem,11vw,4.5rem)] font-normal uppercase leading-none tracking-[0.06em]">
                   {h.products.silentium.name}
                 </span>
               }
@@ -149,9 +150,11 @@ export default function HomePage() {
               status={h.products.silentium.status}
               description={h.products.silentium.description}
               media={
-                <figure className="relative aspect-[4/3] overflow-hidden md:aspect-video">
+                // The client's horizontal cover (made for this spot): always 16:9, uncropped,
+                // so the SILENTIUM title in the artwork stays whole on phones too
+                <figure className="relative aspect-video overflow-hidden">
                   <Image
-                    src="/media/silentium/hand.webp"
+                    src="/media/silentium/cover-horizontal.webp"
                     alt={h.products.silentium.mediaAlt}
                     fill
                     sizes="(min-width: 1024px) 58vw, 100vw"

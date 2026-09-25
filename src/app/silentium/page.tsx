@@ -66,8 +66,9 @@ export default async function SilentiumPage() {
         <div className="grain absolute inset-0 -z-10" />
 
         <div className="mx-auto w-full max-w-7xl px-5 pb-28 md:px-8 md:pb-20">
-          <h1 className="text-[clamp(2.25rem,11vw,8rem)] font-normal uppercase tracking-[0.2em] md:tracking-[0.3em]">SILENTIUM</h1>
-          <p className="mt-6 font-hand text-3xl text-accent md:text-4xl">{s.hero.tagline}</p>
+          {/* Forum: the typeface of the podcast's cover art */}
+          <h1 className="font-forum text-[clamp(2.75rem,13vw,9rem)] font-normal uppercase leading-none tracking-[0.06em]">SILENTIUM</h1>
+          <p className="mt-6 font-cormorant text-3xl italic text-accent md:text-4xl">{s.hero.tagline}</p>
         </div>
       </Parallax>
 
@@ -86,7 +87,7 @@ export default async function SilentiumPage() {
                 </div>
               ))}
             </dl>
-            <p className="mt-8 font-hand text-2xl text-accent">{s.format.forFansOf}</p>
+            <p className="mt-8 font-cormorant text-2xl italic text-accent md:text-3xl">{s.format.forFansOf}</p>
           </div>
           <Parallax className="lg:col-span-5">
             <figure data-parallax="-0.08" className="relative mx-auto max-w-sm lg:max-w-none">
@@ -118,7 +119,12 @@ export default async function SilentiumPage() {
             {s.episodes.rss}
           </a>
         </p>
-        <EpisodePlayer episodes={episodes} showId={site.silentium.spotifyShowId} t={s.episodes} />
+        <EpisodePlayer
+          episodes={episodes}
+          showId={site.silentium.spotifyShowId}
+          transcripts={seasons.flatMap((season) => season.entries.map((e) => e.slug))}
+          t={s.episodes}
+        />
       </Section>
 
       {/* ── Transcripts: every case as a whole-row link (big tap target on phones), read on
@@ -134,7 +140,7 @@ export default async function SilentiumPage() {
             <div className="lg:col-span-8">
               {seasons.map((season) => (
                 <section key={season.title} aria-label={season.title || tr.title} className="mb-10 last:mb-0">
-                  {season.title && <h3 className="mb-2 font-hand text-3xl text-accent">{season.title}</h3>}
+                  {season.title && <h3 className="mb-2 font-cormorant text-3xl italic text-accent">{season.title}</h3>}
                   <ul className="border-t border-line">
                     {season.entries.map((e) => (
                       <li key={e.slug} className="border-b border-line">

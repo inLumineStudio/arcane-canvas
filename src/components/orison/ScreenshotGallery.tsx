@@ -3,7 +3,15 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { Parallax } from "@/components/Parallax";
-import { OsWindow } from "./OsWindow";
+import { ditherBar } from "@/lib/dither";
+import { OsTitlebar, OsWindow } from "./OsWindow";
+
+/** The viewer's title bar: dithered like every window, with a real (tappable) close button */
+function ViewerBar({ title, close }: { title: string; close: React.ReactNode }) {
+  const bar = useRef<HTMLDivElement>(null);
+  useEffect(() => ditherBar(bar.current!), []);
+  return <OsTitlebar ref={bar} title={title} controls={close} />;
+}
 
 // The ORISON screenshots as a folder of windows, with a full-screen viewer.
 //
@@ -108,14 +116,14 @@ export function ScreenshotGallery({ shots, labels }: { shots: Shot[]; labels: La
           // Mobile first: the window hugs the image, centred; from 768px it takes the full height
           <div className="flex h-full flex-col justify-center" onClick={(e) => e.target === e.currentTarget && close()}>
             <div className="os-window flex max-h-full min-h-0 flex-col md:flex-1">
-              <div className="os-titlebar">
-                <span className="truncate">
-                  {current.file} <span className="opacity-60">· {index! + 1}/{shots.length}</span>
-                </span>
-                <button type="button" autoFocus onClick={close} aria-label={labels.close} className="lightbox-close">
-                  ×
-                </button>
-              </div>
+              <ViewerBar
+                title={`${current.file} · ${index! + 1}/${shots.length}`}
+                close={
+                  <button type="button" autoFocus onClick={close} aria-label={labels.close} className="lightbox-close">
+                    <span aria-hidden="true" className="os-btn os-btn-close" />
+                  </button>
+                }
+              />
               <div
                 className="os-body relative flex min-h-0 touch-pan-y md:flex-1 items-center justify-center select-none"
                 onPointerDown={onPointerDown}

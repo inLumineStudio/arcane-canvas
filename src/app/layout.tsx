@@ -18,13 +18,34 @@ const plex = localFont({
   preload: true,
 });
 
-const vt323 = localFont({
-  src: "./fonts/vt323-latin-400-normal.woff2",
-  variable: "--font-vt323",
+// ORISON's "on screen" font: W95FA, the font the game itself uses (a trial, requested by the
+// client; it replaced VT323). To go back, point src at ./fonts/vt323-latin-400-normal.woff2.
+const w95fa = localFont({
+  src: "./fonts/w95fa-400-normal.woff2",
+  variable: "--font-w95",
   display: "swap",
   preload: false,
 });
 
+// SILENTIUM: Forum for the title (the typeface of the podcast's cover art) and Cormorant
+// Garamond Italic for its quiet lines (tagline, "For fans of", season headings).
+const forum = localFont({
+  src: "./fonts/forum-latin-400-normal.woff2",
+  variable: "--font-forum-src",
+  display: "swap",
+  preload: false,
+});
+
+const cormorant = localFont({
+  src: "./fonts/cormorant-garamond-latin-500-italic.woff2",
+  variable: "--font-cormorant-src",
+  weight: "500",
+  style: "italic",
+  display: "swap",
+  preload: false,
+});
+
+// Studio handwriting (About: signature, photo caption)
 const caveat = localFont({
   src: "./fonts/caveat-latin-500-normal.woff2",
   variable: "--font-caveat",
@@ -56,7 +77,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${plex.variable} ${vt323.variable} ${caveat.variable}`}>
+    <html lang="en" className={`${plex.variable} ${w95fa.variable} ${forum.variable} ${cormorant.variable} ${caveat.variable}`}>
       <body className="min-h-dvh">{children}</body>
     </html>
   );

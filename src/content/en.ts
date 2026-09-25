@@ -8,23 +8,23 @@
 export const en = {
   meta: {
     siteName: "Arcane Canvas",
-    homeTitle: "Arcane Canvas - Games, stories and sound from the dark",
+    homeTitle: "Arcane Canvas - Games and stories from the realm of Dreams",
     // Descriptions stay under ~160 characters: longer ones get cut in search results and previews
     homeDescription:
-      "Arcane Canvas is a one-person studio making dark things by hand: ORISON, a narrative game for PC, and SILENTIUM, a horror fiction podcast.",
+      "Arcane Canvas is a place past the stars where Dreams live. Stories brought back from there: ORISON, a narrative game, and SILENTIUM, a horror podcast.",
     aboutTitle: "About - Arcane Canvas",
     aboutDescription:
-      "Arcane Canvas is one person making narrative games, audio fiction and printed things. All human-made.",
+      "Arcane Canvas is one person bringing stories back from the realm of Dreams: a narrative game, a horror fiction podcast and small printed things.",
     orisonTitle: "ORISON - Arcane Canvas",
     orisonDescription:
       "A narrative game for PC. The last unwatched place on the internet ran on a well hidden machine. You found it. Now it wants to talk. Free demo, December 2026.",
     silentiumTitle: "SILENTIUM - Arcane Canvas",
     silentiumDescription:
-      "A horror fiction podcast. Vatican linguist Father Tommaso Lanza translates an impossible language spoken only at the moment of death. New case every month.",
+      "A horror fiction podcast. Vatican linguist Father Tommaso Lanza translates an impossible language spoken only at the moment of death.",
     notFoundTitle: "Page not found - Arcane Canvas",
     // Alt text of the link-preview images in public/og
     ogAlt: {
-      home: "Arcane Canvas: the crystal A with its galaxy ring, next to the words One person. Games, podcasts & other dark things.",
+      home: "Arcane Canvas: the crystal A with its galaxy ring, next to the words Games and stories from the realm of Dreams.",
       orison: "ORISON: a pixel-art eye above the game's wordmark.",
       silentium: "SILENTIUM: a pale hand reaching out in red light. Some words are only spoken once.",
     },
@@ -106,8 +106,8 @@ export const en = {
   // The 404 page: a wall of eyes that follow the visitor
   notFound: {
     code: "404",
-    title: "This page isn't here.",
-    text: "But you are. And they've noticed.",
+    title: "This page isn't there.",
+    text: "But you are. Go back.",
     home: "Back to the home page",
   },
 
@@ -153,14 +153,15 @@ export const en = {
   home: {
     hero: {
       // Words that ride the logo's galaxy ring
-      orbit: ["games", "podcasts", "print", "stories", "sound"],
+      orbit: ["stories", "dreams", "games", "secrets", "whispers"],
       logoAlt: "Arcane Canvas",
     },
     statement: {
-      // Big type, one line per entry. [[x]] is not used here.
-      lines: ["One person.", "Games,", "podcasts", "& other", "dark things."],
+      // Big type, one line per entry; the last one is in the accent colour. The hero sizing in
+      // globals.css (.home-hero) assumes 4 lines, the longest ~12 characters.
+      lines: ["Games and", "stories from", "the realm", "of Dreams"],
       intro:
-        "Arcane Canvas is a one-person studio making narrative games, audio fiction and small printed things. Everything is written, drawn and recorded by hand. Lorem ipsum dolor sit amet.",
+        "The Arcane Canvas is a place somewhere past the stars, where Dreams live. I'm one person with a clear goal in mind: to bring back stories from that realm.",
       aboutLink: "About the studio",
     },
     products: {
@@ -176,10 +177,10 @@ export const en = {
       silentium: {
         kind: "A horror fiction podcast",
         name: "SILENTIUM",
-        status: "New case every month",
+        status: "",
         description:
           "Vatican linguist Father Tommaso Lanza investigates deaths for the Custodia Ultimae Vocis, trying to translate an ancient, impossible language that appears only at the moment of death.",
-        mediaAlt: "SILENTIUM cover art: a pale hand reaching out while shadowed hands close in from above.",
+        mediaAlt: "SILENTIUM: a pale hand reaching out while shadowed hands close in from above, over the title.",
       },
     },
     contact: {
@@ -197,19 +198,18 @@ export const en = {
       paragraphs: [
         "I write, design and build everything you find here: the games, the stories, the sounds, even the little printed things that end up in people's pockets.",
         "ORISON is the first game I made, and I poured everything I had into it. It is a game about humanity and feelings. My only wish is that by playing it you'll discover something new about yourself, or remember someone you thought you had lost.",
-        "SILENTIUM started as a way to keep telling stories between one build and the next. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-        "No generative AI, anywhere. Every word, drawing and note is made by a person, and that person is usually me, very late at night.",
+        "SILENTIUM started as a way for me to experiment in the world of audio dramas, as a fan of the genre myself. I had this crazy dream one night about a priest hearing a language that only eldritch creatures can speak, so I knew I had to craft a story about it.",
       ],
       signoff: "Please, remember you are not alone in this world.",
       signature: "Marco D'Antino",
-      portraitAlt: "Photo placeholder: the developer's desk",
-      portraitCaption: "where ORISON happened (photo TBD)",
+      portraitAlt: "An old dry-stone hut in the woods, its dark doorway half hidden by leaves and branches.",
+      portraitCaption: "this is where I create stories",
     },
     works: {
       title: "Things I've made",
       items: [
         { year: "2026", title: "ORISON", kind: "Narrative game for PC", status: "Free demo in December", href: "/orison" },
-        { year: "2025", title: "SILENTIUM", kind: "Horror fiction podcast", status: "A new case every month", href: "/silentium" },
+        { year: "2025", title: "SILENTIUM", kind: "Horror fiction podcast", status: "", href: "/silentium" },
         { year: "2026", title: "ORISON mini CD", kind: "Print & NFC promo object", status: "Handed out in person, at events", href: null },
       ],
     },
@@ -232,19 +232,20 @@ export const en = {
     trailerTitle: "ORISON - Official Narrative Trailer",
     intro: {
       file: "README.TXT",
-      // The same text as the Home band (home.products.orison.description, the client's
-      // spoiler-free version) plus the closing line. Keep the two in sync.
+      // The same text as the Home band (home.products.orison.description), with the last
+      // sentence on its own line as the client asked. Keep the two in sync.
       // Cipher letters spell a terminal code, UNWATCHED (see src/content/easter-eggs.ts): if
       // the text changes, keep those nine letters in it, in order.
       text:
-        "The last [[u]]nwatched place on the i[[n]]ternet ran on a [[w]]ell hidden machine. The website promised th[[a]]t nothing you sent could be [[t]]raced back to you, and it kept that promise while governments tore the network apart looking for it. You found the ma[[c]]hine. Now it wants to talk. **T[[h]]ere are no right answ[[e]]rs in there.** Only what you [[d]]o.",
+        "The last [[u]]nwatched place on the i[[n]]ternet ran on a [[w]]ell hidden machine. The website promised th[[a]]t no[[t]]hing you sent [[c]]ould be traced back to you, and it kept that promise w[[h]]ile gov[[e]]rnments tore the network apart looking for it.\nYou foun[[d]] the machine. Now it wants to talk.",
     },
     clips: {
       file: "TRAILER.WEBM",
       caption: "The official trailer. Press play to watch it here, with sound.",
     },
     gallery: {
-      folder: "C:\\ORISON\\SCREENS",
+      // In the game ORISON is the root drive, not C:
+      folder: "ORISON:\\SCREENS",
       count: "6 file(s)",
       viewer: { open: "Open full screen", close: "Close", prev: "Previous screenshot", next: "Next screenshot" },
       alts: [
@@ -266,6 +267,9 @@ export const en = {
     },
     // The monitor's brand: Audeo built the machine in the game
     monitorLabel: "Audeo",
+    // Spelled in 8-bit ASCII by the binary rain (components/orison/BinaryRain.tsx): the hint
+    // to the monitor easter egg (components/orison/CrtFrame.tsx). ASCII only, no accents.
+    binaryHint: "PRESS THE MONITOR BUTTONS 1 1 4 2 3 1. ",
     gyroPrompt: "Tap to let it see you",
   },
 
@@ -277,7 +281,7 @@ export const en = {
       "",
       "Type HELP for a list of commands.",
     ],
-    prompt: "C:\\Users\\guest>",
+    prompt: "ORISON:\\Users\\guest>",
     inputLabel: "Terminal input",
     help: [
       "HELP       displays this reference",
@@ -308,13 +312,14 @@ export const en = {
       coverAlt: "SILENTIUM cover art",
     },
     format: {
-      title: "A case file, read aloud.",
+      title: "What language does Death speak?",
+      // The genres live in the Theme fact below, not here
       text:
-        "Each episode documents a new case. Father Tommaso Lanza, a Vatican linguist working for the Custodia Ultimae Vocis, investigates deaths where an impossible language appears at the very last moment. Religious horror, psychological thriller, dark fantasy.",
+        "Each episode documents a new case. Father Tommaso Lanza, a Vatican linguist working for the Custodia Ultimae Vocis, investigates deaths where an impossible language appears at the very last moment.",
+      // No release cadence: the show is no longer monthly
       facts: [
         { label: "Theme", value: "Cosmic and religious horror" },
         { label: "Voice", value: "Solo narrator, Marco D'Antino" },
-        { label: "Cadence", value: "One episode a month" },
         { label: "Length", value: "15 to 35 minutes" },
       ],
       forFansOf: "For fans of The Magnus Archives, Archive 81 and The White Vault.",
@@ -328,6 +333,7 @@ export const en = {
       rss: "RSS feed",
       nowPlaying: "Now playing",
       selected: "Selected episode",
+      readTranscript: "Read the transcript",
       // Shown before the Spotify player is loaded (it is only loaded on request)
       loadPlayer: "Load the Spotify player",
       consentNote: "The player comes from Spotify, which may set its own cookies.",
@@ -356,7 +362,7 @@ export const en = {
     },
     cta: {
       title: "Follow the show.",
-      text: "New case files every month, wherever you listen to podcasts.",
+      text: "New case files, wherever you listen to podcasts.",
       apple: "Listen on Apple Podcasts",
       rss: "RSS feed for podcast apps",
     },

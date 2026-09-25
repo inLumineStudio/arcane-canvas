@@ -24,16 +24,14 @@
 }
 
 /* Colours sampled from the game: the page is the navy of the CURIO browser, raised
-   surfaces are #181233, the indigo of the game's own OS windows (NOTEPAD, title bars),
-   framed in the light grey of its window chrome and taskbar. */
+   surfaces are #181233, the indigo of the game's own OS windows (NOTEPAD, title bars).
+   The windows' own colours live on .os-window. */
 [data-theme="orison"] {
   --bg: #040817;
   --bg-raised: #181233;
   --fg: #d6f3ff;
   --muted: #7f8fb8;
   --line: #2a2356;
-  --os-chrome: #c9c8d0;
-  --os-chrome-dark: #88878d;
   --accent: #35d0ff;
   --accent-fg: #02060f;
 }
@@ -61,8 +59,11 @@
 
   --font-sans: var(--font-plex), ui-monospace, monospace;
   --font-mono: var(--font-plex), ui-monospace, monospace;
-  --font-pixel: var(--font-vt323), var(--font-plex), monospace;
+  --font-pixel: var(--font-w95), var(--font-plex), monospace;
   --font-hand: var(--font-caveat), cursive;
+  /* SILENTIUM: title face of the cover art, and the italic for its quiet lines */
+  --font-forum: var(--font-forum-src), Georgia, serif;
+  --font-cormorant: var(--font-cormorant-src), Georgia, serif;
 }
 
 html {
@@ -166,7 +167,7 @@ body {
 
 /* ORISON: bevelled system buttons, like the game's own OS */
 [data-theme="orison"] .btn {
-  font-family: var(--font-vt323), monospace;
+  font-family: var(--font-w95), monospace;
   font-size: 1.35rem;
   font-weight: 400;
   line-height: 1;
@@ -258,12 +259,13 @@ body {
 }
 
 /* Home hero: logo + statement always share one screen.
-   The statement (5 lines at line-height 0.92) scales with width and with height, so it never
-   takes more than ~35% of the screen. The logo gets the height the header (3.5rem), the
-   statement and the gaps leave, turned into a width through the orbit's aspect (640 / 328).
-   Phones: up to 125% wide so the ring runs off the edges.
+   The statement (4 lines at line-height 0.92, so 3.68 × its font size tall) scales with
+   width and with height, so it never takes more than ~30% of the screen. The logo gets the
+   height the header (3.5rem), the statement and the gaps leave, turned into a width through
+   the orbit's aspect (640 / 328). Phones: up to 125% wide so the ring runs off the edges.
    The statement was scaled down ~18% on the client's request (was min(13vw, 7.5svh, 9rem)
-   and 0.062 / 8rem in landscape); the logo takes the height it frees up. */
+   and 0.062 / 8rem in landscape); the logo takes the height it frees up.
+   If the statement copy changes line count or its longest line, recheck 3.68 and 0.046. */
 .home-hero {
   --statement: min(10.6vw, 6.15svh, 7.4rem);
 }
@@ -274,22 +276,22 @@ body {
   text-align: center;
 }
 .home-hero-logo {
-  width: max(12rem, min(125%, 48rem, (100svh - 3.5rem - 4.6 * var(--statement) - 4.5rem) * 1.95));
+  width: max(12rem, min(125%, 48rem, (100svh - 3.5rem - 3.68 * var(--statement) - 4.5rem) * 1.95));
 }
 @media (min-width: 768px) {
   .home-hero-logo {
-    width: max(16rem, min(100% - 4rem, 48rem, (100svh - 3.5rem - 4.6 * var(--statement) - 6.5rem) * 1.95));
+    width: max(16rem, min(100% - 4rem, 48rem, (100svh - 3.5rem - 3.68 * var(--statement) - 6.5rem) * 1.95));
   }
 }
 /* Landscape screens from 768px (tablet landscape, desktop, and the wide landscape phones):
    side by side, statement on the left, logo on the right. Stacking there would squeeze both
-   into the short height. The statement's longest line is ~6.9em wide, so 0.051 × the usable
-   width gives it ~35% of the row (100vw counts the scrollbar, hence the margin); the logo
-   takes up to ~56%, the rest is the gap. Lines never wrap. */
+   into the short height. The statement's widest line ("stories from", stepped in) is ~7.8em,
+   so 0.046 × the usable width gives it ~36% of the row (100vw counts the scrollbar, hence
+   the margin); the logo takes up to ~56%, the rest is the gap. Lines never wrap. */
 @media (min-width: 768px) and (orientation: landscape) {
   .home-hero {
     --row: calc(100vw - 6rem);
-    --statement: min((100svh - 7.5rem) / 4.6 * 0.82, var(--row) * 0.051, 6.5rem);
+    --statement: min((100svh - 7.5rem) / 3.68 * 0.82, var(--row) * 0.046, 6.5rem);
     flex-direction: row;
     column-gap: calc(var(--row) * 0.04);
     padding-inline: 3rem;
@@ -347,7 +349,7 @@ body {
 
 /* ORISON: the site navigation speaks the game's pixel font */
 [data-theme="orison"] .nav-link {
-  font-family: var(--font-vt323), monospace;
+  font-family: var(--font-w95), monospace;
 }
 
 /* VT323 runs small: bump the menu button (mobile) and the inline links (desktop) */
@@ -548,13 +550,13 @@ html.is-glitching body::after {
    yellowed putty plastic, lighter at the top where the light falls, a recessed lip around
    the curved glass, and a chin with the brand, a row of round buttons and the power button
    with its LED. The page scrolls "inside the glass".
-   Mobile first: a slim bezel and a chin with just the brand and the power button (every
-   pixel of a phone screen counts); from 768px the bezel thickens and the button row shows. */
+   Mobile first: a slim bezel (every pixel of a phone screen counts) with a 44px chin, tall
+   enough to tap its buttons (an easter egg lives there); from 768px the bezel thickens. */
 
 [data-crt] {
   --crt-side: 12px;
   --crt-top: 14px;
-  --crt-bottom: 40px;
+  --crt-bottom: 44px;
   --crt-radius: 16px;
   --crt-plastic: #d4ccb4;
   --crt-plastic-light: #e6dfca;
@@ -644,16 +646,46 @@ html.is-glitching body::after {
   text-shadow: 0 1px 0 rgb(255 255 255 / 0.55);
 }
 
+/* Front-panel buttons on the left, power and LED on the right. The frame ignores the pointer
+   (it lies over the page); only the buttons take it back. Each has a hit area as tall as the
+   chin (44px on phones), wider than the little knob it shows. */
+.crt-knobs,
 .crt-controls {
-  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 10px;
+}
+.crt-controls {
+  margin-left: auto;
+  gap: 6px;
+}
+.crt-hit {
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.crt-hit-power {
+  width: 40px;
+}
+.crt-hit:active .crt-knob,
+.crt-hit:active .crt-power {
+  translate: 0 1px;
+  box-shadow:
+    inset 0 1px 2px rgb(0 0 0 / 0.35),
+    0 0 0 1px var(--crt-lip);
+}
+.crt-hit:focus-visible {
+  outline-offset: -4px;
 }
 
-/* Round front-panel buttons: from tablet up only */
+/* Round front-panel buttons */
 .crt-knob {
-  display: none;
+  display: block;
   width: 11px;
   height: 11px;
   border-radius: 50%;
@@ -688,12 +720,20 @@ html.is-glitching body::after {
   50% { opacity: 0.6; }
 }
 
+/* The LED flickers once to acknowledge a button press */
+.crt-led-blink {
+  animation: crt-led-blink 0.25s steps(2) 1, crt-led 4s ease-in-out 0.25s infinite;
+}
+@keyframes crt-led-blink {
+  50% { opacity: 0.15; }
+}
+
 @media (min-width: 768px) {
   .crt-chin { inset-inline: calc(var(--crt-side) + 28px); }
   .crt-brand { font-size: 1rem; }
-  .crt-controls { gap: 14px; }
-  .crt-knob { display: block; }
-  .crt-power { width: 26px; height: 13px; margin-left: 8px; }
+  .crt-hit { width: 34px; }
+  .crt-hit-power { width: 46px; }
+  .crt-power { width: 26px; height: 13px; }
   .crt-led { width: 6px; height: 6px; }
 }
 
@@ -842,7 +882,7 @@ html.is-glitching body::after {
   position: absolute;
   top: 0;
   white-space: pre;
-  font-family: var(--font-vt323), monospace;
+  font-family: var(--font-w95), monospace;
   font-size: 1.1rem;
   line-height: 1.1;
   color: #35d0ff;
@@ -884,55 +924,68 @@ html.is-glitching body::after {
 }
 
 /* ── ORISON OS window ────────────────────────────────────────────────────── */
-/* Like the game's windows: light grey bevelled chrome, #181233 title bar and body. */
+/* As the windows look in the game (colours sampled from it by the client): flat, no bevel, a
+   thin grey edge, a purple title bar that dithers into grey after the title (lib/dither.ts
+   paints it as the bar background; plain purple until then), and flat grey buttons with a
+   thick outline. The body is the dark NOTEPAD look. */
 
 .os-window {
-  background: var(--os-chrome);
-  padding: 3px;
-  box-shadow:
-    inset -2px -2px 0 var(--os-chrome-dark),
-    inset 2px 2px 0 #fff,
-    0 0 0 1px #000;
+  --os-dark: #181233;
+  --os-light: #d2d2d2;
+  --os-ink: #111019;
+  --os-px: 2px;
+  position: relative;
+  border: 2px solid #999;
+  background: var(--os-dark);
+  padding: 2px;
 }
 
 .os-titlebar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
-  padding: 0.15rem 0.2rem 0.15rem 0.5rem;
-  background: #181233;
-  color: #f2f0fa;
-  font-family: var(--font-vt323), monospace;
-  font-size: 1.15rem;
-  line-height: 1.4;
+  height: 1.75rem;
+  padding: 0 3px 0 0.5rem;
+  background-color: var(--os-dark);
+  color: var(--os-light);
+  font-family: var(--font-w95), monospace;
+  font-size: 1rem;
+  line-height: 1;
+  -webkit-font-smoothing: none;
+  image-rendering: pixelated;
 }
 
 .os-controls {
   display: flex;
   gap: 3px;
+  margin-left: auto;
 }
 
-.os-controls span {
-  display: grid;
-  place-items: center;
-  width: 1.15rem;
-  height: 1rem;
-  font-size: 0.9rem;
-  line-height: 1;
-  color: #181233;
-  background: var(--os-chrome);
-  box-shadow:
-    inset -1px -1px 0 #000,
-    inset 1px 1px 0 #fff;
+.os-btn {
+  display: block;
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 2px solid var(--os-ink);
+  background: var(--os-light) center / 100% 100% no-repeat;
+}
+.os-btn-min {
+  background-image: linear-gradient(var(--os-ink), var(--os-ink));
+  background-size: 64% 3px;
+  background-position: 50% 78%;
+}
+.os-btn-close {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M7 7L25 25M25 7L7 25%27 stroke=%27%23111019%27 stroke-width=%275%27 stroke-linecap=%27square%27/%3E%3C/svg%3E");
 }
 
 .os-body {
-  margin-top: 3px;
-  background: #181233;
-  box-shadow:
-    inset 1px 1px 0 var(--os-chrome-dark),
-    inset -1px -1px 0 #fff;
+  border-top: 3px solid #cdcdcd;
+  background: var(--os-dark);
+}
+
+@media (min-width: 768px) {
+  .os-window { --os-px: 2px; }
+  .os-titlebar { height: 2.25rem; font-size: 1.25rem; padding-left: 0.65rem; }
+  .os-btn { width: 1.6rem; height: 1.6rem; border-width: 3px; }
 }
 
 /* ── ORISON screenshot viewer ────────────────────────────────────────────── */
@@ -957,23 +1010,15 @@ html.is-glitching body::after {
   from { opacity: 0; }
 }
 
-/* The window's own close button, drawn like the title bar controls, but big enough to tap */
+/* The viewer's close button: the in-game close box, inside a 44px tap target */
 .lightbox-close {
   display: grid;
   place-items: center;
-  min-width: 2.25rem;
-  min-height: 1.75rem;
-  font-size: 1.25rem;
-  line-height: 1;
-  color: #181233;
-  background: var(--os-chrome);
-  box-shadow:
-    inset -1px -1px 0 #000,
-    inset 1px 1px 0 #fff;
+  min-width: 44px;
+  min-height: 44px;
+  margin: -0.5rem -3px -0.5rem 0;
 }
 
-.lightbox-close:active {
-  box-shadow:
-    inset 1px 1px 0 #000,
-    inset -1px -1px 0 #fff;
+.lightbox-close:active .os-btn {
+  translate: 0 1px;
 }

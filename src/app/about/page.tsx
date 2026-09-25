@@ -40,10 +40,13 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-6xl gap-16 px-5 pb-24 pt-36 md:px-8 md:pt-44 lg:grid-cols-[18rem_1fr] lg:gap-24">
           {/* Polaroid-style snapshot, pinned slightly crooked */}
           <figure className="ml-2 w-52 -rotate-3 md:w-60 bg-[#e4eef9] p-3 pb-2 shadow-[0_20px_60px_rgb(0_0_0/0.6)] lg:sticky lg:top-32 lg:ml-0 lg:mt-4 lg:self-start">
-            <div
-              role="img"
-              aria-label={a.letter.portraitAlt}
-              className="aspect-square bg-[#131b26] bg-[radial-gradient(circle_at_50%_40%,rgb(142_191_231/0.25),transparent_60%)]"
+            <Image
+              src="/media/brand/about-portrait.webp"
+              alt={a.letter.portraitAlt}
+              width={720}
+              height={960}
+              sizes="(min-width: 768px) 15rem, 13rem"
+              className="aspect-[3/4] h-auto w-full object-cover"
             />
             <figcaption className="pt-2 text-center font-hand text-xl leading-tight text-[#1b2330]">
               {a.letter.portraitCaption}

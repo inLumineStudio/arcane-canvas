@@ -55,14 +55,16 @@ export const site = {
   builtBy: { label: "inLumine", href: "https://www.inlumine.it/" },
 
   // Split by owner, so the ORISON accounts (@orison.sys) don't read as the studio's.
-  // YouTube is listed under ORISON as the client asked (the channel hosts the trailer).
+  // The YouTube channel is the studio's (it hosts the ORISON trailer and SILENTIUM).
   socials: {
     orison: [
       { label: "Instagram", href: "https://www.instagram.com/orison.sys/" },
       { label: "TikTok", href: "https://www.tiktok.com/@orison.sys" },
+    ],
+    studio: [
+      { label: "Bluesky", href: "https://bsky.app/profile/arcanecanvas.bsky.social" },
       { label: "YouTube", href: "https://www.youtube.com/@ArcaneCanvasYT" },
     ],
-    studio: [{ label: "Bluesky", href: "https://bsky.app/profile/arcanecanvas.bsky.social" }],
   },
 } as const;
 

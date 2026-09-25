@@ -38,7 +38,8 @@ export function ProductBand(p: Props) {
         <header className={`lg:col-span-5 lg:row-start-1 lg:self-end ${p.reverse ? "lg:col-start-8" : "lg:col-start-1"}`}>
           <h3>{p.name}</h3>
           <p className="mt-4 text-sm text-muted">
-            {p.kind} <span className="text-fg">· {p.status}</span>
+            {p.kind}
+            {p.status && <span className="text-fg"> · {p.status}</span>}
           </p>
         </header>
 

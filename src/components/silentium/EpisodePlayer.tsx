@@ -20,6 +20,8 @@ import type { Dictionary } from "@/content";
 type Props = {
   episodes: Episode[];
   showId: string;
+  /** Slugs of the transcripts that exist in the archive (episode1, episode5_5…) */
+  transcripts: string[];
   t: Dictionary["silentium"]["episodes"];
 };
 
@@ -29,13 +31,22 @@ function splitTitle(title: string) {
   return m ? { label: m[1], name: m[2] } : { label: "", name: title };
 }
 
+// "Episode 5.5: Bellows" → "episode5_5", the archive's file name for that transcript
+function transcriptSlug(title: string) {
+  const n = title.match(/^Episode ([\d.]+)/)?.[1];
+  return n ? `episode${n.replace(".", "_")}` : null;
+}
+
 const dateFmt = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" });
 
-export function EpisodePlayer({ episodes, showId, t }: Props) {
+export function EpisodePlayer({ episodes, showId, transcripts, t }: Props) {
   const [current, setCurrent] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const player = useRef<HTMLDivElement>(null);
   const ep = episodes[current];
+  // Only link a transcript the archive really has
+  const slug = ep ? transcriptSlug(ep.title) : null;
+  const transcriptHref = slug && transcripts.includes(slug) ? `/silentium/transcripts/${slug}` : null;
   const src = ep?.id
     ? `https://open.spotify.com/embed/episode/${ep.id}?theme=0`
     : `https://open.spotify.com/embed/show/${showId}?theme=0`;
@@ -52,7 +63,15 @@ export function EpisodePlayer({ episodes, showId, t }: Props) {
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-14">
       <div ref={player} className="scroll-mt-20 lg:sticky lg:top-24 lg:order-2 lg:self-start">
         <p className="text-sm text-muted">{loaded ? t.nowPlaying : t.selected}</p>
-        <p className="mb-4 mt-1 text-lg font-medium">{ep ? splitTitle(ep.title).name : ""}</p>
+        {/* The episode's name, and its transcript right beside it (read along while listening) */}
+        <div className="mb-4 mt-1 flex flex-wrap items-baseline justify-between gap-x-4">
+          <p className="text-lg font-medium">{ep ? splitTitle(ep.title).name : ""}</p>
+          {transcriptHref && (
+            <Link href={transcriptHref} className="link inline-flex min-h-11 items-center text-sm text-accent md:min-h-0">
+              {t.readTranscript} →
+            </Link>
+          )}
+        </div>
         {loaded ? (
           <iframe
             key={src}
