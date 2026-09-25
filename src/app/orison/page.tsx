@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { orisonPressKitHref, site } from "@/config/site";
+import { site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { OG, pageMetadata } from "@/lib/metadata";
 import { breadcrumbs, game, graph } from "@/lib/structured-data";
@@ -87,8 +87,9 @@ export default function OrisonPage() {
             {o.hero.tagline.slice(0, -1)}
             <GlitchTrigger t={t.glitch}>{o.hero.tagline.slice(-1)}</GlitchTrigger>
           </div>
+          {/* Release status (empty until the demo is out, see orisonStatus in en.ts), then languages */}
           <p className="font-pixel text-xl leading-tight text-muted">
-            {o.hero.status}
+            {o.hero.status && <span className="block">{o.hero.status}</span>}
             <span className="block">{o.hero.languages}</span>
           </p>
           <GyroPrompt label={o.gyroPrompt} />
@@ -116,7 +117,7 @@ export default function OrisonPage() {
           <Button href={site.orison.steamUrl} external>
             {t.buttons.wishlist}
           </Button>
-          <Button href={orisonPressKitHref} external variant="quiet">
+          <Button href={site.orison.pressKitUrl} external variant="quiet">
             {t.buttons.pressKit}
           </Button>
         </div>
@@ -173,7 +174,7 @@ export default function OrisonPage() {
             <Button href={site.orison.steamUrl} external>
               {t.buttons.wishlist}
             </Button>
-            <Button href={orisonPressKitHref} external variant="quiet">
+            <Button href={site.orison.pressKitUrl} external variant="quiet">
               {t.buttons.pressKit}
             </Button>
           </div>

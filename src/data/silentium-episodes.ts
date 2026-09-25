@@ -8,11 +8,13 @@ export type Episode = {
   minutes: number;
 };
 
-// Snapshot of the public show listing (Spotify / Apple Podcasts, September 2026). Episode IDs
-// come from the show's Spotify for Creators page (creators.spotify.com/pod/profile/arcane-canvas),
-// which lists every episode; the logged-out open.spotify.com page only shows the first six.
-// A new episode needs its ID added here, or the player falls back to the whole show.
-// Only used when the Spotify Web API credentials are missing or the API is unreachable.
+// Two jobs (see lib/spotify.ts):
+//   - Spotify IDs for the RSS-driven list: the feed has none, so each episode is matched here
+//     by title. A new episode without an entry still appears (from the RSS) and plays through
+//     the whole-show player; add its ID here to give it its own player. IDs are listed on the
+//     show's Spotify for Creators page (creators.spotify.com/pod/profile/arcane-canvas).
+//   - The last-resort list, if both the Spotify API and the RSS feed are unreachable.
+// Not needed at all once SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET are set on Vercel.
 export const fallbackEpisodes: Episode[] = [
   {
     id: "52Va4JwIcM5aNEu07Q8R9v",

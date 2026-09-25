@@ -11,8 +11,8 @@ The site is live at **https://www.thearcanecanvas.com** (Vercel, auto-deployed f
 | `/` | Done. Logo + orbit hero with the statement "Games and stories from the realm of Dreams", intro, Projects (ORISON band with the YouTube trailer, SILENTIUM band with the horizontal cover), contact. |
 | `/about` | Done. Letter, photo ("this is where I create stories"), list of works (the mini CD is "handed out in person"), press. |
 | `/orison` | Done. Audeo CRT monitor with power-on, parallax hero with the tracking eye (tilt on phones), README, trailer, screenshots with viewer, terminal, easter eggs. W95FA font (a trial). |
-| `/orison/the-watcher` | Done. Secret page behind the monitor buttons. Its eight lines are the agency's proposal. |
-| `/silentium` | Done. Format facts, episodes with the Spotify player on request, Apple Podcasts / RSS, transcripts with "Read the transcript" next to the selected episode. |
+| `/orison/the-watcher` | Done. Secret page behind the monitor buttons. Its five lines are Marco's. |
+| `/silentium` | Done. Format facts, episodes from the RSS feed (hourly, new ones appear on their own) with the Spotify player on request, Apple Podcasts / RSS, transcripts with "Read the transcript" next to the selected episode. |
 | `/silentium/transcripts/*` | Done. Read live from the client's archive repo (hourly). |
 | `/privacy` | Done as a draft: have it reviewed. |
 | 404 | Done. Wall of eyes, "This page isn't there. But you are. Go back." |
@@ -30,12 +30,10 @@ The site is live at **https://www.thearcanecanvas.com** (Vercel, auto-deployed f
 
 | Item | Where it goes |
 |------|---------------|
-| ORISON press kit Dropbox URL | `site.orison.pressKitUrl` in `src/config/site.ts` (until then, Press kit buttons open an email to press@) |
-| Final Home contact text | `home.contact.text` in `src/content/en.ts` (still lorem ipsum) |
 | Glitch panel and terminal unlock texts | `glitch` in `en.ts`, `src/content/easter-eggs.ts`. He does not want to write terminal content: decide whether to keep, trim or remove the terminal |
-| Approval of The Watcher's lines | `orison.watcher.lines` in `en.ts` |
+| Demo release day: "Demo out now" | `orisonStatus` at the top of `en.ts` (empty until then, so no date is shown anywhere) |
 | Verdict on W95FA (trial font) after seeing it on a real phone | `layout.tsx`, see README "Fonts" to go back to VT323 |
-| Episode 1 summary: "33-year-old" → "34-year-old" | Not in this repo: the client's archive `index.html` (arcane-canvas/silentiumpodcast); the site picks it up within an hour |
+| Episode 1 summary: "33-year-old" → "34-year-old" in the archive | Already corrected on the site (`SUMMARY_ERRATA` in `src/lib/transcripts.ts`); Marco should still fix `index.html` in arcane-canvas/silentiumpodcast so the archive site is right too |
 | Legal review of the privacy notice | `privacy` in `en.ts` |
 
 ## To do outside the code
@@ -43,7 +41,7 @@ The site is live at **https://www.thearcanecanvas.com** (Vercel, auto-deployed f
 1. **Google Search Console**: add a *Domain* property for `thearcanecanvas.com`, verify it with the TXT record Google gives (Aruba → DNS management, new TXT on `@`; leave the SPF TXT alone), then submit `https://www.thearcanecanvas.com/sitemap.xml`. Same in Bing Webmaster Tools (it can import from Search Console).
 2. **Transcript archive canonicals** (client's repo): the transcripts are also public on GitHub Pages, so Google sees duplicates. In each `episodeN.html` and `lexicon.html`, inside `<head>`, add e.g. `<link rel="canonical" href="https://www.thearcanecanvas.com/silentium/transcripts/episode1">`, and in `index.html` point the canonical to `https://www.thearcanecanvas.com/silentium`. This site only reads `<main>` from those files.
 3. **Email deliverability**: SPF is set (Aruba), DMARC exists in `p=none`, DKIM was not found. Switch DKIM on from the Aruba mail panel, then after a couple of weeks move DMARC to `p=quarantine`.
-4. **Vercel env**: set `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` so the episode list (with Spotify IDs) updates by itself; otherwise every new episode needs its ID added to `src/data/silentium-episodes.ts`.
+4. **Vercel env (optional)**: new episodes and transcripts already appear by themselves within an hour (RSS feed + archive repo). The only manual step left is a new episode's Spotify ID in `src/data/silentium-episodes.ts`, for its own player (without it, it plays through the whole-show player). Setting `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` removes that step too.
 5. **Repo visibility**: the client asked for the repo to be private. Before switching, check the Vercel plan (Hobby may not deploy private repos owned by a GitHub organisation).
 6. After each deploy that touches metadata: Rich Results Test and Facebook Sharing Debugger on Home, /orison, /silentium.
 

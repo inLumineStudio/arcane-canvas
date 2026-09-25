@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { orisonPressKitHref, site } from "@/config/site";
+import { site } from "@/config/site";
 import { getDictionary } from "@/content";
 import { pageMetadata } from "@/lib/metadata";
 import { aboutPage, breadcrumbs, graph, owner } from "@/lib/structured-data";
@@ -128,7 +128,7 @@ export default function AboutPage() {
               </a>
             </p>
           </div>
-          <Button href={orisonPressKitHref} external>
+          <Button href={site.orison.pressKitUrl} external>
             {a.press.orisonKit}
           </Button>
         </div>

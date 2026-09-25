@@ -24,9 +24,9 @@ export const metadata: Metadata = pageMetadata({
   image: OG.silentium,
 });
 
-// Refresh the episode list from Spotify once a day; the transcript list (from the client's
-// archive repo) asks for an hourly refresh, and the page follows the shorter of the two.
-export const revalidate = 86400;
+// Regenerated at most once an hour: a newly published episode (RSS / Spotify, lib/spotify.ts)
+// and its transcript (client's archive repo, lib/transcripts.ts) show up with no deploy.
+export const revalidate = 3600;
 
 export default async function SilentiumPage() {
   const s = t.silentium;

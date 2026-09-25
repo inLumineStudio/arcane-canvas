@@ -45,9 +45,10 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
 ## Where things live
 
 - **Copy**: `src/content/en.ts`, every user-facing string. Add a locale by copying it and registering it in `src/content/index.ts`.
+- **ORISON release status**: `orisonStatus` at the top of `en.ts`, shown on the Home band, the `/orison` hero, the sticky wishlist bar and About. Empty (hidden everywhere) until the demo is out; on launch day set it to "Demo out now".
 - **Links / IDs / emails / socials**: `src/config/site.ts` (items marked TBD are open points).
-- **SILENTIUM episodes**: from the Spotify Web API when `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` are set (see `.env.example`), otherwise `src/data/silentium-episodes.ts`. That static list needs each new episode's Spotify ID added by hand (IDs are listed on the show's Spotify for Creators page).
-- **SILENTIUM transcripts**: not stored here. `src/lib/transcripts.ts` reads the HTML of the client's archive repo (`site.silentium.transcripts`, `arcane-canvas/silentiumpodcast`) and regenerates at most once an hour, so a new `episodeN.html` listed in its `index.html` appears with no deploy. The markup is cut to an allowlist and restyled by `.transcript` in `globals.css`. If GitHub is unreachable, the page links to the archive site instead.
+- **SILENTIUM episodes** (`src/lib/spotify.ts`, `/silentium` regenerates at most once an hour): from the Spotify Web API when `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` are set (see `.env.example`); otherwise from the podcast's public RSS feed (`site.silentium.rssUrl`), so a newly published episode appears with no deploy. The feed has no Spotify IDs: they are matched by title from `src/data/silentium-episodes.ts`. A new episode without an ID there still appears and plays through the whole-show player; add its ID (from the show's Spotify for Creators page) to give it its own. That file is also the last-resort list if both sources fail.
+- **SILENTIUM transcripts**: not stored here. `src/lib/transcripts.ts` reads the HTML of the client's archive repo (`site.silentium.transcripts`, `arcane-canvas/silentiumpodcast`) and regenerates at most once an hour, so a new `episodeN.html` listed in its `index.html` appears with no deploy. The markup is cut to an allowlist and restyled by `.transcript` in `globals.css`. If GitHub is unreachable, the page links to the archive site instead. Typos in the archive's summaries can be patched in `SUMMARY_ERRATA` (e.g. episode 1's "33-year-old" → "34-year-old"); an entry is harmless once the archive is fixed.
 - **Privacy**: no analytics and no cookies of the site's own. YouTube (trailer) and Spotify (player) load only when the visitor asks, from local placeholders, so no cookie banner is needed. The notice (`/privacy`, copy in `en.ts` → `privacy`) must be updated if analytics, forms or new embeds are ever added.
 - **Link previews and SEO**:
   - Primary address `https://www.thearcanecanvas.com` (`site.url`), the domain set as primary on Vercel; the bare domain and `arcane-canvas.vercel.app` 308-redirect to it (the latter in `next.config.ts`). Preview deployments send `X-Robots-Tag: noindex`.
@@ -71,7 +72,5 @@ Avoid template tropes: uppercase letter-spaced labels over headings, gradient te
 
 ## Placeholders to replace
 
-- ORISON press kit link (`site.orison.pressKitUrl`, TBD): until it exists, the Press kit buttons open an email to press@.
-- Home contact text ("Say hello.", still with lorem ipsum): final text promised by the client.
 - Glitch panel and terminal unlock texts (TBD with Marco; he does not want to write terminal content, so decide whether to keep, trim or remove the terminal).
-- The Watcher's eight lines (`orison.watcher.lines`): the agency's proposal, to be approved by Marco.
+- ORISON release status (`orisonStatus` in `en.ts`): empty until the demo is out, then "Demo out now".

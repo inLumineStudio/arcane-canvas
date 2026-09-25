@@ -1,4 +1,4 @@
-// External links and IDs. Values marked TBD are open points in the brief (§8).
+// External links and IDs.
 export const site = {
   // The primary address, as served by Vercel (the bare domain 308-redirects here). Canonical
   // URLs, the sitemap, link previews and structured data all derive from it: it must match
@@ -12,9 +12,9 @@ export const site = {
 
   orison: {
     steamUrl: "https://store.steampowered.com/app/5202200/ORISON/",
-    // TBD: Dropbox folder from Marco (trailer, screenshots, cover…). While null, the
-    // Press kit button opens an email to pressEmail instead.
-    pressKitUrl: null as string | null,
+    // Press kit: Dropbox folder from Marco (trailer, screenshots, key art, logos)
+    pressKitUrl:
+      "https://www.dropbox.com/scl/fo/3lw8osfuhhiw56nqfgkh7/ACIcGG_A7LgtJm_-Zb01rLY?rlkey=2orl7hjgsbet77uj1a18sta34&st=ji9zu7me&dl=0",
     // YouTube ID of the trailer (youtube.com/watch?v=<ID>), played inside the trailer windows
     // on Home and /orison. Its cover is a local copy: public/media/orison/trailer-poster.webp.
     youtubeTrailerId: "6veKf0zDn1g",
@@ -67,7 +67,3 @@ export const site = {
     ],
   },
 } as const;
-
-/** Dropbox press kit once Marco shares it; an email to the press address until then. */
-export const orisonPressKitHref =
-  site.orison.pressKitUrl ?? `mailto:${site.pressEmail}?subject=ORISON%20press%20kit`;

@@ -5,6 +5,12 @@
 // Inline markup supported by <RichText>: **bold**, _italic_, and [[x]] for cipher letters
 // (the letters of a hidden code, rendered with a barely different tint).
 
+// ORISON's release status, shown in four places: the Home band, the /orison hero, the
+// sticky wishlist bar and About's list of works. Empty = hidden everywhere. Left empty until
+// the demo is out ("Free demo · December 2026" read as if the demo were already available);
+// on launch day set it to "Demo out now".
+const orisonStatus = "";
+
 export const en = {
   meta: {
     siteName: "Arcane Canvas",
@@ -17,7 +23,7 @@ export const en = {
       "Arcane Canvas is one person bringing stories back from the realm of Dreams: a narrative game, a horror fiction podcast and small printed things.",
     orisonTitle: "ORISON - Arcane Canvas",
     orisonDescription:
-      "A narrative game for PC. The last unwatched place on the internet ran on a well hidden machine. You found it. Now it wants to talk. Free demo, December 2026.",
+      "A narrative game for PC. The last unwatched place on the internet ran on a well hidden machine. You found it. Now it wants to talk. Available in English and Italian.",
     silentiumTitle: "SILENTIUM - Arcane Canvas",
     silentiumDescription:
       "A horror fiction podcast. Vatican linguist Father Tommaso Lanza translates an impossible language spoken only at the moment of death.",
@@ -160,7 +166,7 @@ export const en = {
       // globals.css (.home-hero) assumes 4 lines, the longest ~12 characters.
       lines: ["Games and", "stories from", "the realm", "of Dreams"],
       intro:
-        "The Arcane Canvas is a place somewhere past the stars, where Dreams live. I'm one person with a clear goal in mind: to bring back stories from that realm.",
+        "The Arcane Canvas is a place somewhere past the stars, where Dreams live. I'm one person with a clear goal in mind:\nto bring back stories from that realm.",
       aboutLink: "About the studio",
     },
     products: {
@@ -168,7 +174,7 @@ export const en = {
       orison: {
         kind: "A narrative game for PC",
         name: "ORISON",
-        status: "Free demo, December 2026",
+        status: orisonStatus,
         description:
           "The last unwatched place on the internet ran on a well hidden machine. The website promised that nothing you sent could be traced back to you, and it kept that promise while governments tore the network apart looking for it. You found the machine. Now it wants to talk.",
         mediaLabel: "Play the ORISON trailer",
@@ -184,7 +190,7 @@ export const en = {
     },
     contact: {
       title: "Say hello.",
-      text: "Collaborations, questions, or just a message. Lorem ipsum dolor sit amet, every email gets read.",
+      text: "Collaborations, questions, or just a message.",
       pressLabel: "Press & creators",
     },
   },
@@ -207,7 +213,7 @@ export const en = {
     works: {
       title: "Things I've made",
       items: [
-        { year: "2026", title: "ORISON", kind: "Narrative game for PC", status: "Free demo in December", href: "/orison" },
+        { year: "2026", title: "ORISON", kind: "Narrative game for PC", status: orisonStatus, href: "/orison" },
         { year: "2025", title: "SILENTIUM", kind: "Horror fiction podcast", status: "", href: "/silentium" },
         { year: "2026", title: "ORISON mini CD", kind: "Print & NFC promo object", status: "Handed out in person, at events", href: null },
       ],
@@ -223,7 +229,7 @@ export const en = {
   orison: {
     hero: {
       tagline: "Humanity awaits.",
-      status: "Free demo · December 2026",
+      status: orisonStatus,
       languages: "Available in English and Italian",
       wordmarkAlt: "ORISON",
     },
@@ -266,19 +272,16 @@ export const en = {
     },
     // The monitor's brand: Audeo built the machine in the game
     monitorLabel: "Audeo",
-    // The secret page behind the monitor buttons (/orison/the-watcher). Copy proposed by the
-    // agency in the game's tone, to be approved by Marco. Lines are typed out one by one.
+    // The secret page behind the monitor buttons (/orison/the-watcher), Marco's copy.
+    // Lines are typed out one by one; the last three stay on screen.
     watcher: {
       metaTitle: "It sees you - ORISON",
       lines: [
         "You pressed them in the right order.",
-        "Nobody was supposed to know the order.",
-        "The machine was never the one watching.",
-        "It was only an eyelid.",
-        "What waits behind it is older than the network,",
-        "older than the first word anyone spoke.",
-        "It does not hate you. It has simply noticed you.",
-        "From now on it will know where you are looking.",
+        "Either you're a careful watcher or...",
+        "You knew Edgar.",
+        "Regardless, you got my attention.",
+        "I'll start watching you too.",
       ],
       exit: "Close your eyes",
     },

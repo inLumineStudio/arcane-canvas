@@ -19,6 +19,18 @@ import { site } from "@/config/site";
 const HOUR = 60 * 60;
 const { repo, ref } = site.silentium.transcripts;
 const SLUG = /^[a-z0-9_-]+$/;
+
+// Corrections to the archive's episode summaries, applied until they are fixed at the source
+// (the client's index.html). A fix there makes the entry match nothing, so it is harmless to
+// leave; remove it once the archive is corrected.
+const SUMMARY_ERRATA: Record<string, [wrong: string, right: string][]> = {
+  // Marcus Chen is thirty-four, as the transcript itself says
+  episode1: [["33-year-old", "34-year-old"]],
+};
+
+function fixSummary(slug: string, text: string) {
+  return (SUMMARY_ERRATA[slug] ?? []).reduce((t, [wrong, right]) => t.replace(wrong, right), text);
+}
 export const LEXICON = "lexicon";
 
 export type TranscriptEntry = {
@@ -101,7 +113,7 @@ export async function getTranscriptSeasons(): Promise<TranscriptSeason[]> {
       slug: link[1],
       title: toText(link[2]),
       meta: meta ? meta.split("|").map((s) => s.trim()).filter(Boolean) : [],
-      summary: toText(block.match(/<p class="episode-summary">([\s\S]*?)<\/p>/)?.[1] ?? ""),
+      summary: fixSummary(link[1], toText(block.match(/<p class="episode-summary">([\s\S]*?)<\/p>/)?.[1] ?? "")),
     });
   }
   return seasons.filter((s) => s.entries.length);

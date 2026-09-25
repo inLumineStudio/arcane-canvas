@@ -5,6 +5,7 @@ import { getDictionary } from "@/content";
 import { PageShell } from "@/components/PageShell";
 import { ProductBand } from "@/components/ProductBand";
 import { Parallax } from "@/components/Parallax";
+import { RichText } from "@/components/RichText";
 import { StarBackdrop, Starfield } from "@/components/home/Starfield";
 import { LogoOrbit } from "@/components/home/LogoOrbit";
 import { BinaryRain } from "@/components/orison/BinaryRain";
@@ -65,7 +66,10 @@ export default function HomePage() {
 
         {/* ── Intro: short enough (4 lines) to centre under the hero on tablet and desktop ── */}
         <section className="mx-auto max-w-[60ch] px-5 pb-20 pt-12 text-lg md:px-0 md:pb-28 md:pt-20 md:text-center">
-          <p className="leading-relaxed text-fg/85">{h.statement.intro}</p>
+          {/* The line break after "goal in mind:" (\n in the copy) keeps the last clause whole */}
+          <p className="leading-relaxed text-fg/85">
+            <RichText text={h.statement.intro} />
+          </p>
           <Link href="/about" className="link mt-4 inline-block text-fg">
             {h.statement.aboutLink}
           </Link>
