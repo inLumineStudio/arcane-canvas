@@ -12,13 +12,12 @@ import { useRouter } from "next/navigation";
 //
 // Easter eggs on the chin (the binary rain in the background spells the hint in ASCII, see
 // BinaryRain):
-//   - pressing the buttons 1 1 4 2 3 1 opens the 404 full of eyes;
+//   - pressing the buttons 1 1 4 2 3 1 opens the secret page, /orison/the-watcher;
 //   - the power button makes the screen glitch, but it stays on.
 // The buttons are real buttons, tappable on phones too (the chin is 44px tall there).
 
 const SEQUENCE = "114231";
-// Any path that does not exist: the point is to land on the 404
-const SECRET_PATH = "/orison/signal-lost";
+const SECRET_PATH = "/orison/the-watcher";
 const GLITCH_MS = 900;
 
 export function CrtFrame({ label }: { label: string }) {

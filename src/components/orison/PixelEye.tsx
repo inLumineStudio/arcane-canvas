@@ -49,6 +49,15 @@ function tick(ts: number) {
   }
 }
 
+/** Every eye on the page blinks now, in unison (instead of each at its own pace). */
+export function blinkAll() {
+  for (const e of entries.values()) {
+    e.lid.setAttribute("height", "10");
+    setTimeout(() => e.lid.setAttribute("height", "0"), 180);
+    e.nextBlink = performance.now() + 2500 + Math.random() * 6000;
+  }
+}
+
 export function PixelEye({ className = "", size = 64 }: { className?: string; size?: number }) {
   const root = useRef<HTMLSpanElement>(null);
   const iris = useRef<SVGGElement>(null);

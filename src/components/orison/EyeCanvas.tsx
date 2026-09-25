@@ -143,6 +143,14 @@ export function EyeCanvas({ className = "" }: { className?: string }) {
       const core = CFG.haloCore * bs;
       const mid = Math.ceil(CFG.haloRadius * bs);
       haloSize = mid * 2;
+      // A container measured at 0px (hidden, not laid out yet) has nothing to draw into:
+      // skip the halo until the next resize instead of asking for a 0×0 pixel buffer
+      if (haloSize < 1) {
+        haloCanvas = null;
+        haloImg = null;
+        haloPrev = new Int32Array(0);
+        return;
+      }
 
       const cum = new Float64Array(mid + 1);
       let total = 0;

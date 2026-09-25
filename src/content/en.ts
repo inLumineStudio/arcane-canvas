@@ -267,6 +267,22 @@ export const en = {
     },
     // The monitor's brand: Audeo built the machine in the game
     monitorLabel: "Audeo",
+    // The secret page behind the monitor buttons (/orison/the-watcher). Copy proposed by the
+    // agency in the game's tone, to be approved by Marco. Lines are typed out one by one.
+    watcher: {
+      metaTitle: "It sees you - ORISON",
+      lines: [
+        "You pressed them in the right order.",
+        "Nobody was supposed to know the order.",
+        "The machine was never the one watching.",
+        "It was only an eyelid.",
+        "What waits behind it is older than the network,",
+        "older than the first word anyone spoke.",
+        "It does not hate you. It has simply noticed you.",
+        "From now on it will know where you are looking.",
+      ],
+      exit: "Close your eyes",
+    },
     // Spelled in 8-bit ASCII by the binary rain (components/orison/BinaryRain.tsx): the hint
     // to the monitor easter egg (components/orison/CrtFrame.tsx). ASCII only, no accents.
     binaryHint: "PRESS THE MONITOR BUTTONS 1 1 4 2 3 1. ",

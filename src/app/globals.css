@@ -888,6 +888,83 @@ html.is-glitching body::after {
     translate: 50% 0;
   }
 }
+/* ── ORISON secret page: the Watcher (components/orison/Watcher.tsx) ────────── */
+/* Concentric rings of eyes around the great eye. Each ring turns (in alternating
+   directions), each eye counter-turns so it stays upright, and opens like an eyelid on its
+   own delay. The whole field breathes. When the visitor stands still (data-idle) the field
+   leans in and the dark closes around the centre. */
+
+.watcher-field {
+  animation: watcher-breathe 11s ease-in-out infinite;
+  transition: scale 3s ease-in-out;
+}
+.watcher[data-idle] .watcher-field {
+  scale: 1.07;
+}
+
+.watcher-ring {
+  position: absolute;
+  left: 50%;
+  top: 36%;
+  width: 0;
+  height: 0;
+  animation: watcher-spin linear infinite;
+}
+.watcher-slot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 0;
+}
+.watcher-upright {
+  display: block;
+  animation: watcher-spin linear infinite;
+}
+.watcher-eye {
+  display: block;
+  transform-origin: 50% 50%;
+  animation: watcher-open 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* The great eye surfaces from the dark, out of focus first */
+.watcher-great {
+  animation: watcher-rise 5s ease-out 2.2s both;
+}
+
+.watcher-dark {
+  background: radial-gradient(ellipse 55% 45% at 50% 36%, transparent 35%, rgb(0 0 0 / 0.92) 100%);
+  opacity: 0.35;
+  transition: opacity 3s ease-in-out;
+}
+.watcher[data-idle] .watcher-dark {
+  opacity: 1;
+}
+
+@keyframes watcher-spin {
+  to { rotate: 360deg; }
+}
+@keyframes watcher-open {
+  from { scale: 1 0; opacity: 0; }
+  60% { opacity: 1; }
+}
+@keyframes watcher-breathe {
+  50% { transform: scale(1.035); }
+}
+@keyframes watcher-rise {
+  from { opacity: 0; filter: blur(10px); }
+}
+
+/* Reduced motion: the scene at rest (the global rule shortens durations, not delays) */
+@media (prefers-reduced-motion: reduce) {
+  .watcher-field,
+  .watcher-ring,
+  .watcher-upright,
+  .watcher-eye,
+  .watcher-great {
+    animation: none;
+  }
+}
+
 /* ── 404 eye wall ───────────────────────────────────────────────────────── */
 /* The middle of the wall is cleared for the message: a wide, short hole on phones (the text
    spans the width), a rounder one from tablet up. */

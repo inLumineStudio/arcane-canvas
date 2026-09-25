@@ -24,7 +24,7 @@ npm run build
 Each area speaks its own visual language; the rules are in the header comment of `src/app/globals.css`.
 
 - **Studio (Home, About)**: built from the logo. The crystal "A" and its galaxy ring are the Home hero, with the studio's work orbiting on the ring; big monospace statements (after aggrocrab.com).
-- **ORISON**: the game's own OS: flat windows with the in-game dithered title bar (`src/lib/dither.ts`), W95FA (the game's font), bevelled system buttons. Black around the eye, decoration only at the edges (after deltarune.com). The whole page sits inside a beige Audeo CRT monitor, whose chin buttons hide an easter egg (sequence 1 1 4 2 3 1 → the 404; the hint is the ASCII spelled by the binary rain; the power button glitches the screen).
+- **ORISON**: the game's own OS: flat windows with the in-game dithered title bar (`src/lib/dither.ts`), W95FA (the game's font), bevelled system buttons. Black around the eye, decoration only at the edges (after deltarune.com). The whole page sits inside a beige Audeo CRT monitor, whose chin buttons hide an easter egg (sequence 1 1 4 2 3 1 → the secret page `/orison/the-watcher`, noindex; the hint is the ASCII spelled by the binary rain; the power button glitches the screen).
 - **SILENTIUM**: the poster's black, brick and flesh; photographic, film grain, format facts set like closing credits.
 
 Avoid template tropes: uppercase letter-spaced labels over headings, gradient text, glows, numbered cards. Buttons use `.btn` / `.btn-quiet`, which restyle per theme.
